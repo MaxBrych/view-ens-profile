@@ -118,7 +118,7 @@ const SearchAddress = () => {
             lineHeight={"1.1"}
             fontWeight={"black"}
           >
-            Explore your Web3 bagpack
+            Easiest way to donate crypto
           </FormLabel>
           <Button
             mb={4}
