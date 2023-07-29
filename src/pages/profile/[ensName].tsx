@@ -165,13 +165,7 @@ const ProfilePage = () => {
             </ENSRecordSkeleton>
 
             <ENSRecordSkeleton isLoaded={!isLoading}>
-              <Heading
-                as="h1"
-                fontSize={"lg"}
-                h={"10px"}
-                textAlign="center"
-                fontStyle={manrope}
-              >
+              <Heading as="h1" fontSize={"lg"} h={"10px"} textAlign="center">
                 {ensName || ""}
               </Heading>
             </ENSRecordSkeleton>
