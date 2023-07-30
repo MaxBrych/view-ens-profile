@@ -114,7 +114,7 @@ const SearchAddress = () => {
             textAlign={"center"}
             mb={3}
             textColor={"gray.700"}
-            fontSize={{ base: "3xl", md: "4xl" }}
+            fontSize={{ base: "3xl", md: "6xl" }}
             lineHeight={"1.1"}
             fontWeight={"black"}
           >
