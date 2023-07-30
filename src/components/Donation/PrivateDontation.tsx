@@ -99,47 +99,19 @@ export default function PrivateDonation({
 
   return (
     <>
-      <VStack>
-        <IconButton
-          color="black"
-          bg="gray.200"
-          aria-label="Send Message"
-          icon={<FaCoffee />}
-          onClick={onOpen}
-          rounded={"full"}
-          size={"lg"}
-        />
-        <Text
-          fontSize="xs"
-          className="font-semibold"
-          textColor={"blackAlpha.600"}
-        >
-          Support
-        </Text>
-      </VStack>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Support</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Flex direction="row" gap={4}>
-              {DONATION_AMOUNTS.map((amount) => (
-                <Button
-                  key={amount}
-                  onClick={() => {
-                    handleDonate(amount);
-                    onClose();
-                  }}
-                >
-                  {`Donate $${amount}`}
-                </Button>
-              ))}
-            </Flex>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+      <Flex direction="row" gap={4}>
+        {DONATION_AMOUNTS.map((amount) => (
+          <Button
+            key={amount}
+            onClick={() => {
+              handleDonate(amount);
+              onClose();
+            }}
+          >
+            {`Donate $${amount}`}
+          </Button>
+        ))}
+      </Flex>
     </>
   );
 }

@@ -175,56 +175,28 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
 
   return (
     <>
-      <VStack>
-        <IconButton
-          color="black"
-          bg="gray.200"
-          aria-label="Send Message"
-          icon={<BiCoffeeTogo />}
-          onClick={onOpen}
-          rounded={"full"}
-          size={"lg"}
+      <Flex direction="column" gap={4}>
+        <input
+          type="number"
+          value={amount}
+          onChange={(e) => setAmount(parseFloat(e.target.value))}
+          placeholder="Amount (USDC)"
         />
-        <Text
-          fontSize="xs"
-          className="font-semibold"
-          textColor={"blackAlpha.600"}
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Message"
+        />
+        <Button
+          onClick={() => {
+            handleDonate(amount, message);
+            onClose();
+          }}
         >
-          Support
-        </Text>
-      </VStack>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Support</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody textColor={"white"}>
-            <Flex direction="column" gap={4}>
-              <input
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(parseFloat(e.target.value))}
-                placeholder="Amount (USDC)"
-              />
-              <input
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Message"
-              />
-              <Button
-                onClick={() => {
-                  handleDonate(amount, message);
-                  onClose();
-                }}
-              >
-                Donate
-              </Button>
-            </Flex>
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+          Donate
+        </Button>
+      </Flex>
     </>
   );
 }
