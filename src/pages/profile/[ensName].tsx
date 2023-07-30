@@ -17,13 +17,14 @@ import { FaGithub } from "react-icons/fa";
 import { ethers } from "ethers";
 import { Inter, Manrope, Share } from "next/font/google";
 import Navbar from "@/components/NavBar";
-import DonateButton from "@/components/Donate";
+import DonateButton from "@/components/Donation/Donate";
 import ChatButton from "@/components/ChatButton";
 import ShareButton from "@/components/ShareButton";
 import AddressCopy from "@/components/AddressCopy";
 import axios from "axios";
 import NavBarNew from "@/components/NavBarNew";
 import NFTList from "@/components/NFTList"; // adjust path to where your NFTList.tsx is located
+import TransactionFeed from "@/components/TransactionFeed";
 
 const manrope = Manrope({ subsets: ["latin"] });
 const ethersDynamic: Promise<any> = import("ethers");
@@ -185,7 +186,7 @@ const ProfilePage = () => {
               <HStack mt={2} spacing={8} rowGap={8}>
                 <ChatButton receiverAddress={address} />
                 <ShareButton />
-                <DonateButton receiverAddress={address} />
+                <DonateButton address={address} />
               </HStack>
             </ENSRecordSkeleton>
             <ENSRecordSkeleton isLoaded={!isLoading}>
@@ -227,8 +228,8 @@ const ProfilePage = () => {
               )}
             </ENSRecordSkeleton>
           </Flex>
-
-          <NFTList ownerAddress={address} />
+          <TransactionFeed />
+          {/**  <NFTList ownerAddress={address} />*/}
         </Box>
       </Box>
     </>

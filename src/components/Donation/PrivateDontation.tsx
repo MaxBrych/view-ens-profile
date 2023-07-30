@@ -38,7 +38,9 @@ interface DonateButtonProps {
   receiverAddress: any;
 }
 
-export default function DonateButton({ receiverAddress }: DonateButtonProps) {
+export default function PrivateDonation({
+  receiverAddress,
+}: DonateButtonProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const wallet: WalletInstance | undefined = useWallet();
   const [usdcContract, setUsdcContract] = useState<ethers.Contract | null>(
