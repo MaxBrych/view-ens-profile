@@ -228,8 +228,7 @@ const ProfilePage = () => {
               )}
             </ENSRecordSkeleton>
           </Flex>
-          <TransactionFeed />
-          {/**  <NFTList ownerAddress={address} />*/}
+          <TransactionFeed receiverAddress={address} />
         </Box>
       </Box>
     </>
