@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Chat.module.css";
 import { useAddress } from "@thirdweb-dev/react";
+import { BiCheckDouble } from "react-icons/bi";
 
 function Chat({ client, messageHistory, conversation }) {
   const address = useAddress();
@@ -31,20 +32,24 @@ function Chat({ client, messageHistory, conversation }) {
         {messages.map((message, index) => (
           <li
             key={message.id}
-            className="messageItem"
+            className="flex flex-col gap-1 items-start my-2"
             title="Click to log this message to the console"
           >
-            <strong>
-              {message.senderAddress === address ? "You" : "Bot"}:
+            <strong className="text-sm mr-2">
+              {message.senderAddress === address ? "You" : "Bot"}
             </strong>
-            <span>{message.content}</span>
-            <span className="date"> ({message.sent.toLocaleTimeString()})</span>
-            <span
-              className="ml-12 mr-0 text-xs"
-              onClick={() => console.log(message)}
-            >
-              👀
+            <span className="text-md p-2 bg-[#05C756] text-white rounded-xl">
+              {message.content}
             </span>
+            <div className="flex gap-3">
+              <span onClick={() => console.log(message)}>
+                <BiCheckDouble />
+              </span>
+              <span className="text-xs">
+                {" "}
+                {message.sent.toLocaleTimeString()}
+              </span>
+            </div>
           </li>
         ))}
       </ul>

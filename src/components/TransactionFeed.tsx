@@ -66,7 +66,7 @@ export default function TransactionFeed({ receiverAddress }: ProfileProps) {
                 <div>
                   <b>{formatAddress(transaction.sender)}</b> {""} donated{" "}
                 </div>
-                <div className="px-2 py-1 text-xs font-semibold bg-gray-200 rounded-full">
+                <div className="px-2 py-1 text-sm font-semibold text-[#00280E] bg-[#D0FFE0] rounded-full">
                   ${ethers.utils.formatUnits(transaction.amount, DECIMALS)}
                 </div>
               </div>

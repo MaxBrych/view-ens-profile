@@ -181,14 +181,18 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
           value={amount}
           onChange={(e) => setAmount(parseFloat(e.target.value))}
           placeholder="Amount (USDC)"
+          className="text-2xl text-center w-full focus:outline-none"
         />
         <input
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Message"
+          className="h-12 border-2 border-gray-200 rounded-lg "
         />
+
         <Button
+          className="rounded-full h-16 "
           onClick={() => {
             handleDonate(amount, message);
             onClose();

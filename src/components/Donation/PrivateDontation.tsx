@@ -102,6 +102,7 @@ export default function PrivateDonation({
       <Flex direction="row" gap={4}>
         {DONATION_AMOUNTS.map((amount) => (
           <Button
+            className="text-sm"
             key={amount}
             onClick={() => {
               handleDonate(amount);
