@@ -28,14 +28,14 @@ function Chat({ client, messageHistory, conversation }) {
     );
 
     return (
-      <ul className="messageList">
+      <ul className="flex flex-col justify-end">
         {messages.map((message, index) => (
           <li
             key={message.id}
-            className="flex flex-col gap-1 items-start my-2"
+            className="flex flex-col items-start justify-end gap-1 my-2"
             title="Click to log this message to the console"
           >
-            <strong className="text-sm mr-2">
+            <strong className="mr-2 text-sm">
               {message.senderAddress === address ? "You" : "Bot"}
             </strong>
             <span className="text-md p-2 bg-[#05C756] text-white rounded-xl">

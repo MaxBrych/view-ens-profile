@@ -133,18 +133,36 @@ const SearchAddress = () => {
             colorScheme="transparent"
             w={{ base: "auto", md: "auto" }}
           >
-            Show of your ENS Profile like you’ve never had before
+            Send crypto and chat with people{" "}
           </Button>
-          <Input
+          <Box
             borderRadius={{ base: "xl", md: "2xl" }}
             h={{ base: "16", md: "20" }}
             fontWeight={"bold"}
             backgroundColor={"white"}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"space-between"}
+            px={4}
             fontSize={{ base: "lg", md: "xl" }}
-            ref={addrRef}
-            placeholder="ETH Address or ENS Name"
-            isInvalid={isError}
-          ></Input>
+          >
+            flippr.xyz/
+            <Input
+              ref={addrRef}
+              placeholder="ETH Address or ENS Name"
+              isInvalid={isError}
+              className="px-0 focus:outline-none "
+              fontWeight={"bold"}
+              backgroundColor={"white"}
+              fontSize={{ base: "lg", md: "xl" }}
+            ></Input>
+            <Button
+              colorScheme="grey"
+              className="rounded-full px-2 bg-[#05C756] text-white"
+            >
+              Search
+            </Button>
+          </Box>
           {isError && (
             <Text color="red.500" mt={2}>
               Please input a valid ENS name (ending with .eth)

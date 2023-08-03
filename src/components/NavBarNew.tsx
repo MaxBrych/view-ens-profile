@@ -8,10 +8,10 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 
 export default function NavBarNew() {
   return (
-    <Container className="w-full rounded-xl" py={2}>
+    <Container className="fixed top-0 left-0 w-full" py={2}>
       <Flex
         justifyContent={"space-between"}
-        className="w-full md:w-[50vw] "
+        className="w-full md:w-[90vw] md:px-32 "
         alignItems={"center"}
       >
         <Link href="/">
