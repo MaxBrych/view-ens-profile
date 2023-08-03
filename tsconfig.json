@@ -23,7 +23,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/ENSProfile.jsx",
-    "src/pages/index.jsx"
+    "src/pages/index.jsx",
+    "src/components/Chat/Home.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,38 +1,63 @@
 import { useRouter } from "next/router";
-import { IconButton, Text, VStack } from "@chakra-ui/react";
+import {
+  Text,
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  useDisclosure,
+  ModalBody,
+  ModalContent,
+  Modal,
+  ModalCloseButton,
+  ModalHeader,
+  ModalOverlay,
+  VStack,
+  IconButton,
+} from "@chakra-ui/react";
 import { FaRegComment } from "react-icons/fa";
 import { BsFillChatFill } from "react-icons/bs";
+import Home from "./Chat/Home";
 
 interface ChatButtonProps {
   receiverAddress: any;
 }
 
 const ChatButton: React.FC<ChatButtonProps> = ({ receiverAddress }) => {
-  const router = useRouter();
-
-  const handleOnClick = () => {
-    router.push(`https://chat.blockscan.com/index?a=${receiverAddress}`);
-  };
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <VStack>
-      <IconButton
-        color="black"
-        bg="gray.200"
-        aria-label="Send Message"
-        icon={<BsFillChatFill />}
-        onClick={handleOnClick}
-        rounded={"full"}
-        size={"lg"}
-      />
-      <Text
-        fontSize="xs"
-        className="font-semibold"
-        textColor={"blackAlpha.600"}
-      >
-        Chat
-      </Text>
-    </VStack>
+    <>
+      <VStack>
+        <IconButton
+          color="black"
+          bg="gray.200"
+          aria-label="Send Message"
+          icon={<BsFillChatFill />}
+          onClick={onOpen}
+          rounded={"full"}
+          size={"lg"}
+        />
+        <Text
+          fontSize="xs"
+          className="font-semibold"
+          textColor={"blackAlpha.600"}
+        >
+          Chat
+        </Text>
+      </VStack>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Chat</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Home receiverAddress={receiverAddress} />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 
