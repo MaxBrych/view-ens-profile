@@ -29,7 +29,7 @@ import { ethers } from "ethers";
 
 const USDC_CONTRACT_ADDRESS = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"; // Polygon USDC contract address
 const DECIMALS = 6; // USDC has 6 decimals
-const CONTRACT_ADDRESS = "0xdca71af42DdC60ddb3f19081A2CA09FD3DB9e512"; // Your contract address
+const CONTRACT_ADDRESS = "0xaa64B5631b98d8d123C7be6bd04aA6D6aC0f6148"; // Your contract address
 
 // Prepare USDC contract instance
 const contractABI = [
@@ -181,7 +181,7 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
           value={amount}
           onChange={(e) => setAmount(parseFloat(e.target.value))}
           placeholder="Amount (USDC)"
-          className="text-2xl text-center w-full focus:outline-none"
+          className="w-full text-2xl text-center focus:outline-none"
         />
         <input
           type="text"
@@ -192,7 +192,7 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
         />
 
         <Button
-          className="rounded-full h-16 "
+          className="h-16 rounded-full "
           onClick={() => {
             handleDonate(amount, message);
             onClose();
