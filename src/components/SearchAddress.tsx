@@ -8,8 +8,10 @@ import {
   Button,
   useToast,
   Text,
+  IconButton,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { FiSearch } from "react-icons/fi";
 
 const ethersDynamic: Promise<any> = import("ethers");
 
@@ -112,18 +114,18 @@ const SearchAddress = () => {
         >
           <FormLabel
             textAlign={"center"}
-            mb={3}
-            textColor={"gray.700"}
-            fontSize={{ base: "3xl", md: "6xl" }}
+            mb={{ base: "2", md: "3" }}
+            textColor={"black"}
+            fontSize={{ base: "4xl", md: "6xl" }}
             lineHeight={"1.1"}
-            fontWeight={"black"}
+            fontWeight={"bold"}
           >
             Easiest way to donate crypto
           </FormLabel>
           <Button
             mb={4}
             textAlign={"center"}
-            fontSize={{ base: "xs", md: "lg" }}
+            fontSize={{ base: "sm", md: "lg" }}
             fontWeight={"semibold"}
             textColor={"gray.500"}
             type="submit"
@@ -136,7 +138,9 @@ const SearchAddress = () => {
             Send crypto and chat with people{" "}
           </Button>
           <Box
-            borderRadius={{ base: "xl", md: "2xl" }}
+            borderRadius={"full"}
+            border={"1px solid"}
+            borderColor={"gray.300"}
             h={{ base: "16", md: "20" }}
             fontWeight={"bold"}
             backgroundColor={"white"}
@@ -144,24 +148,37 @@ const SearchAddress = () => {
             alignItems={"center"}
             justifyContent={"space-between"}
             px={4}
+            pl={6}
+            textColor={"gray.500"}
             fontSize={{ base: "lg", md: "xl" }}
           >
             flippr.xyz/
             <Input
               ref={addrRef}
-              placeholder="ETH Address or ENS Name"
+              placeholder="Your address"
               isInvalid={isError}
-              className="px-0 focus:outline-none "
-              fontWeight={"bold"}
+              className="px-0 border-none outline-none focus:outline-none "
               backgroundColor={"white"}
+              border={"none"}
+              outline={"none"}
+              textColor={"black"}
+              p={0}
+              focusBorderColor="transparent"
+              variant="unstyled"
               fontSize={{ base: "lg", md: "xl" }}
             ></Input>
-            <Button
+            <IconButton
+              icon={<FiSearch />}
               colorScheme="grey"
               className="rounded-full px-2 bg-[#05C756] text-white"
+              aria-label={""}
+              rounded={"full"}
+              size={{ base: "md", md: "lg" }}
+              fontSize={{ base: "xl", md: "2xl" }}
+              onClick={handleSubmit}
             >
               Search
-            </Button>
+            </IconButton>
           </Box>
           {isError && (
             <Text color="red.500" mt={2}>
@@ -170,7 +187,7 @@ const SearchAddress = () => {
           )}
         </FormControl>
         <Link
-          className="w-full mt-8 text-xs font-semibold text-center text-gray-500 underline md:text-sm underline-offset-1"
+          className="w-full mt-4 text-xs font-semibold text-center text-gray-500 underline md:text-sm underline-offset-1"
           href="https://app.ens.domains/"
           target="_blank"
         >
