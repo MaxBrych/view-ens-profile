@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import PublicDonation from "./PublicDonation";
 import PrivateDonation from "./PrivateDontation";
-import { FaCoffee } from "react-icons/fa";
+import { BiDollarCircle } from "react-icons/bi";
 
 interface DonateButtonProps {
   address: any;
@@ -34,7 +34,7 @@ export default function Donate({ address }: DonateButtonProps) {
           color="black"
           bg="gray.200"
           aria-label="Send Message"
-          icon={<FaCoffee />}
+          icon={<BiDollarCircle />}
           onClick={onOpen}
           rounded={"full"}
           size={"lg"}

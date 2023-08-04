@@ -176,7 +176,7 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
       console.error("Error in transaction:", err);
       toast({
         title: "Transaction error.",
-        description: "An error occurred while processing the transaction.",
+        description: "You cannot donate to yourself.",
         status: "error",
         duration: 3000,
         isClosable: true,
