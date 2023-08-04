@@ -109,7 +109,7 @@ export default function PrivateDonation({
               onClose();
             }}
           >
-            {`Donate $${amount}`}
+            {`${amount}$`}
           </Button>
         ))}
       </Flex>
