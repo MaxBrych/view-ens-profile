@@ -23,7 +23,7 @@ export default function NavBarNew() {
             className="w-auto h-8 cursor-pointer"
           />
         </Link>
-        <ConnectWallet />
+        <ConnectWallet theme="light" />
       </Flex>
     </Container>
   );

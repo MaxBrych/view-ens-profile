@@ -4,6 +4,7 @@ import {
   ThirdwebProvider,
   coinbaseWallet,
   metamaskWallet,
+  localWallet,
 } from "@thirdweb-dev/react";
 import { mode } from "@chakra-ui/theme-tools"; // <-- import the mode function
 import { WagmiConfig, createConfig } from "wagmi";
@@ -12,6 +13,8 @@ import {
   ConnectKitButton,
   getDefaultConfig,
 } from "connectkit";
+
+const client = process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID;
 
 const config = createConfig(
   getDefaultConfig({
@@ -49,7 +52,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <ConnectKitProvider>
         <ThirdwebProvider
           activeChain={activeChain}
-          supportedWallets={[coinbaseWallet(), metamaskWallet()]}
+          supportedWallets={[coinbaseWallet(), metamaskWallet(), localWallet()]}
         >
           <ChakraProvider theme={theme}>
             <Component {...pageProps} />

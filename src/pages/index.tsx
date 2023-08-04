@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <Box
         color={color}
-        className={`flex min-h-screen flex-col items-center justify-center pb-[33vh] p-4 ${manrope.className}`}
+        className={`flex min-h-screen flex-col items-center justify-center pb-[33vh] p-4 ${inter.className}`}
       >
         <NavBarNew />
         <SearchAddress />
