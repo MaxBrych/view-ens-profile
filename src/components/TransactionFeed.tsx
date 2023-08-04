@@ -13,7 +13,7 @@ import {
 
 const USDC_CONTRACT_ADDRESS = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"; // Polygon USDC contract address
 const DECIMALS = 6; // USDC has 6 decimals
-const CONTRACT_ADDRESS = "0xaa64B5631b98d8d123C7be6bd04aA6D6aC0f6148"; // Your contract address
+const CONTRACT_ADDRESS = "0x0599bE8D535483e643Bee914feFaf2ce6Ca3B21B";
 
 // Prepare USDC contract instance
 const contractABI = [
