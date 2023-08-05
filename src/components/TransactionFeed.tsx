@@ -10,10 +10,11 @@ import {
   useContractWrite,
   useContractRead,
 } from "@thirdweb-dev/react";
+import FeedPlaceholder from "./FeedPlaceholder";
 
 const USDC_CONTRACT_ADDRESS = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"; // Polygon USDC contract address
 const DECIMALS = 6; // USDC has 6 decimals
-const CONTRACT_ADDRESS = "0x0599bE8D535483e643Bee914feFaf2ce6Ca3B21B";
+const CONTRACT_ADDRESS = "0xEDEA779530f91D03646f7B1823fF2f8FBfb27481";
 
 // Prepare USDC contract instance
 const contractABI = [
@@ -53,35 +54,38 @@ export default function TransactionFeed({ receiverAddress }: ProfileProps) {
 
     resolveNames();
   }, [ensProvider, account, receiverAddress]);
+  if (isLoadingTransactions) {
+    return <div>Loading transactions...</div>;
+  }
+
+  if (transactions && transactions.length === 0) {
+    return <FeedPlaceholder address={receiverAddress} />;
+  }
 
   return (
     <>
-      {isLoadingTransactions ? (
-        <div>Loading transactions...</div>
-      ) : (
-        transactions?.map((transaction: any, index: any) => {
-          return (
-            <div key={index} className="px-1 py-3 text-black">
-              <div className="flex justify-between text-sm ">
-                <div>
-                  <b>{formatAddress(transaction.sender)}</b> {""} donated{" "}
-                </div>
-                <div className="px-2 py-1 text-sm font-semibold text-[#00280E] bg-[#D0FFE0] rounded-full">
-                  ${ethers.utils.formatUnits(transaction.amount, DECIMALS)}
-                </div>
+      {transactions?.map((transaction: any, index: any) => {
+        return (
+          <div key={index} className="px-1 py-3 text-black">
+            <div className="flex justify-between text-sm ">
+              <div>
+                <b>{formatAddress(transaction.sender)}</b> {""} donated{" "}
               </div>
-              <div className="text-xs leading-3">
-                {new Date(transaction.timestamp * 1000).toLocaleString()}
+              <div className="px-2 py-1 text-sm font-semibold text-[#00280E] bg-[#D0FFE0] rounded-full">
+                ${ethers.utils.formatUnits(transaction.amount, DECIMALS)}
               </div>
-              <div className="py-1 text-lg font-semibold">
-                {transaction.message}
-              </div>
-
-              <hr />
             </div>
-          );
-        })
-      )}
+            <div className="text-xs leading-3">
+              {new Date(transaction.timestamp * 1000).toLocaleString()}
+            </div>
+            <div className="py-1 text-lg font-semibold">
+              {transaction.message}
+            </div>
+
+            <hr />
+          </div>
+        );
+      })}
     </>
   );
 }

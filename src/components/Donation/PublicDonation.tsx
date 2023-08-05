@@ -29,7 +29,7 @@ import { ethers } from "ethers";
 
 const USDC_CONTRACT_ADDRESS = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"; // Polygon USDC contract address
 const DECIMALS = 6; // USDC has 6 decimals
-const CONTRACT_ADDRESS = "0x0599bE8D535483e643Bee914feFaf2ce6Ca3B21B"; // Your contract address
+const CONTRACT_ADDRESS = "0xEDEA779530f91D03646f7B1823fF2f8FBfb27481"; // Your contract address
 
 // Prepare USDC contract instance
 const contractABI = [
@@ -95,7 +95,7 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
   const toast = useToast();
 
   const { contract } = useContract(CONTRACT_ADDRESS);
-  const { mutateAsync: transferAndRecord, isLoading } = useContractWrite(
+  const { mutateAsync: addToBlockchain, isLoading } = useContractWrite(
     contract,
     "addToBlockchain"
   );
@@ -161,7 +161,7 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
       }
 
       // Record the transaction details in the contract and perform the transfer
-      const tx: any = await transferAndRecord({
+      const tx: any = await addToBlockchain({
         args: [receiverAddress, value, message],
       });
 

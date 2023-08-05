@@ -25,8 +25,9 @@ import axios from "axios";
 import NavBarNew from "@/components/NavBarNew";
 import NFTList from "@/components/NFTList"; // adjust path to where your NFTList.tsx is located
 import TransactionFeed from "@/components/TransactionFeed";
+import FeedPlaceholder from "@/components/FeedPlaceholder";
 
-const manrope = Manrope({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 const ethersDynamic: Promise<any> = import("ethers");
 
 // This component represents a skeleton state of an ENS record.
@@ -139,18 +140,18 @@ const ProfilePage = () => {
         justifyContent="center"
         color={color}
         backgroundColor={bg}
-        className={` ${manrope.className}`}
+        className={` ${inter.className}`}
         p={4}
       >
         <Box
-          className="w-full p-4 pt-2 mt-16"
+          className="w-full p-4 mt-16"
           bg={"white"}
           maxW={96}
           rounded={"2xl"}
           h="full"
           minH={"85vh"}
           border={"1px solid #E2E8F0"}
-          p={2}
+          p={4}
         >
           <Flex direction="column" p={4} w="full" align="center">
             <ENSRecordSkeleton isLoaded={!isLoading}>
@@ -228,6 +229,7 @@ const ProfilePage = () => {
               )}
             </ENSRecordSkeleton>
           </Flex>
+
           <TransactionFeed receiverAddress={address} />
         </Box>
       </Box>
