@@ -168,7 +168,7 @@ function Chat({ client, messageHistory, conversation }) {
           placeholder="Type your text here "
         />
         <span
-          className="rounded-full outline-none bg-[#05C756] flex flex-col justify-center items-center cursor-pointer text-white h-12 w-12 hover:bg-[#04B950]"
+          className="rounded-full outline-none bg-[#05C756] flex flex-col justify-center items-center cursor-pointer text-white flex-shrink-0 h-12 w-12 hover:bg-[#04B950]"
           onClick={handleSend}
         >
           <FiSend />

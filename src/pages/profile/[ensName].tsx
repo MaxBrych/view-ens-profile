@@ -186,7 +186,7 @@ const ProfilePage = () => {
               <HStack mt={2} spacing={8} rowGap={8}>
                 <ChatButton receiverAddress={address} />
                 <ShareButton />
-                <DonateButton address={address} />
+                <DonateButton address={address} name="Donate" />
               </HStack>
             </ENSRecordSkeleton>
             <ENSRecordSkeleton isLoaded={!isLoading}>

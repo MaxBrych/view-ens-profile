@@ -18,13 +18,14 @@ import {
 } from "@chakra-ui/react";
 import PublicDonation from "./PublicDonation";
 import PrivateDonation from "./PrivateDontation";
-import { BiDollarCircle } from "react-icons/bi";
+import { HiCurrencyDollar } from "react-icons/hi";
 
 interface DonateButtonProps {
   address: any;
+  name?: string;
 }
 
-export default function Donate({ address }: DonateButtonProps) {
+export default function Donate({ address, name }: DonateButtonProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -34,18 +35,20 @@ export default function Donate({ address }: DonateButtonProps) {
           color="black"
           bg="gray.200"
           aria-label="Send Message"
-          icon={<BiDollarCircle />}
+          icon={<HiCurrencyDollar />}
           onClick={onOpen}
           rounded={"full"}
           size={"lg"}
         />
-        <Text
-          fontSize="xs"
-          className="font-semibold"
-          textColor={"blackAlpha.600"}
-        >
-          Support
-        </Text>
+        {name && (
+          <Text
+            fontSize="xs"
+            className="font-semibold"
+            textColor={"blackAlpha.600"}
+          >
+            {name}
+          </Text>
+        )}
       </VStack>
 
       <Modal isOpen={isOpen} onClose={onClose}>
