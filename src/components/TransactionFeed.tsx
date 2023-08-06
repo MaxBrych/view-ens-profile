@@ -14,7 +14,7 @@ import FeedPlaceholder from "./FeedPlaceholder";
 
 const USDC_CONTRACT_ADDRESS = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"; // Polygon USDC contract address
 const DECIMALS = 6; // USDC has 6 decimals
-const CONTRACT_ADDRESS = "0xEDEA779530f91D03646f7B1823fF2f8FBfb27481";
+const CONTRACT_ADDRESS = "0x36415EDb32fC5F90aebFaA258B2e11962b38aaB5";
 
 // Prepare USDC contract instance
 const contractABI = [
@@ -67,7 +67,7 @@ export default function TransactionFeed({ receiverAddress }: ProfileProps) {
       {transactions?.map((transaction: any, index: any) => {
         return (
           <div key={index} className="px-1 py-3 text-black">
-            <div className="flex justify-between text-sm ">
+            <div className="flex items-center justify-between text-sm ">
               <div>
                 <b>{formatAddress(transaction.sender)}</b> {""} donated{" "}
               </div>
@@ -75,13 +75,13 @@ export default function TransactionFeed({ receiverAddress }: ProfileProps) {
                 ${ethers.utils.formatUnits(transaction.amount, DECIMALS)}
               </div>
             </div>
+
+            <div className="py-1 text-lg font-semibold md:text-xl">
+              {transaction.message}
+            </div>
             <div className="text-xs leading-3">
               {new Date(transaction.timestamp * 1000).toLocaleString()}
             </div>
-            <div className="py-1 text-lg font-semibold">
-              {transaction.message}
-            </div>
-
             <hr />
           </div>
         );

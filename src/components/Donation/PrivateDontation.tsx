@@ -1,21 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Flex,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  useDisclosure,
-  Icon,
-  useToast,
-  VStack,
-  Text,
-  IconButton,
-} from "@chakra-ui/react";
-import { FaCoffee } from "react-icons/fa"; // for coffee icon
+import { Button, Flex, useDisclosure, useToast, Text } from "@chakra-ui/react";
 import {
   WalletInstance,
   useAddress,
@@ -48,6 +32,8 @@ export default function PrivateDonation({
   );
   const chainId = useChainId();
   const account = useAddress();
+  const toast = useToast();
+  const [amount, setAmount] = useState(0);
 
   useEffect(() => {
     const loadProviderAndSigner = async () => {
@@ -70,10 +56,8 @@ export default function PrivateDonation({
     loadProviderAndSigner();
   }, [wallet]);
 
-  const toast = useToast();
-
-  async function handleDonate(amount: number) {
-    if (!wallet || !account || !usdcContract) {
+  async function handleDonate() {
+    if (!wallet || !account || !usdcContract || amount <= 0) {
       return;
     }
 
@@ -99,19 +83,46 @@ export default function PrivateDonation({
 
   return (
     <>
-      <Flex direction="row" gap={4}>
-        {DONATION_AMOUNTS.map((amount) => (
-          <Button
-            className="text-sm"
-            key={amount}
-            onClick={() => {
-              handleDonate(amount);
-              onClose();
-            }}
-          >
-            {`${amount}$`}
-          </Button>
-        ))}
+      <Flex direction="column" alignItems={"center"} gap={4}>
+        <div className="relative w-full">
+          <span className="absolute text-lg left-28 md:left-36 top-3">$</span>
+          <input
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(parseFloat(e.target.value))}
+            placeholder="0"
+            className="w-full pl-8 text-5xl text-center focus:outline-none"
+          />
+        </div>
+
+        <Flex direction="row" gap={4}>
+          {DONATION_AMOUNTS.map((amt) => (
+            <Button
+              rounded={"full"}
+              fontSize={"sm"}
+              fontStyle={"semibold"}
+              h={8}
+              px={6}
+              className={`text-sm ${amt === amount ? "bg-primary-500" : ""}`}
+              key={amt}
+              onClick={() => setAmount(amt)}
+            >
+              {`${amt}$`}
+            </Button>
+          ))}
+        </Flex>
+        <hr />
+
+        <Button
+          rounded={"full"}
+          h={12}
+          bg={"primary.500"}
+          _hover={{ bg: "primary.600" }}
+          className="w-full h-16 rounded-full bg-primary-500 "
+          onClick={handleDonate}
+        >
+          Donate
+        </Button>
       </Flex>
     </>
   );

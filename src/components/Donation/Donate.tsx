@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import PublicDonation from "./PublicDonation";
 import PrivateDonation from "./PrivateDontation";
-import { HiCurrencyDollar } from "react-icons/hi";
+import { BsCurrencyDollar } from "react-icons/bs";
 
 interface DonateButtonProps {
   address: any;
@@ -35,7 +35,7 @@ export default function Donate({ address, name }: DonateButtonProps) {
           color="black"
           bg="gray.200"
           aria-label="Send Message"
-          icon={<HiCurrencyDollar />}
+          icon={<BsCurrencyDollar />}
           onClick={onOpen}
           rounded={"full"}
           size={"lg"}
@@ -56,11 +56,25 @@ export default function Donate({ address, name }: DonateButtonProps) {
         <ModalContent>
           <ModalHeader>Support</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            <Tabs variant="soft-rounded" className="w-full">
-              <TabList>
-                <Tab>Public</Tab>
-                <Tab>Private</Tab>
+          <ModalBody
+            mx={4}
+            mb={4}
+            className="border border-gray-300 rounded-xl"
+          >
+            <Tabs variant="soft-rounded" className="w-full ">
+              <TabList
+                w={"full"}
+                flex={1}
+                flexDirection={"row"}
+                justifyContent={"center"}
+                className="flex flex-row items-center justify-center w-full py-2"
+              >
+                <Tab fontSize={14} height={8}>
+                  Public
+                </Tab>
+                <Tab fontSize={14} height={8}>
+                  Private
+                </Tab>
               </TabList>
               <TabPanels>
                 <TabPanel>
