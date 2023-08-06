@@ -14,7 +14,6 @@ const DONATION_AMOUNTS = [5, 10, 25];
 
 // Prepare USDC contract instance
 const contractABI = [
-  // transfer function
   "function transfer(address recipient, uint256 amount) public returns (bool)",
 ];
 

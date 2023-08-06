@@ -14,7 +14,7 @@ import FeedPlaceholder from "./FeedPlaceholder";
 
 const USDC_CONTRACT_ADDRESS = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"; // Polygon USDC contract address
 const DECIMALS = 6; // USDC has 6 decimals
-const CONTRACT_ADDRESS = "0x36415EDb32fC5F90aebFaA258B2e11962b38aaB5";
+const CONTRACT_ADDRESS = "0xee1449c6731B864eB0c487Af11a5af878A729220";
 
 // Prepare USDC contract instance
 const contractABI = [

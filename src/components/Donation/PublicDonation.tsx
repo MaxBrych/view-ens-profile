@@ -16,6 +16,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { BiCoffeeTogo } from "react-icons/bi"; // for coffee icon
+import { AiFillCheckCircle } from "react-icons/ai"; // for checkmark icon
 import {
   WalletInstance,
   useAddress,
@@ -29,12 +30,12 @@ import { ethers } from "ethers";
 
 const USDC_CONTRACT_ADDRESS = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"; // Polygon USDC contract address
 const DECIMALS = 6; // USDC has 6 decimals
-const CONTRACT_ADDRESS = "0x36415EDb32fC5F90aebFaA258B2e11962b38aaB5"; // Your contract address
+const CONTRACT_ADDRESS = "0xee1449c6731B864eB0c487Af11a5af878A729220"; // Your contract address
 const DONATION_AMOUNTS = [5, 10, 25];
 
 // Prepare USDC contract instance
 const contractABI = [
-  // transfer function
+  "function approve(address spender, uint256 amount) public returns (bool)",
   "function transfer(address recipient, uint256 amount) public returns (bool)",
 ];
 
@@ -54,6 +55,14 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
   const [receiverEnsName, setReceiverEnsName] = useState<string | null>(null);
   const [ensProvider, setEnsProvider] =
     useState<ethers.providers.Provider | null>(null);
+  const [isLoadingTransaction, setIsLoadingTransaction] =
+    useState<boolean>(false);
+  const [currentStep, setCurrentStep] = useState<string>("");
+  const [loadingMessage, setLoadingMessage] = useState("");
+  const [isDonationSuccessful, setIsDonationSuccessful] = useState(false);
+  const [transactionHash, setTransactionHash] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const loadProviderAndSigner = async () => {
@@ -98,17 +107,14 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
   const { contract } = useContract(CONTRACT_ADDRESS);
   const { mutateAsync: transferAndRecord, isLoading } = useContractWrite(
     contract,
-    "addToBlockchain"
+    "transferAndRecord"
   );
 
-  async function handleDonate(amount: number, message: string) {
-    console.log(
-      "handleDonate called with amount:",
-      amount,
-      "message:",
-      message
-    ); // Added log
-
+  async function handleApproveAndDonate(amount: number, message: string) {
+    if (!usdcContract || !account) {
+      console.log("No USDC contract or account.");
+      return;
+    }
     if (!wallet || !account) {
       console.log("No wallet or account."); // Added log
       return;
@@ -151,83 +157,127 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
     }
 
     try {
+      setIsLoadingTransaction(true);
+
+      // Convert the donation amount to the correct number of decimal places
       const ethersDynamic: any = await import("ethers");
       const value = ethersDynamic.utils.parseUnits(amount.toString(), DECIMALS);
 
-      // Record the transaction details in the contract and perform the transfer
+      // Call the approve function on the USDC contract
+      setLoadingMessage("Sign to approve USDC");
+      const approveTx = await usdcContract.approve(CONTRACT_ADDRESS, value);
+      console.log("Approval sent:", approveTx);
+
+      // Wait for the approval transaction to be confirmed
+      const provider = new ethersDynamic.providers.Web3Provider(
+        window.ethereum
+      );
+      await provider.waitForTransaction(approveTx.hash);
+      console.log("Approval confirmed:", approveTx.hash);
+
+      // Once the approval transaction is confirmed, make the donation
+      setLoadingMessage("Sign to transfer USDC");
       const tx: any = await transferAndRecord({
         args: [receiverAddress, value, message],
       });
 
-      console.log("Transaction sent:", tx); // Added log
-
-      const provider = new ethersDynamic.providers.Web3Provider(
-        window.ethereum
-      );
+      console.log("Transaction sent:", tx);
       await provider.waitForTransaction(tx.hash);
-      console.log("Transaction confirmed:", tx.hash); // Added log
+      console.log("Transaction confirmed:", tx.hash);
+      setTransactionHash(tx.hash); // save the transaction hash
+      setIsDonationSuccessful(true); // indicate the donation was successful
     } catch (err) {
-      console.error("Error in transaction:", err); // Added log
+      console.error("Error in transaction:", err);
+    } finally {
+      setIsLoadingTransaction(false);
+      setLoadingMessage("");
     }
   }
 
-  const [amount, setAmount] = useState(0);
-  const [message, setMessage] = useState("");
-
   return (
     <>
-      <Flex direction="column" alignItems={"center"} gap={4}>
-        <div className="relative w-full">
-          <span className="absolute text-lg left-28 md:left-36 top-3">$</span>
+      {!isDonationSuccessful ? (
+        // the previous modal content goes here
+        <Flex direction="column" alignItems={"center"} gap={4}>
+          <div className="relative w-full">
+            <span className="absolute text-lg left-28 md:left-36 top-3">$</span>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(parseFloat(e.target.value))}
+              placeholder="0"
+              className="w-full pl-8 text-5xl text-center focus:outline-none"
+            />
+          </div>
+
+          <Flex direction="row" gap={4}>
+            {DONATION_AMOUNTS.map((amt) => (
+              <Button
+                className={` ${amt === amount ? "bg-primary-500" : ""}`}
+                key={amt}
+                rounded={"full"}
+                fontSize={"sm"}
+                fontStyle={"semibold"}
+                h={8}
+                px={6}
+                onClick={() => setAmount(amt)}
+              >
+                {`$${amt}`}
+              </Button>
+            ))}
+          </Flex>
+          <hr />
+
           <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(parseFloat(e.target.value))}
-            placeholder="0"
-            className="w-full pl-8 text-5xl text-center focus:outline-none"
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Message"
+            className="w-full h-12 p-3 border-2 border-gray-200 rounded-lg focus:outline-none"
           />
-        </div>
-
-        <Flex direction="row" gap={4}>
-          {DONATION_AMOUNTS.map((amt) => (
-            <Button
-              className={` ${amt === amount ? "bg-primary-500" : ""}`}
-              key={amt}
-              rounded={"full"}
-              fontSize={"sm"}
-              fontStyle={"semibold"}
-              h={8}
-              px={6}
-              onClick={() => setAmount(amt)}
-            >
-              {`$${amt}`}
-            </Button>
-          ))}
+          {isLoadingTransaction && <p>{loadingMessage}</p>}
+          <Button
+            rounded={"full"}
+            bg={"primary.500"}
+            h={12}
+            _hover={{ bg: "primary.600" }}
+            className="w-full h-20 rounded-full bg-primary-500 "
+            onClick={() => {
+              handleApproveAndDonate(amount, message);
+              onClose();
+            }}
+            isLoading={isLoadingTransaction}
+          >
+            Donate
+          </Button>
         </Flex>
-        <hr />
-
-        <input
-          type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Message"
-          className="w-full h-12 p-3 border-2 border-gray-200 rounded-lg focus:outline-none"
-        />
-
-        <Button
-          rounded={"full"}
-          bg={"primary.500"}
-          h={12}
-          _hover={{ bg: "primary.600" }}
-          className="w-full h-20 rounded-full bg-primary-500 "
-          onClick={() => {
-            handleDonate(amount, message);
-            onClose();
-          }}
-        >
-          Donate
-        </Button>
-      </Flex>
+      ) : (
+        // the success message and buttons
+        <Flex direction="column" alignItems={"center"} gap={4}>
+          <Icon as={AiFillCheckCircle} w={24} h={24} />
+          <Text fontSize="xl" fontWeight="bold" mt={5}>
+            Donation Successful
+          </Text>
+          <Button
+            mt={5}
+            onClick={() => {
+              setIsDonationSuccessful(false); // reset the modal for the next use
+              onClose(); // close the modal
+            }}
+          >
+            Back to profile page
+          </Button>
+          <Button
+            mt={5}
+            as="a"
+            href={`https://polygonscan.com/tx/${transactionHash}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View transaction
+          </Button>
+        </Flex>
+      )}
     </>
   );
 }
