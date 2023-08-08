@@ -30,7 +30,7 @@ import { ethers } from "ethers";
 
 const USDC_CONTRACT_ADDRESS = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"; // Polygon USDC contract address
 const DECIMALS = 6; // USDC has 6 decimals
-const CONTRACT_ADDRESS = "0xee1449c6731B864eB0c487Af11a5af878A729220"; // Your contract address
+const CONTRACT_ADDRESS = "0x2C381d51bf5A6B8229Fe9C443c6D9257db4d5F43";
 const DONATION_AMOUNTS = [5, 10, 25];
 
 // Prepare USDC contract instance

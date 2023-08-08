@@ -29,7 +29,7 @@ export default function FeedPlaceholder({ address }: DonateButtonProps) {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-2 p-3 border border-gray-200 rounded-xl">
+      <div className="flex flex-col items-center justify-center gap-2 p-3 border w-full border-[#DDD] rounded-xl">
         <img
           className="w-16 h-16"
           src="https://cdn.discordapp.com/attachments/911669935363752026/1137477405963997214/usdc.png"
@@ -38,7 +38,7 @@ export default function FeedPlaceholder({ address }: DonateButtonProps) {
         <h1 className="text-xl font-bold tracking-tight md:text-2xl ">
           Be the first donator
         </h1>
-        <p className="mb-2 text-xs text-center text-gray-500 md:text-sm">
+        <p className="mb-2 text-xs text-center font-medium text-[#888] md:text-sm">
           The user has not received any donation yet.
         </p>
         <Button

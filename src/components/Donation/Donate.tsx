@@ -61,7 +61,11 @@ export default function Donate({ address, name }: DonateButtonProps) {
             mb={4}
             className="border border-gray-300 rounded-xl"
           >
-            <Tabs variant="soft-rounded" className="w-full ">
+            <Tabs
+              variant="soft-rounded"
+              colorScheme="green"
+              className="w-full "
+            >
               <TabList
                 w={"full"}
                 flex={1}

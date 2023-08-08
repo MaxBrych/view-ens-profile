@@ -24,7 +24,7 @@ import AddressCopy from "@/components/AddressCopy";
 import axios from "axios";
 import NavBarNew from "@/components/NavBarNew";
 import NFTList from "@/components/NFTList"; // adjust path to where your NFTList.tsx is located
-import TransactionFeed from "@/components/TransactionFeed";
+import TransactionFeed from "@/components/TransactionFeed/TransactionFeed";
 import FeedPlaceholder from "@/components/FeedPlaceholder";
 
 const inter = Inter({ subsets: ["latin"] });
