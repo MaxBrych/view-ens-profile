@@ -16,7 +16,7 @@ import Donated from "./Donated";
 
 const USDC_CONTRACT_ADDRESS = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"; // Polygon USDC contract address
 const DECIMALS = 6; // USDC has 6 decimals
-const CONTRACT_ADDRESS = "0x2C381d51bf5A6B8229Fe9C443c6D9257db4d5F43";
+const CONTRACT_ADDRESS = "0xB63B7e95BDA4a7d3Bf0A886a5dfaa7445430d2F5";
 
 interface ProfileProps {
   receiverAddress: any;
@@ -42,7 +42,7 @@ export default function TransactionFeed({ receiverAddress }: ProfileProps) {
     receiverAddress,
   ]);
   const { data: donatedTransactions, isLoading: isLoadingDonatedTransactions } =
-    useContractRead(contract, "getTransactionsForSender", [account]);
+    useContractRead(contract, "getTransactionsForSender", [receiverAddress]);
 
   function formatAddress(address: string): string {
     return address.slice(0, 6) + "..." + address.slice(-4);
@@ -65,8 +65,12 @@ export default function TransactionFeed({ receiverAddress }: ProfileProps) {
     <>
       <Tabs colorScheme="green" align="center">
         <TabList>
-          <Tab w={"full"}>Received</Tab>
-          <Tab w={"full"}>Donated</Tab>
+          <Tab w={"full"} fontSize={"md"} fontWeight={500}>
+            Received
+          </Tab>
+          <Tab w={"full"} fontSize={"md"} fontWeight={500}>
+            Donated
+          </Tab>
         </TabList>
         <TabPanels>
           <TabPanel>

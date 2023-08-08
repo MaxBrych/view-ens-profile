@@ -34,7 +34,7 @@ export default function Donate({ address, name }: DonateButtonProps) {
         <IconButton
           colorScheme="green"
           color="black"
-          bg="gray.200"
+          bg="#05C756"
           aria-label="Send Message"
           icon={<BsCurrencyDollar />}
           onClick={onOpen}

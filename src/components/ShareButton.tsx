@@ -26,7 +26,7 @@ export default function ShareButton() {
       <IconButton
         colorScheme="green"
         color="black"
-        bg="gray.200"
+        bg="#05C756"
         aria-label="Send Message"
         icon={<FaShareAlt />}
         onClick={handleShare}

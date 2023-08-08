@@ -33,7 +33,7 @@ const ChatButton: React.FC<ChatButtonProps> = ({ receiverAddress }) => {
         <IconButton
           colorScheme="green"
           color="black"
-          bg="gray.200"
+          bg="#05C756"
           aria-label="Send Message"
           icon={<BsFillChatFill />}
           onClick={onOpen}

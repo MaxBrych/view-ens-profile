@@ -30,7 +30,7 @@ import { ethers } from "ethers";
 
 const USDC_CONTRACT_ADDRESS = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"; // Polygon USDC contract address
 const DECIMALS = 6; // USDC has 6 decimals
-const CONTRACT_ADDRESS = "0x2C381d51bf5A6B8229Fe9C443c6D9257db4d5F43";
+const CONTRACT_ADDRESS = "0xB63B7e95BDA4a7d3Bf0A886a5dfaa7445430d2F5";
 const DONATION_AMOUNTS = [5, 10, 25];
 
 // Prepare USDC contract instance
@@ -64,6 +64,8 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
   const [amount, setAmount] = useState(0);
   const [message, setMessage] = useState("");
 
+  const [ethersDynamic, setEthersDynamic] = useState<any>(null);
+
   useEffect(() => {
     const loadProviderAndSigner = async () => {
       if (!wallet) {
@@ -71,10 +73,12 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
         return;
       }
 
+      const ethersDynamic = await import("ethers");
+      setEthersDynamic(ethersDynamic); // Set it here
+
       const signer = await wallet.getSigner();
       console.log("Got signer:", signer);
 
-      const ethersDynamic: any = await import("ethers");
       const usdcContract = new ethersDynamic.Contract(
         USDC_CONTRACT_ADDRESS,
         contractABI,
@@ -89,6 +93,8 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
     };
     loadProviderAndSigner();
   }, [wallet]);
+
+  const CREATOR_FEE = 1001; //  0.1% fee
 
   useEffect(() => {
     const resolveNames = async () => {
@@ -160,12 +166,19 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
       setIsLoadingTransaction(true);
 
       // Convert the donation amount to the correct number of decimal places
-      const ethersDynamic: any = await import("ethers");
-      const value = ethersDynamic.utils.parseUnits(amount.toString(), DECIMALS);
+      const valueWithoutFee = ethersDynamic.utils.parseUnits(
+        amount.toString(),
+        DECIMALS
+      );
+      const fee = valueWithoutFee.mul(CREATOR_FEE).div(10 ** 6);
+      const totalValue = valueWithoutFee.add(fee);
 
-      // Call the approve function on the USDC contract
+      // Call the approve function on the USDC contract with the total value
       setLoadingMessage("Sign to approve USDC");
-      const approveTx = await usdcContract.approve(CONTRACT_ADDRESS, value);
+      const approveTx = await usdcContract.approve(
+        CONTRACT_ADDRESS,
+        totalValue
+      );
       console.log("Approval sent:", approveTx);
 
       // Wait for the approval transaction to be confirmed
@@ -178,7 +191,7 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
       // Once the approval transaction is confirmed, make the donation
       setLoadingMessage("Sign to transfer USDC");
       const tx: any = await transferAndRecord({
-        args: [receiverAddress, value, message],
+        args: [receiverAddress, totalValue, message],
       });
 
       console.log("Transaction sent:", tx);

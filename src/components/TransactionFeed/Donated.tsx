@@ -24,7 +24,7 @@ export default function Donated({ transactions, isLoading }: DonatedProps) {
   return (
     <>
       {transactions.map((transaction: any, index: any) => (
-        <div key={index} className="px-1 py-3 text-black">
+        <div key={index} className="py-3 text-black ">
           <div className="flex items-center justify-between text-sm">
             <div>
               Donated to <b>{formatAddress(transaction.receiver)}</b>
