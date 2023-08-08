@@ -18,7 +18,7 @@ export default function Donated({ transactions, isLoading }: DonatedProps) {
   }
 
   if (transactions && transactions.length === 0) {
-    return <div>User hasn't made any donations yet</div>;
+    return <div> User hasn&apos;t made any donations yet </div>;
   }
 
   return (

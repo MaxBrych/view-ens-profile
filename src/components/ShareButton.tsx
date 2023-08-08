@@ -24,6 +24,7 @@ export default function ShareButton() {
   return (
     <VStack>
       <IconButton
+        colorScheme="green"
         color="black"
         bg="gray.200"
         aria-label="Send Message"
