@@ -126,7 +126,7 @@ const SearchAddress = () => {
           <Button
             mb={4}
             textAlign={"center"}
-            fontSize={{ base: "sm", md: "lg" }}
+            fontSize={{ base: "sm", md: "xl" }}
             fontWeight={"semibold"}
             textColor={"gray.500"}
             type="submit"
@@ -139,6 +139,7 @@ const SearchAddress = () => {
             Send crypto and chat with people{" "}
           </Button>
           <Box
+            mt={4}
             borderRadius={"full"}
             border={"1px solid"}
             borderColor={"gray.300"}

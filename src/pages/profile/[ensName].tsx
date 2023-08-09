@@ -166,68 +166,63 @@ const ProfilePage = () => {
               />
             </ENSRecordSkeleton>
 
-            <ENSRecordSkeleton isLoaded={!isLoading}>
-              <Heading as="h1" fontSize={"lg"} h={"10px"} textAlign="center">
-                {ensName || ""}
-              </Heading>
-            </ENSRecordSkeleton>
-            <ENSRecordSkeleton isLoaded={!isLoading}>
-              {ensRecords.description && (
-                <Text
-                  textAlign="center"
-                  fontSize={{ base: "xs", md: "sm" }}
-                  fontWeight={"medium"}
+            <Heading as="h1" fontSize={"lg"} h={"10px"} textAlign="center">
+              {ensName || ""}
+            </Heading>
+
+            {ensRecords.description && (
+              <Text
+                textAlign="center"
+                fontSize={{ base: "xs", md: "sm" }}
+                fontWeight={"medium"}
+                color={color}
+              >
+                {ensRecords.description}
+              </Text>
+            )}
+
+            <HStack mt={2} spacing={8} rowGap={8}>
+              <ChatButton receiverAddress={address} />
+              <ShareButton />
+              <DonateButton address={address} name="Donate" />
+            </HStack>
+
+            {ensRecords["com.github"] && (
+              <Flex
+                border={"1px"}
+                borderColor={"gray.200"}
+                align="center"
+                mt={2}
+                mb={0}
+                p={4}
+                backgroundColor={"white"}
+                borderRadius={"lg"}
+                className="transition-all duration-150 cursor-pointer hover:bg-gray-300"
+              >
+                <Link
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  gap={2}
                   color={color}
+                  href={ensRecords["com.github"]}
+                  h={"full"}
+                  w={"full"}
+                  isExternal
                 >
-                  {ensRecords.description}
-                </Text>
-              )}
-            </ENSRecordSkeleton>
-            <ENSRecordSkeleton isLoaded={!isLoading}>
-              <HStack mt={2} spacing={8} rowGap={8}>
-                <ChatButton receiverAddress={address} />
-                <ShareButton />
-                <DonateButton address={address} name="Donate" />
-              </HStack>
-            </ENSRecordSkeleton>
-            <ENSRecordSkeleton isLoaded={!isLoading}>
-              {ensRecords["com.github"] && (
-                <Flex
-                  border={"1px"}
-                  borderColor={"gray.200"}
-                  align="center"
-                  mt={2}
-                  mb={0}
-                  p={4}
-                  backgroundColor={"white"}
-                  borderRadius={"lg"}
-                  className="transition-all duration-150 cursor-pointer hover:bg-gray-300"
-                >
-                  <Link
-                    display={"flex"}
-                    justifyContent={"center"}
-                    alignItems={"center"}
-                    gap={2}
-                    color={color}
-                    href={ensRecords["com.github"]}
-                    h={"full"}
-                    w={"full"}
-                    isExternal
+                  <Icon as={FaGithub} boxSize={6} mr={2} color={color} />
+                  <Text
+                    textDecorationLine={"none"}
+                    fontSize={"sm"}
+                    fontWeight={"semibold"}
+                    textColor={color}
+                    className="underline-none"
                   >
-                    <Icon as={FaGithub} boxSize={6} mr={2} color={color} />
-                    <Text
-                      textDecorationLine={"none"}
-                      fontSize={"sm"}
-                      fontWeight={"semibold"}
-                      textColor={color}
-                      className="underline-none"
-                    >
-                      {ensRecords["com.github"]}
-                    </Text>
-                  </Link>
-                </Flex>
-              )}
-            </ENSRecordSkeleton>
+                    {ensRecords["com.github"]}
+                  </Text>
+                </Link>
+              </Flex>
+            )}
           </Flex>
 
           <TransactionFeed receiverAddress={address} />

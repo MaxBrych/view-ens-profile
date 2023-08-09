@@ -47,6 +47,13 @@ export default function Home({ receiverAddress }) {
     //Set the client in the ref
     clientRef.current = xmtp;
   };
+  const saveKeys = async function () {
+    const { initialize } = useClient();
+    // get the keys using a valid Signer
+    const keys = await Client.getKeys(signer);
+    // create a client using keys returned from getKeys
+    await initialize({ keys, signer });
+  };
 
   useEffect(() => {
     if (isOnNetwork && convRef.current) {

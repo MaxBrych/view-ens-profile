@@ -6,7 +6,6 @@ import {
   metamaskWallet,
   localWallet,
 } from "@thirdweb-dev/react";
-import { mode } from "@chakra-ui/theme-tools"; // <-- import the mode function
 import { WagmiConfig, createConfig } from "wagmi";
 import {
   ConnectKitProvider,
@@ -33,6 +32,9 @@ const config = createConfig(
 );
 
 import type { AppProps } from "next/app";
+import { useState } from "react";
+import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { SessionContextProvider } from "@supabase/auth-helpers-react";
 
 const activeChain = "polygon";
 const theme = extendTheme({
@@ -47,18 +49,29 @@ const theme = extendTheme({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+
   return (
-    <WagmiConfig config={config}>
-      <ConnectKitProvider>
-        <ThirdwebProvider
-          activeChain={activeChain}
-          supportedWallets={[coinbaseWallet(), metamaskWallet(), localWallet()]}
-        >
-          <ChakraProvider theme={theme}>
-            <Component {...pageProps} />
-          </ChakraProvider>
-        </ThirdwebProvider>
-      </ConnectKitProvider>
-    </WagmiConfig>
+    <SessionContextProvider
+      supabaseClient={supabaseClient}
+      initialSession={pageProps.initialSession}
+    >
+      <WagmiConfig config={config}>
+        <ConnectKitProvider>
+          <ThirdwebProvider
+            activeChain={activeChain}
+            supportedWallets={[
+              coinbaseWallet(),
+              metamaskWallet(),
+              localWallet(),
+            ]}
+          >
+            <ChakraProvider theme={theme}>
+              <Component {...pageProps} />
+            </ChakraProvider>
+          </ThirdwebProvider>
+        </ConnectKitProvider>
+      </WagmiConfig>
+    </SessionContextProvider>
   );
 }

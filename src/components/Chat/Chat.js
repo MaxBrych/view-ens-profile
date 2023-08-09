@@ -124,7 +124,7 @@ function Chat({ client, messageHistory, conversation }) {
               className={`text-md p-2 rounded-xl ${
                 message.senderAddress === wallet
                   ? "bg-[#05C756] text-white"
-                  : "text-black "
+                  : "text-black bg-[#EEE] "
               }`}
             >
               {message.content}
