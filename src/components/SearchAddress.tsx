@@ -100,7 +100,10 @@ const SearchAddress = () => {
   };
 
   return (
-    <Box w={"full"}>
+    <Box
+      w={"full"}
+      className="flex flex-col items-center justify-center min-h-screen"
+    >
       <Box p={1} className="credit-card" mx="auto" w="full" maxW={"lg"}>
         <FormControl
           as="form"
@@ -183,18 +186,26 @@ const SearchAddress = () => {
             </IconButton>
           </Box>
           {isError && (
-            <Text color="red.500" mt={2}>
+            <Text color="red.500">
               Please input a valid ENS name (ending with .eth)
             </Text>
           )}
         </FormControl>
-        <Link
-          className="w-full mt-4 text-xs font-semibold text-center text-gray-500 underline md:text-sm underline-offset-1"
-          href="https://app.ens.domains/"
-          target="_blank"
-        >
-          Get a ENS name here!
-        </Link>
+        <div className="flex flex-col justify-between w-full py-6">
+          <Link
+            href={"/account"}
+            className="flex items-center justify-center px-5 mt-2 text-sm font-semibold text-center rounded-full underline-offset-1 bg-dark-300 flex-shrink-1"
+          >
+            Sign Up
+          </Link>
+          <Link
+            className="w-full mt-4 text-xs font-semibold text-center text-gray-500 underline md:text-sm hover:text-gray-700 focus:text-gray-700"
+            href="https://app.ens.domains/"
+            target="_blank"
+          >
+            Get a ENS name here!
+          </Link>
+        </div>
       </Box>
     </Box>
   );

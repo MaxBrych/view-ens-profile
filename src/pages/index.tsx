@@ -6,6 +6,7 @@ import Navbar from "@/components/NavBar";
 import { ConnectKitButton } from "connectkit";
 import { ConnectKit } from "@/components/ConnectKit";
 import NavBarNew from "@/components/NavBarNew";
+import NavBar from "@/components/NavBar";
 
 const inter = Inter({ subsets: ["latin"] });
 const manrope = Manrope({ subsets: ["latin"] });
@@ -20,7 +21,7 @@ export default function Home() {
         color={color}
         className={`flex min-h-screen flex-col items-center justify-center pb-[33vh] p-4 ${inter.className}`}
       >
-        <NavBarNew />
+        <NavBar />
         <SearchAddress />
       </Box>
     </>

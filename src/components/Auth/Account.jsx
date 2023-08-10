@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Avatar from "./Avatar";
+import Link from "next/link";
+import { FiChevronLeft } from "react-icons/fi";
 
 export default function Account({ session }) {
   const supabase = useSupabaseClient();
@@ -65,7 +67,14 @@ export default function Account({ session }) {
   }
 
   return (
-    <div className="form-widget">
+    <div className="pt-4">
+      <Link
+        href="/"
+        className="flex items-center justify-start gap-2 font-semibold text-md "
+      >
+        <FiChevronLeft className="w-8 h-8 p-1 bg-gray-300 rounded-full" />
+        Back
+      </Link>
       <Avatar
         uid={user.id}
         url={avatar_url}

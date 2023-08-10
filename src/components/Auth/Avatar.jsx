@@ -61,20 +61,20 @@ export default function Avatar({ uid, url, size, onUpload }) {
         <img
           src={avatarUrl}
           alt="Avatar"
-          className=" border border-[#DDD] rounded-full"
+          className="border border-gray-300 rounded-full "
           style={{ height: size, width: size }}
         />
       ) : (
         <div
-          className="bg-primary-500 border border-[#DDD] rounded-full"
+          className="bg-center bg-no-repeat bg-cover border border-gray-300 rounded-full bg-profil-pfp"
           style={{ height: size, width: size }}
         />
       )}
       <div
-        className="items-center justify-center block h-10 px-6 mt-2 font-semibold text-center rounded-md cursor-pointer bg-[#DDD] "
+        className="flex items-center justify-center h-8 px-6 mt-2 text-sm font-bold text-center border border-gray-500 rounded-full cursor-pointer "
         style={{ width: size }}
       >
-        <label htmlFor="single">{uploading ? "Uploading ..." : "Upload"}</label>
+        <label htmlFor="single">{uploading ? "Uploading ..." : "Change"}</label>
         <input
           style={{
             visibility: "hidden",

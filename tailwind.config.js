@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "hero-bg":
-          "url('https://cdn.discordapp.com/attachments/911669935363752026/1122534199363113090/Desktop_-_12.png')",
+        "profil-pfp":
+          "url('https://cdn.discordapp.com/attachments/1070670506052821083/1139184181574893588/pandapfpf.png')",
         "hero-bg-desktop":
           "url('https://cdn.discordapp.com/attachments/911669935363752026/1122603145969807491/bg-desktop.png')",
         "hero-bg-mobile":
@@ -22,12 +22,19 @@ module.exports = {
     },
     colors: {
       primary: {
-        500: "#05C756",
+        500: "#1FD25A",
         600: "#006522",
       },
-      secondary: {
-        DEFAULT: "#4B5563",
-        dark: "#4B5563",
+      gray: {
+        100: "#F5F6F7",
+        200: "#E3E5E8",
+        300: "#D5D9DD",
+        400: "#BEC4CA",
+        500: "#AAB2BB",
+        600: "#8D979F",
+        700: "#6E7A83",
+        800: "#454D55",
+        900: "#22272B",
       },
     },
   },

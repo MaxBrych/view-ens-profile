@@ -14,18 +14,12 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
-import { ethers } from "ethers";
 import { Inter, Manrope, Share } from "next/font/google";
-import Navbar from "@/components/NavBar";
 import DonateButton from "@/components/Donation/Donate";
 import ChatButton from "@/components/ChatButton";
 import ShareButton from "@/components/ShareButton";
-import AddressCopy from "@/components/AddressCopy";
-import axios from "axios";
 import NavBarNew from "@/components/NavBarNew";
-import NFTList from "@/components/NFTList"; // adjust path to where your NFTList.tsx is located
 import TransactionFeed from "@/components/TransactionFeed/TransactionFeed";
-import FeedPlaceholder from "@/components/FeedPlaceholder";
 
 const inter = Inter({ subsets: ["latin"] });
 const ethersDynamic: Promise<any> = import("ethers");
@@ -163,10 +157,18 @@ const ProfilePage = () => {
                 alt="Avatar"
                 boxSize={["96px", "128px", "160px"]}
                 rounded="full"
+                border={"1px"}
+                borderColor={"gray.300"}
               />
             </ENSRecordSkeleton>
 
-            <Heading as="h1" fontSize={"lg"} h={"10px"} textAlign="center">
+            <Heading
+              as="h1"
+              fontSize={"lg"}
+              h={"10px"}
+              mb={4}
+              textAlign="center"
+            >
               {ensName || ""}
             </Heading>
 
@@ -175,13 +177,15 @@ const ProfilePage = () => {
                 textAlign="center"
                 fontSize={{ base: "xs", md: "sm" }}
                 fontWeight={"medium"}
+                lineHeight={"normal"}
+                mb={4}
                 color={color}
               >
                 {ensRecords.description}
               </Text>
             )}
 
-            <HStack mt={2} spacing={8} rowGap={8}>
+            <HStack mt={2} spacing={8} mb={4} rowGap={8}>
               <ChatButton receiverAddress={address} />
               <ShareButton />
               <DonateButton address={address} name="Donate" />
