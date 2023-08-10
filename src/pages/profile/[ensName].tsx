@@ -20,6 +20,7 @@ import ChatButton from "@/components/ChatButton";
 import ShareButton from "@/components/ShareButton";
 import NavBarNew from "@/components/NavBarNew";
 import TransactionFeed from "@/components/TransactionFeed/TransactionFeed";
+import NavBar from "@/components/NavBar";
 
 const inter = Inter({ subsets: ["latin"] });
 const ethersDynamic: Promise<any> = import("ethers");
@@ -124,7 +125,7 @@ const ProfilePage = () => {
 
   return (
     <>
-      <NavBarNew />
+      <NavBar />
       <Box
         minHeight="100vh"
         w="full"
