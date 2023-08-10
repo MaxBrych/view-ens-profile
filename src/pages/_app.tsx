@@ -15,22 +15,6 @@ import {
 
 const client = process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID;
 
-const config = createConfig(
-  getDefaultConfig({
-    // Required API Keys
-    alchemyId: process.env.ALCHEMY_ID || "", // or infuraId
-    walletConnectProjectId: process.env.WALLETCONNECT_PROJECT_ID || "",
-
-    // Required
-    appName: "ENS-Linktree",
-
-    // Optional
-    appDescription: "Your public ENS Bagpack 🎒",
-    appUrl: "https://family.co", // your app's url
-    appIcon: "https://family.co/logo.png", // your app's icon, no bigger than 1024x1024px (max. 1MB)
-  })
-);
-
 import type { AppProps } from "next/app";
 import { useState } from "react";
 
@@ -63,22 +47,14 @@ export default function App({
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      <WagmiConfig config={config}>
-        <ConnectKitProvider>
-          <ThirdwebProvider
-            activeChain={activeChain}
-            supportedWallets={[
-              coinbaseWallet(),
-              metamaskWallet(),
-              localWallet(),
-            ]}
-          >
-            <ChakraProvider theme={theme}>
-              <Component {...pageProps} />
-            </ChakraProvider>
-          </ThirdwebProvider>
-        </ConnectKitProvider>
-      </WagmiConfig>
+      <ThirdwebProvider
+        activeChain={activeChain}
+        supportedWallets={[coinbaseWallet(), metamaskWallet(), localWallet()]}
+      >
+        <ChakraProvider theme={theme}>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </ThirdwebProvider>
     </SessionContextProvider>
   );
 }

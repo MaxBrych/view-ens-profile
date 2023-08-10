@@ -30,9 +30,11 @@ import { HiMenuAlt4 } from "react-icons/hi";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { ethers } from "ethers";
 import Account from "./Auth/Account";
-import { useSession } from "@supabase/auth-helpers-react";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 export default function Navbar() {
+  const supabase = useSupabaseClient();
+
   const { isOpen, onOpen, onClose } = useDisclosure(); // for controlling the modal
   const walletAddress = useAddress();
   const disconnect = useDisconnect();
@@ -43,11 +45,23 @@ export default function Navbar() {
   const [ensRecords, setEnsRecords] = useState<Record<string, string>>({});
   const [isLoading, setLoading] = useState(true);
   const session = useSession();
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const provider = new ethers.providers.JsonRpcProvider(
       process.env.NEXT_PUBLIC_PROVIDER_URL
     );
+    const fetchAvatarFromDatabase = async () => {
+      const { data, error } = await supabase
+        .from("wallet_profiles")
+        .select("avatar_url")
+        .eq("wallet_address", walletAddress)
+        .single();
+
+      if (data && data.avatar_url) {
+        setAvatarUrl(data.avatar_url);
+      }
+    };
 
     const fetchEnsDetails = async () => {
       setLoading(true);
@@ -74,7 +88,19 @@ export default function Navbar() {
           `;
 
           const result = await client.query({ query });
+          if (!ensName || !ensRecords.avatar) {
+            const { data, error } = await supabase
+              .from("wallet_profiles")
+              .select("*")
+              .eq("wallet_address", walletAddress)
+              .single();
 
+            if (!data) {
+              await supabase.from("wallet_profiles").insert({
+                wallet_address: walletAddress,
+              });
+            }
+          }
           if (
             result.data &&
             result.data.domains.length > 0 &&
@@ -95,6 +121,11 @@ export default function Navbar() {
               setEnsRecords(newRecords);
             }
             setLoading(false);
+          }
+
+          // Outside the if block
+          if (!ensName || !ensRecords.avatar) {
+            fetchAvatarFromDatabase(); // Call the function to fetch avatar from the database
           }
         }
       }
@@ -133,6 +164,7 @@ export default function Navbar() {
                   <Image
                     src={
                       ensRecords.avatar ||
+                      avatarUrl ||
                       "https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png"
                     }
                     alt="Avatar"
@@ -147,7 +179,7 @@ export default function Navbar() {
                 <ModalContent>
                   <ModalHeader>Account</ModalHeader>
                   <ModalBody>
-                    <Account session={session} walletAddress={walletAddress} />
+                    <Account walletAddress={walletAddress} />
                     <MenuItem onClick={disconnect}>Sign Out</MenuItem>
                   </ModalBody>
                 </ModalContent>

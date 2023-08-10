@@ -9,7 +9,8 @@ export default function Account({ session, walletAddress }: any) {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [loading, setLoading] = useState(true);
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState<string | null>(null);
+
   const [website, setWebsite] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
   const address = useAddress();
@@ -23,9 +24,9 @@ export default function Account({ session, walletAddress }: any) {
       setLoading(true);
 
       let { data, error, status } = await supabase
-        .from("profiles")
-        .select(`username, website, avatar_url`)
-        .eq("wallet_address", walletAddress) // Changed from user.id to walletAddress
+        .from("wallet_profiles")
+        .select(`username, avatar_url`)
+        .eq("wallet_address", walletAddress)
         .single();
 
       if (error && status !== 406) {
@@ -33,9 +34,8 @@ export default function Account({ session, walletAddress }: any) {
       }
 
       if (data) {
-        setUsername(data.username);
-        setWebsite(data.website);
-        setAvatarUrl(data.avatar_url);
+        setUsername(data.username || "");
+        setAvatarUrl(data.avatar_url || "");
       }
     } catch (error) {
       alert("Error loading user data!");
@@ -45,21 +45,18 @@ export default function Account({ session, walletAddress }: any) {
     }
   }
 
-  async function updateProfile({ username, website, avatar_url }: any) {
+  async function updateProfile({ username, avatar_url }: any) {
     try {
       setLoading(true);
 
       const updates = {
         username,
-        website,
         avatar_url,
-        updated_at: new Date().toISOString(),
-        // Removed the id field here, and no need to update wallet_address since it's the primary key
       };
 
       let { error } = await supabase
-        .from("profiles")
-        .upsert({ wallet_address: walletAddress, ...updates }); // Use wallet_address in upsert
+        .from("wallet_profiles")
+        .upsert({ wallet_address: walletAddress, ...updates });
       if (error) throw error;
       alert("Profile updated!");
     } catch (error) {
@@ -83,7 +80,7 @@ export default function Account({ session, walletAddress }: any) {
         Back
       </Link>
       <Avatar
-        uid={formatAddress(walletAddress)} // Use walletAddress instead of user.id
+        walletAddress={formatAddress(walletAddress)} // Use walletAddress instead of uid
         url={avatar_url}
         size={150}
         onUpload={(url: any) => {

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
-export default function Avatar({ uid, url, size, onUpload }) {
+export default function Avatar({ walletAddress, url, size, onUpload }: any) {
   const supabase = useSupabaseClient();
-  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [avatarUrl, setAvatarUrl] = useState<any>(null);
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (url) downloadImage(url);
   }, [url]);
 
-  async function downloadImage(path) {
+  async function downloadImage(path: any) {
     try {
       const { data, error } = await supabase.storage
         .from("avatars")
@@ -25,7 +25,7 @@ export default function Avatar({ uid, url, size, onUpload }) {
     }
   }
 
-  const uploadAvatar = async (event) => {
+  const uploadAvatar = async (event: any) => {
     try {
       setUploading(true);
 
@@ -35,8 +35,8 @@ export default function Avatar({ uid, url, size, onUpload }) {
 
       const file = event.target.files[0];
       const fileExt = file.name.split(".").pop();
-      const fileName = `${uid}`; // You can directly use the wallet address as the filename
-      const filePath = `${fileName}`;
+      const fileName = `${walletAddress}`; // Using the wallet address as the filename
+      const filePath = `${fileName}.${fileExt}`; // Including file extension
 
       let { error: uploadError } = await supabase.storage
         .from("avatars")
