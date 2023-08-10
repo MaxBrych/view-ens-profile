@@ -3,14 +3,16 @@ import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Avatar from "./Avatar";
 import Link from "next/link";
 import { FiChevronLeft } from "react-icons/fi";
+import { useAddress } from "@thirdweb-dev/react";
 
-export default function Account({ session }) {
+export default function Account({ session, walletAddress }: any) {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
   const [website, setWebsite] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
+  const address = useAddress();
 
   useEffect(() => {
     getProfile();
@@ -23,7 +25,7 @@ export default function Account({ session }) {
       let { data, error, status } = await supabase
         .from("profiles")
         .select(`username, website, avatar_url`)
-        .eq("id", user.id)
+        .eq("wallet_address", walletAddress) // Changed from user.id to walletAddress
         .single();
 
       if (error && status !== 406) {
@@ -43,19 +45,21 @@ export default function Account({ session }) {
     }
   }
 
-  async function updateProfile({ username, website, avatar_url }) {
+  async function updateProfile({ username, website, avatar_url }: any) {
     try {
       setLoading(true);
 
       const updates = {
-        id: user.id,
         username,
         website,
         avatar_url,
         updated_at: new Date().toISOString(),
+        // Removed the id field here, and no need to update wallet_address since it's the primary key
       };
 
-      let { error } = await supabase.from("profiles").upsert(updates);
+      let { error } = await supabase
+        .from("profiles")
+        .upsert({ wallet_address: walletAddress, ...updates }); // Use wallet_address in upsert
       if (error) throw error;
       alert("Profile updated!");
     } catch (error) {
@@ -64,6 +68,9 @@ export default function Account({ session }) {
     } finally {
       setLoading(false);
     }
+  }
+  function formatAddress(address: string): string {
+    return address.slice(0, 6) + "..." + address.slice(-4);
   }
 
   return (
@@ -76,25 +83,17 @@ export default function Account({ session }) {
         Back
       </Link>
       <Avatar
-        uid={user.id}
+        uid={formatAddress(walletAddress)} // Use walletAddress instead of user.id
         url={avatar_url}
         size={150}
-        onUpload={(url) => {
+        onUpload={(url: any) => {
           setAvatarUrl(url);
           updateProfile({ username, website, avatar_url: url });
         }}
       />
+
       <div className="flex flex-col my-2">
-        <label htmlFor="email">Email</label>
-        <input
-          className="bg-[#f3f3f3] p-2 rounded-md border border-[#DDD]"
-          id="email"
-          type="text"
-          value={session.user.email}
-          disabled
-        />
-      </div>
-      <div className="flex flex-col my-2">
+        <h5 className="text-sm">{address}</h5>
         <label htmlFor="username">Username</label>
         <input
           className="bg-[#f3f3f3] p-2 rounded-md border border-[#DDD]"
@@ -102,16 +101,6 @@ export default function Account({ session }) {
           type="text"
           value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div className="flex flex-col my-2">
-        <label htmlFor="website">Website</label>
-        <input
-          className="bg-[#f3f3f3] p-2 rounded-md border border-[#DDD]"
-          id="website"
-          type="website"
-          value={website || ""}
-          onChange={(e) => setWebsite(e.target.value)}
         />
       </div>
 

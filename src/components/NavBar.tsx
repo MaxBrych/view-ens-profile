@@ -6,7 +6,14 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  useDisclosure,
 } from "@chakra-ui/react";
+
 import {
   useAddress,
   useDisconnect,
@@ -21,9 +28,12 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import { ethers } from "ethers"; // You can import ethers directly
+import { ethers } from "ethers";
+import Account from "./Auth/Account";
+import { useSession } from "@supabase/auth-helpers-react";
 
 export default function Navbar() {
+  const { isOpen, onOpen, onClose } = useDisclosure(); // for controlling the modal
   const walletAddress = useAddress();
   const disconnect = useDisconnect();
   const isMismatched = useNetworkMismatch();
@@ -32,6 +42,7 @@ export default function Navbar() {
   const [ensName, setEnsName] = useState<string | null>(null);
   const [ensRecords, setEnsRecords] = useState<Record<string, string>>({});
   const [isLoading, setLoading] = useState(true);
+  const session = useSession();
 
   useEffect(() => {
     const provider = new ethers.providers.JsonRpcProvider(
@@ -98,7 +109,7 @@ export default function Navbar() {
         <Link href="/">
           <Image
             alt="Logo"
-            src="https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png"
+            src="https://cdn.discordapp.com/attachments/911669935363752026/1134946436908322846/Flippr_Wordmark.png"
             height={48}
             width={200}
             className="w-auto h-8 cursor-pointer"
@@ -116,7 +127,7 @@ export default function Navbar() {
             </button>
           ) : (
             <Menu>
-              <MenuButton>
+              <MenuButton onClick={onOpen}>
                 <Flex className="flex h-12 gap-2 pl-3 justify-center items-center bg-[#FFF] px-2 rounded-full py-1">
                   <HiMenuAlt4 className="w-5 h-5" />
                   <Image
@@ -131,13 +142,16 @@ export default function Navbar() {
                   />
                 </Flex>
               </MenuButton>
-
-              <MenuList>
-                <MenuItem>
-                  <Link href={`/account`}> Profile </Link>
-                </MenuItem>
-                <MenuItem onClick={disconnect}>Sign Out</MenuItem>
-              </MenuList>
+              <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>Account</ModalHeader>
+                  <ModalBody>
+                    <Account session={session} walletAddress={walletAddress} />
+                    <MenuItem onClick={disconnect}>Sign Out</MenuItem>
+                  </ModalBody>
+                </ModalContent>
+              </Modal>
             </Menu>
           )}
         </Flex>

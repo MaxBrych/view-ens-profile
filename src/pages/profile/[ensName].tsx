@@ -21,6 +21,7 @@ import ShareButton from "@/components/ShareButton";
 import NavBarNew from "@/components/NavBarNew";
 import TransactionFeed from "@/components/TransactionFeed/TransactionFeed";
 import NavBar from "@/components/NavBar";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const inter = Inter({ subsets: ["latin"] });
 const ethersDynamic: Promise<any> = import("ethers");
@@ -56,6 +57,9 @@ const ProfilePage = () => {
   const [ensRecords, setEnsRecords] = useState<Record<string, string>>({});
   const [isLoading, setLoading] = useState(true);
 
+  const supabase = useSupabaseClient();
+  const user = useUser();
+
   useEffect(() => {
     ethersDynamic.then((ethers) => {
       const provider = new ethers.providers.JsonRpcProvider(
@@ -64,6 +68,7 @@ const ProfilePage = () => {
       setProvider(provider);
     });
   }, []);
+
   useEffect(() => {
     const getAllRecords = async (ensName: string) => {
       setLoading(true);
@@ -115,9 +120,45 @@ const ProfilePage = () => {
         }
       }
     };
+    const fetchData = async (nameOrAddress: string) => {
+      setLoading(true);
+
+      if (nameOrAddress.endsWith(".eth")) {
+        // Handle ENS name
+        await getAllRecords(nameOrAddress as string);
+      } else {
+        // Handle username
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("*")
+          .eq("username", nameOrAddress)
+          .single();
+
+        if (data) {
+          // Set data from database
+          setAddress(data.wallet_address);
+          setEnsRecords({
+            avatar:
+              data.avatar_url ||
+              "https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png",
+            description: data.full_name,
+            // Add other fields as needed
+          });
+        } else {
+          // Handle error or use placeholders
+
+          setEnsRecords({
+            avatar: "https://example.com/placeholder-avatar.png",
+            description: "User not found",
+          });
+        }
+      }
+
+      setLoading(false);
+    };
 
     if (ensName && provider) {
-      getAllRecords(ensName as string);
+      fetchData(ensName as string);
     }
   }, [ensName, provider]);
   const bg = "gray.50";
