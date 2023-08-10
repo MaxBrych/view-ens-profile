@@ -10,7 +10,7 @@ export default function RegisterPage() {
       <div className="w-full px-12 ">
         <h1 className="text-4xl text-black">Flippr Account</h1>
         {!session ? (
-          <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />
+          <Auth supabaseClient={supabase} />
         ) : (
           <Account session={session} />
         )}
