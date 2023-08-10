@@ -56,24 +56,25 @@ export default function Avatar({ uid, url, size, onUpload }) {
   };
 
   return (
-    <div>
+    <div className="flex flex-col justify-center my-4">
       {avatarUrl ? (
         <img
           src={avatarUrl}
           alt="Avatar"
-          className="avatar image"
+          className=" border border-[#DDD] rounded-full"
           style={{ height: size, width: size }}
         />
       ) : (
         <div
-          className="avatar no-image"
+          className="bg-primary-500 border border-[#DDD] rounded-full"
           style={{ height: size, width: size }}
         />
       )}
-      <div style={{ width: size }}>
-        <label className="block button primary" htmlFor="single">
-          {uploading ? "Uploading ..." : "Upload"}
-        </label>
+      <div
+        className="items-center justify-center block h-10 px-6 mt-2 font-semibold text-center rounded-md cursor-pointer bg-[#DDD] "
+        style={{ width: size }}
+      >
+        <label htmlFor="single">{uploading ? "Uploading ..." : "Upload"}</label>
         <input
           style={{
             visibility: "hidden",

@@ -75,22 +75,30 @@ export default function Account({ session }) {
           updateProfile({ username, website, avatar_url: url });
         }}
       />
-      <div>
+      <div className="flex flex-col my-2">
         <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={session.user.email} disabled />
+        <input
+          className="bg-[#f3f3f3] p-2 rounded-md border border-[#DDD]"
+          id="email"
+          type="text"
+          value={session.user.email}
+          disabled
+        />
       </div>
-      <div>
+      <div className="flex flex-col my-2">
         <label htmlFor="username">Username</label>
         <input
+          className="bg-[#f3f3f3] p-2 rounded-md border border-[#DDD]"
           id="username"
           type="text"
           value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
         />
       </div>
-      <div>
+      <div className="flex flex-col my-2">
         <label htmlFor="website">Website</label>
         <input
+          className="bg-[#f3f3f3] p-2 rounded-md border border-[#DDD]"
           id="website"
           type="website"
           value={website || ""}
@@ -98,9 +106,9 @@ export default function Account({ session }) {
         />
       </div>
 
-      <div>
+      <div className="flex w-full gap-4">
         <button
-          className="block button primary"
+          className="block h-10 px-6 mt-2 font-semibold text-center rounded-md cursor-pointer bg-primary-500"
           onClick={() => updateProfile({ username, website, avatar_url })}
           disabled={loading}
         >
@@ -110,7 +118,7 @@ export default function Account({ session }) {
 
       <div>
         <button
-          className="block button"
+          className="bg-[#DDD] cursor-pointer block px-6 text-center rounded-md h-10 mt-2"
           onClick={() => supabase.auth.signOut()}
         >
           Sign Out
