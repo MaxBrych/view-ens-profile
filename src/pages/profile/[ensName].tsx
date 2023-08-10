@@ -153,7 +153,7 @@ const ProfilePage = () => {
               <Image
                 src={
                   ensRecords.avatar ||
-                  "https://cdn.discordapp.com/attachments/1070670506052821083/1116097197826658414/MaxCJack60_Front-facing_human_figure_styled_akin_to_a_Pokemon_p_9fe497d9-0642-49ce-829e-d00ad4a1876f.png"
+                  "https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png"
                 }
                 alt="Avatar"
                 boxSize={["96px", "128px", "160px"]}

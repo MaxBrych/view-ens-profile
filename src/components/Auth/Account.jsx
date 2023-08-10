@@ -127,7 +127,7 @@ export default function Account({ session }) {
 
       <div>
         <button
-          className="bg-[#DDD] cursor-pointer block px-6 text-center rounded-md h-10 mt-2"
+          className="block h-10 px-6 mt-2 text-center bg-gray-300 rounded-md cursor-pointer"
           onClick={() => supabase.auth.signOut()}
         >
           Sign Out
