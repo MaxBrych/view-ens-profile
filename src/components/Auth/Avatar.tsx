@@ -35,8 +35,8 @@ export default function Avatar({ walletAddress, url, size, onUpload }: any) {
 
       const file = event.target.files[0];
       const fileExt = file.name.split(".").pop();
-      const fileName = `${walletAddress}`; // Using the wallet address as the filename
-      const filePath = `${fileName}.${fileExt}`; // Including file extension
+      const fileName = `${walletAddress}`;
+      const filePath = `${fileName}.${fileExt}`;
 
       let { error: uploadError } = await supabase.storage
         .from("avatars")

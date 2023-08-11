@@ -18,10 +18,10 @@ import { Inter, Manrope, Share } from "next/font/google";
 import DonateButton from "@/components/Donation/Donate";
 import ChatButton from "@/components/ChatButton";
 import ShareButton from "@/components/ShareButton";
-import NavBarNew from "@/components/NavBarNew";
 import TransactionFeed from "@/components/TransactionFeed/TransactionFeed";
 import NavBar from "@/components/NavBar";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useAddress } from "@thirdweb-dev/react";
 
 const inter = Inter({ subsets: ["latin"] });
 const ethersDynamic: Promise<any> = import("ethers");
@@ -120,6 +120,7 @@ const ProfilePage = () => {
         }
       }
     };
+
     const fetchData = async (nameOrAddress: string) => {
       setLoading(true);
 
@@ -156,10 +157,14 @@ const ProfilePage = () => {
 
       setLoading(false);
     };
+    function formatAddress(address: string): string {
+      return address.slice(0, 6) + "..." + address.slice(-4);
+    }
 
     if (ensName && provider) {
       fetchData(ensName as string);
     }
+    const formattedAddress = formatAddress(address || "");
   }, [ensName, provider]);
   const bg = "gray.50";
   const color = "gray.700";
