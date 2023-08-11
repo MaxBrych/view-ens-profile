@@ -134,6 +134,7 @@ function AddressProfile() {
                 rounded="full"
                 border={"1px"}
                 borderColor={"gray.300"}
+                objectFit={"cover"}
               />
             </ProfileSkeleton>
 

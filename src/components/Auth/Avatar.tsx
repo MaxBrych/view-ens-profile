@@ -62,7 +62,12 @@ export default function Avatar({ walletAddress, url, size, onUpload }: any) {
           src={avatarUrl}
           alt="Avatar"
           className="border border-gray-300 rounded-full "
-          style={{ height: size, width: size }}
+          style={{
+            height: size,
+            width: size,
+            objectFit: "cover",
+            display: "block",
+          }}
         />
       ) : (
         <div
