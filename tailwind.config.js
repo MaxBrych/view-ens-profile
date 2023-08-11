@@ -9,7 +9,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         "profil-pfp":
-          "url('https://cdn.discordapp.com/attachments/1070670506052821083/1139184181574893588/pandapfpf.png')",
+          "url('https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png')",
         "hero-bg-desktop":
           "url('https://cdn.discordapp.com/attachments/911669935363752026/1122603145969807491/bg-desktop.png')",
         "hero-bg-mobile":

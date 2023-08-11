@@ -12,6 +12,8 @@ import {
   ModalHeader,
   ModalBody,
   useDisclosure,
+  Box,
+  Button,
 } from "@chakra-ui/react";
 
 import {
@@ -157,34 +159,38 @@ export default function Navbar() {
               Switch Network
             </button>
           ) : (
-            <Menu>
-              <MenuButton onClick={onOpen}>
-                <Flex className="flex h-12 gap-2 pl-3 justify-center items-center bg-[#FFF] px-2 rounded-full py-1">
-                  <HiMenuAlt4 className="w-5 h-5" />
-                  <Image
-                    src={
-                      ensRecords.avatar ||
-                      avatarUrl ||
-                      "https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png"
-                    }
-                    alt="Avatar"
-                    height={36}
-                    width={36}
-                    className="border border-gray-300 rounded-full"
-                  />
-                </Flex>
-              </MenuButton>
+            <Box>
+              <Flex
+                onClick={onOpen}
+                className="flex h-12 gap-2 pl-3 justify-center items-center bg-[#FFF] px-2 rounded-full py-1"
+              >
+                <HiMenuAlt4 className="w-5 h-5" />
+                <Image
+                  src={
+                    ensRecords.avatar ||
+                    avatarUrl ||
+                    "https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png"
+                  }
+                  alt="Avatar"
+                  height={36}
+                  width={36}
+                  className="border border-gray-300 rounded-full"
+                />
+              </Flex>
+
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
                   <ModalHeader>Account</ModalHeader>
                   <ModalBody>
                     <Account walletAddress={walletAddress} />
-                    <MenuItem onClick={disconnect}>Sign Out</MenuItem>
+                    <Button colorScheme="grey" onClick={disconnect}>
+                      Sign Out
+                    </Button>
                   </ModalBody>
                 </ModalContent>
               </Modal>
-            </Menu>
+            </Box>
           )}
         </Flex>
       </Flex>
