@@ -71,7 +71,7 @@ export default function Account({ session, walletAddress }: any) {
   }
 
   return (
-    <div className="pt-4">
+    <div className="pt-4 font-medium font-mona-sans">
       <Link
         href="/"
         className="flex items-center justify-start gap-2 font-semibold text-md "

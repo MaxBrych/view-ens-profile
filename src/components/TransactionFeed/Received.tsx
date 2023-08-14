@@ -35,11 +35,11 @@ export default function Received({
             <div>
               <b>{formatAddress(transaction.sender)}</b> donated
             </div>
-            <div className="px-2 py-1 text-xs font-bold text-[#00280E] bg-[#D0FFE0] rounded-full">
+            <div className="px-2 py-1 text-xs font-medium text-[#00280E] bg-[#D0FFE0] rounded-full">
               ${ethers.utils.formatUnits(transaction.amount, DECIMALS)}
             </div>
           </div>
-          <div className="py-1 text-lg font-semibold text-left md:text-xl">
+          <div className="py-1 text-lg font-medium text-left md:text-xl">
             {transaction.message}
           </div>
           <div className="text-xs leading-3 text-left">

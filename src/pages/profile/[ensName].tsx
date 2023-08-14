@@ -209,15 +209,7 @@ const ProfilePage = () => {
               />
             </ENSRecordSkeleton>
 
-            <Heading
-              as="h1"
-              fontSize={"lg"}
-              h={"10px"}
-              mb={4}
-              textAlign="center"
-            >
-              {ensName || ""}
-            </Heading>
+            <h1 className="h-3 mb-4 text-xl text-center">{ensName || ""}</h1>
 
             {ensRecords.description && (
               <Text
@@ -240,6 +232,7 @@ const ProfilePage = () => {
 
             {ensRecords["com.github"] && (
               <Flex
+                fontStyle={"normal"}
                 border={"1px"}
                 borderColor={"gray.200"}
                 align="center"

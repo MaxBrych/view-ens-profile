@@ -41,6 +41,12 @@ const Mona = localFont({
       style: "body",
     },
     {
+      path: "fonts/Mona-Sans-Bold.woff2",
+      weight: "600",
+      style: "bold",
+    },
+
+    {
       path: "fonts/Mona-Sans-BlackWide.woff2",
       weight: "800",
       style: "heading",
