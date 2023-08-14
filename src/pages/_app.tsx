@@ -12,6 +12,7 @@ import {
   ConnectKitButton,
   getDefaultConfig,
 } from "connectkit";
+import localFont from "next/font/local";
 
 const client = process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID;
 
@@ -31,6 +32,20 @@ const theme = extendTheme({
       },
     },
   },
+});
+const Mona = localFont({
+  src: [
+    {
+      path: "fonts/Mona-Sans-Medium.woff2",
+      weight: "400",
+      style: "body",
+    },
+    {
+      path: "fonts/Mona-Sans-BlackWide.woff2",
+      weight: "800",
+      style: "heading",
+    },
+  ],
 });
 
 export default function App({
@@ -52,7 +67,9 @@ export default function App({
         supportedWallets={[coinbaseWallet(), metamaskWallet(), localWallet()]}
       >
         <ChakraProvider theme={theme}>
-          <Component {...pageProps} />
+          <main className={`${Mona.className} font-mona`}>
+            <Component {...pageProps} />
+          </main>
         </ChakraProvider>
       </ThirdwebProvider>
     </SessionContextProvider>

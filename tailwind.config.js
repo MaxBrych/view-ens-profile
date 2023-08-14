@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        "mona-sans": ["Mona-Sans", "sans-serif"],
+      },
       backgroundImage: {
         "profil-pfp":
           "url('https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png')",
@@ -36,6 +39,8 @@ module.exports = {
         800: "#454D55",
         900: "#22272B",
       },
+      white: "#FFFFFF",
+      black: "#000000",
     },
   },
   plugins: [],

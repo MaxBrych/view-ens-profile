@@ -1,49 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import Avatar from "./Avatar";
 import Link from "next/link";
 import { FiChevronLeft } from "react-icons/fi";
 import { useAddress } from "@thirdweb-dev/react";
+import { useUserAvatarAndENS } from "@/hooks/useUserAvatarAndENS";
 
 export default function Account({ session, walletAddress }: any) {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState<string | null>(null);
-
   const [website, setWebsite] = useState(null);
-  const [avatar_url, setAvatarUrl] = useState(null);
-  const address = useAddress();
 
-  useEffect(() => {
-    getProfile();
-  }, [session]);
-
-  async function getProfile() {
-    try {
-      setLoading(true);
-
-      let { data, error, status } = await supabase
-        .from("wallet_profiles")
-        .select(`username, avatar_url`)
-        .eq("wallet_address", walletAddress)
-        .single();
-
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data) {
-        setUsername(data.username || "");
-        setAvatarUrl(data.avatar_url || "");
-      }
-    } catch (error) {
-      alert("Error loading user data!");
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const { ensName, avatarUrl, isLoading } = useUserAvatarAndENS(walletAddress); // Use the custom hook
 
   async function updateProfile({ username, avatar_url }: any) {
     try {
@@ -66,6 +36,7 @@ export default function Account({ session, walletAddress }: any) {
       setLoading(false);
     }
   }
+
   function formatAddress(address: string): string {
     return address.slice(0, 6) + "..." + address.slice(-4);
   }
@@ -81,16 +52,15 @@ export default function Account({ session, walletAddress }: any) {
       </Link>
       <Avatar
         walletAddress={formatAddress(walletAddress)} // Use walletAddress instead of uid
-        url={avatar_url}
+        url={avatarUrl}
         size={150}
         onUpload={(url: any) => {
-          setAvatarUrl(url);
           updateProfile({ username, website, avatar_url: url });
         }}
       />
 
       <div className="flex flex-col my-2">
-        <h5 className="text-sm">{address}</h5>
+        <h5 className="text-sm">{ensName || formatAddress(walletAddress)}</h5>
         <label htmlFor="username">Username</label>
         <input
           className="bg-[#f3f3f3] p-2 rounded-md border border-[#DDD]"
@@ -104,19 +74,12 @@ export default function Account({ session, walletAddress }: any) {
       <div className="flex w-full gap-4">
         <button
           className="block h-10 px-6 mt-2 font-semibold text-center rounded-md cursor-pointer bg-primary-500"
-          onClick={() => updateProfile({ username, website, avatar_url })}
-          disabled={loading}
+          onClick={() =>
+            updateProfile({ username, website, avatar_url: avatarUrl })
+          }
+          disabled={isLoading || loading}
         >
-          {loading ? "Loading ..." : "Update"}
-        </button>
-      </div>
-
-      <div>
-        <button
-          className="block h-10 px-6 mt-2 text-center bg-gray-300 rounded-md cursor-pointer"
-          onClick={() => supabase.auth.signOut()}
-        >
-          Sign Out
+          {isLoading || loading ? "Loading ..." : "Update"}
         </button>
       </div>
     </div>

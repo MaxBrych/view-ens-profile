@@ -51,7 +51,6 @@ const Searchbar = () => {
   return (
     <FormControl as="form" onSubmit={handleSearch}>
       <Box
-        mt={4}
         borderRadius={"full"}
         border={"1px solid"}
         borderColor={"gray.300"}

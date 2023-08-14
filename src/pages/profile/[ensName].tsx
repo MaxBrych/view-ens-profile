@@ -181,7 +181,7 @@ const ProfilePage = () => {
         justifyContent="center"
         color={color}
         backgroundColor={bg}
-        className={` ${inter.className}`}
+        className=" font-mona"
         p={4}
       >
         <Box
@@ -223,10 +223,10 @@ const ProfilePage = () => {
               <Text
                 textAlign="center"
                 fontSize={{ base: "xs", md: "sm" }}
-                fontWeight={"medium"}
                 lineHeight={"normal"}
                 mb={4}
                 color={color}
+                className=" font-mona"
               >
                 {ensRecords.description}
               </Text>

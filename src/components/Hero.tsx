@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import { FiSearch } from "react-icons/fi";
 import SearchBar from "./SearchBar";
+import Image from "next/image";
 
 const ethersDynamic: Promise<any> = import("ethers");
 
@@ -24,30 +25,17 @@ const Hero = () => {
       className="flex flex-col items-center justify-center min-h-screen"
     >
       <Box p={1} className="credit-card" mx="auto" w="full" maxW={"lg"}>
-        <Heading
-          textAlign={"center"}
-          mb={{ base: "2", md: "3" }}
-          textColor={"black"}
-          className="tracking-tight md:tracking-tighter"
-          fontSize={{ base: "4xl", md: "7xl" }}
-          lineHeight={"1.1"}
-          fontWeight={"bold"}
-        >
-          Easiest way to donate crypto
-        </Heading>
-        <Text
-          mb={4}
-          textAlign={"center"}
-          fontSize={{ base: "sm", md: "xl" }}
-          fontWeight={"semibold"}
-          textColor={"gray.500"}
-          className="cursor-default"
-          colorScheme="transparent"
-          w={{ base: "auto", md: "auto" }}
-        >
-          Send crypto and chat with people{" "}
-        </Text>
+        <h1 className="mb-2 text-4xl font-black text-center text-black md:mb-4 md:text-6xl">
+          EASIEST WAY TO DONATE CRYPTO
+        </h1>
 
+        <Image
+          src="https://cdn.discordapp.com/attachments/911669935363752026/1140751372120236093/FlipprIllus.png"
+          alt="Hero"
+          width={500}
+          height={500}
+          className="mb-0"
+        />
         <SearchBar />
         <div className="flex flex-col justify-between w-full py-6">
           <Link
