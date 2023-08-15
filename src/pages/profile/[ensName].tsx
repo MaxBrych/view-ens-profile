@@ -23,7 +23,6 @@ import NavBar from "@/components/NavBar";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useAddress } from "@thirdweb-dev/react";
 
-const inter = Inter({ subsets: ["latin"] });
 const ethersDynamic: Promise<any> = import("ethers");
 
 // This component represents a skeleton state of an ENS record.

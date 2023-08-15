@@ -10,8 +10,8 @@ export default function Account({ session, walletAddress }: any) {
   const user = useUser();
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState<string | null>(null);
+  const [description, setDescription] = useState<string | null>(null);
 
-  const [website, setWebsite] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
   const address = useAddress();
 
@@ -25,7 +25,7 @@ export default function Account({ session, walletAddress }: any) {
 
       let { data, error, status } = await supabase
         .from("wallet_profiles")
-        .select(`username, avatar_url`)
+        .select(`username, description, avatar_url`)
         .eq("wallet_address", walletAddress)
         .single();
 
@@ -36,6 +36,7 @@ export default function Account({ session, walletAddress }: any) {
       if (data) {
         setUsername(data.username || "");
         setAvatarUrl(data.avatar_url || "");
+        setDescription(data.description || "");
       }
     } catch (error) {
       alert("Error loading user data!");
@@ -45,12 +46,13 @@ export default function Account({ session, walletAddress }: any) {
     }
   }
 
-  async function updateProfile({ username, avatar_url }: any) {
+  async function updateProfile({ username, description, avatar_url }: any) {
     try {
       setLoading(true);
 
       const updates = {
         username,
+        description,
         avatar_url,
       };
 
@@ -80,12 +82,12 @@ export default function Account({ session, walletAddress }: any) {
         Back
       </Link>
       <Avatar
-        walletAddress={formatAddress(walletAddress)} // Use walletAddress instead of uid
+        walletAddress={formatAddress(walletAddress)}
         url={avatar_url}
         size={150}
         onUpload={(url: any) => {
           setAvatarUrl(url);
-          updateProfile({ username, website, avatar_url: url });
+          updateProfile({ username, description, avatar_url: url });
         }}
       />
 
@@ -99,12 +101,21 @@ export default function Account({ session, walletAddress }: any) {
           value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
         />
+
+        <label htmlFor="description">Description</label>
+        <input
+          className="p-2 bg-gray-100 border border-gray-300 rounded-md"
+          id="description"
+          type="text"
+          value={username || ""}
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </div>
 
       <div className="flex w-full gap-4">
         <button
           className="block h-10 px-6 mt-2 font-semibold text-center rounded-md cursor-pointer bg-primary-500"
-          onClick={() => updateProfile({ username, website, avatar_url })}
+          onClick={() => updateProfile({ username, description, avatar_url })}
           disabled={loading}
         >
           {loading ? "Loading ..." : "Update"}

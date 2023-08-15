@@ -18,9 +18,6 @@ import ChatButton from "@/components/ChatButton";
 import ShareButton from "@/components/ShareButton";
 import TransactionFeed from "@/components/TransactionFeed/TransactionFeed";
 import NavBar from "@/components/NavBar";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
 
 function ProfileSkeleton({
   children,
@@ -56,7 +53,7 @@ function AddressProfile() {
         setLoading(true);
         let { data, error, status } = await supabase
           .from("wallet_profiles")
-          .select(`username, avatar_url`)
+          .select(`username, description, avatar_url`)
           .eq("wallet_address", walletAddress)
           .single();
 
@@ -73,13 +70,14 @@ function AddressProfile() {
               throw avatarError;
             }
             const avatarUrl = URL.createObjectURL(avatarData);
-            data.avatar_url = avatarUrl; // Replacing the URL with the actual downloaded URL
+            data.avatar_url = avatarUrl;
           }
 
           setAddress(walletAddress);
           setProfile({
             avatar: data.avatar_url,
-            description: data.username,
+            username: data.username,
+            description: data.description,
           });
         }
       } catch (error) {
@@ -95,7 +93,7 @@ function AddressProfile() {
   }, [queryAddress]);
 
   const bg = "gray.50";
-  const color = "gray.700";
+  const color = "black";
 
   return (
     <>
@@ -109,7 +107,6 @@ function AddressProfile() {
         justifyContent="center"
         color={color}
         backgroundColor={bg}
-        className={` ${inter.className}`}
         p={4}
       >
         <Box
@@ -138,15 +135,19 @@ function AddressProfile() {
               />
             </ProfileSkeleton>
 
-            <Heading
-              as="h1"
-              fontSize={"lg"}
-              h={"10px"}
-              mb={4}
+            <h1 className="h-3 mb-4 text-xl text-center">
+              {profile.username || ""}
+            </h1>
+            <Text
               textAlign="center"
+              fontSize={{ base: "xs", md: "sm" }}
+              lineHeight={"normal"}
+              mb={4}
+              color={color}
+              className=" font-mona"
             >
               {profile.description || ""}
-            </Heading>
+            </Text>
 
             <HStack mt={2} spacing={8} mb={4} rowGap={8}>
               <ChatButton receiverAddress={address} />
