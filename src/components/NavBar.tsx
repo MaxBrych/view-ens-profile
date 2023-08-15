@@ -93,7 +93,7 @@ export default function Navbar() {
           if (!ensName || !ensRecords.avatar) {
             const { data, error } = await supabase
               .from("wallet_profiles")
-              .select("*")
+              .select("avatar_url")
               .eq("wallet_address", walletAddress)
               .single();
 
