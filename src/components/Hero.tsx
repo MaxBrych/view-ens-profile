@@ -30,7 +30,7 @@ const Hero = () => {
         w="full"
         maxW={"xl"}
       >
-        <h1 className="mb-2 text-4xl font-black tracking-tight text-center text-black md:mb-4 md:text-7xl ">
+        <h1 className="mb-2 text-3xl font-black tracking-tight text-center text-black md:mb-4 md:text-7xl ">
           EASIEST WAY TO DONATE CRYPTO
         </h1>
 
