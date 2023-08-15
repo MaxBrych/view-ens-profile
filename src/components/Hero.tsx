@@ -24,8 +24,8 @@ const Hero = () => {
       w={"full"}
       className="flex flex-col items-center justify-center min-h-screen"
     >
-      <Box p={1} className="credit-card" mx="auto" w="full" maxW={"lg"}>
-        <h1 className="mb-2 text-4xl font-black text-center text-black md:mb-4 md:text-6xl">
+      <Box mx="auto" w="full" maxW={"xl"}>
+        <h1 className="mb-2 text-4xl font-black text-center text-black md:mb-4 md:text-7xl">
           EASIEST WAY TO DONATE CRYPTO
         </h1>
 
