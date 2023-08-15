@@ -45,7 +45,6 @@ export default function Received({
           <div className="text-xs leading-3 text-left">
             {new Date(transaction.timestamp * 1000).toLocaleString()}
           </div>
-          <hr />
         </div>
       ))}
     </>
