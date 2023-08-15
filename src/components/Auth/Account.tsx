@@ -107,7 +107,7 @@ export default function Account({ session, walletAddress }: any) {
           className="p-2 bg-gray-100 border border-gray-300 rounded-md"
           id="description"
           type="text"
-          value={username || ""}
+          value={description || ""}
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
