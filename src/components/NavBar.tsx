@@ -142,11 +142,7 @@ export default function Navbar() {
         <Link href="/">
           <Image
             alt="Logo"
-            src={
-              ensRecords.avatar ||
-              avatarUrl ||
-              "https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png"
-            }
+            src="https://cdn.discordapp.com/attachments/911669935363752026/1134946436908322846/Flippr_Wordmark.png"
             height={48}
             width={200}
             className="w-auto h-8 cursor-pointer"
