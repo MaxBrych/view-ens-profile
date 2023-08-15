@@ -108,7 +108,7 @@ export default function Account({ session, walletAddress }: any) {
           id="description"
           type="text"
           value={username || ""}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </div>
 
