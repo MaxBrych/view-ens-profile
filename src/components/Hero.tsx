@@ -26,14 +26,11 @@ const Hero = () => {
     >
       <Box
         mx="auto"
-        flex="1"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
+        className="flex flex-col items-center justify-center "
         w="full"
         maxW={"xl"}
       >
-        <h1 className="mb-2 text-4xl font-black text-center text-black md:mb-4 md:text-7xl">
+        <h1 className="mb-2 text-4xl font-black tracking-tight text-center text-black md:mb-4 md:text-7xl ">
           EASIEST WAY TO DONATE CRYPTO
         </h1>
 
