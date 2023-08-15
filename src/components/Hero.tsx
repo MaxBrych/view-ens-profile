@@ -28,7 +28,7 @@ const Hero = () => {
         mx="auto"
         className="flex flex-col items-center justify-center "
         w="full"
-        maxW={"xl"}
+        maxW={"2xl"}
       >
         <h1 className="mb-2 text-3xl font-black tracking-tight text-center text-black md:mb-4 md:text-7xl ">
           EASIEST WAY TO DONATE CRYPTO
