@@ -88,7 +88,7 @@ const Searchbar = () => {
         <IconButton
           icon={<FiSearch />}
           colorScheme="grey"
-          className="px-2 text-white rounded-full bg-primary-500"
+          className="px-2 text-black rounded-full bg-primary-500"
           aria-label={""}
           rounded={"full"}
           size={{ base: "md", md: "lg" }}
