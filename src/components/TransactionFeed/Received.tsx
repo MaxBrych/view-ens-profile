@@ -32,10 +32,8 @@ export default function Received({
       {transactions.map((transaction: any, index: any) => (
         <div key={index} className="py-3 text-black ">
           <div className="flex items-center justify-between text-sm">
-            <div>
-              <b>{formatAddress(transaction.sender)}</b> donated
-            </div>
-            <div className="px-2 py-1 text-xs font-medium text-[#00280E] bg-[#D0FFE0] rounded-full">
+            <div>{formatAddress(transaction.sender)} donated</div>
+            <div className="px-2 py-1 text-xs font-bold text-[#00280E] bg-[#D0FFE0] rounded-full">
               ${ethers.utils.formatUnits(transaction.amount, DECIMALS)}
             </div>
           </div>

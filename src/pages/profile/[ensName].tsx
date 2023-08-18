@@ -208,7 +208,9 @@ const ProfilePage = () => {
               />
             </ENSRecordSkeleton>
 
-            <h1 className="h-3 mb-4 text-xl text-center">{ensName || ""}</h1>
+            <h1 className="h-3 mb-4 text-xl font-bold text-center">
+              {ensName || ""}
+            </h1>
 
             {ensRecords.description && (
               <Text
