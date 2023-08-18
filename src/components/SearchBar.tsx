@@ -59,7 +59,7 @@ const Searchbar = () => {
         borderRadius={"full"}
         border={"1px solid"}
         borderColor={"gray.300"}
-        h={{ base: "12", md: "16" }}
+        h={{ base: "16", md: "20" }}
         fontWeight={"bold"}
         backgroundColor={"white"}
         display={"flex"}
@@ -69,7 +69,7 @@ const Searchbar = () => {
         fontSize={{ base: "md", md: "lg" }}
         maxWidth={{ base: "full", md: "xl" }}
       >
-        <Text pl={6}>flippr.xyz/</Text>
+        <Text pl={4}>flippr.xyz/</Text>
         <Input
           ref={inputRef}
           value={searchInput}
@@ -91,8 +91,9 @@ const Searchbar = () => {
           className="px-2 text-black rounded-full bg-primary-500"
           aria-label={""}
           rounded={"full"}
-          size={{ base: "md", md: "lg" }}
-          fontSize={{ base: "2xl", md: "3xl" }}
+          color={"black"}
+          size={{ base: "lg", md: "lg" }}
+          fontSize={{ base: "3xl", md: "3xl" }}
           onClick={handleSearch}
         >
           Search
