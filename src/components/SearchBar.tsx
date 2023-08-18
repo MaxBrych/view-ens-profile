@@ -64,6 +64,7 @@ const Searchbar = () => {
         pl={6}
         textColor={"gray.500"}
         fontSize={{ base: "lg", md: "xl" }}
+        maxWidth={{ base: "full", md: "2xl" }}
       >
         flippr.xyz/
         <Input

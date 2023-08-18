@@ -28,14 +28,14 @@ const Hero = () => {
         mx="auto"
         className="flex flex-col items-center justify-center "
         w="full"
-        maxW={"2xl"}
+        maxW={"4xl"}
       >
-        <h1 className="mb-2 text-2xl font-black tracking-tight text-center text-black md:mb-4 md:text-6xl ">
+        <h1 className="mb-2 text-3xl font-black tracking-tighter text-center text-black md:mb-4 md:text-7xl ">
           EASIEST WAY TO DONATE CRYPTO
         </h1>
 
         <Image
-          src="https://cdn.discordapp.com/attachments/911669935363752026/1140751372120236093/FlipprIllus.png"
+          src="https://cdn.discordapp.com/attachments/911669935363752026/1142189764087382036/hero-illustration.png"
           alt="Hero"
           width={500}
           height={500}

@@ -64,7 +64,8 @@ export default function Donate({ address, name }: DonateButtonProps) {
           >
             <Tabs
               variant="soft-rounded"
-              colorScheme="whiteAlpha"
+              bg={"white"}
+              textColor={"black"}
               className="w-full"
             >
               <TabList
@@ -72,7 +73,7 @@ export default function Donate({ address, name }: DonateButtonProps) {
                 flex={1}
                 flexDirection={"row"}
                 justifyContent={"center"}
-                className="flex flex-row items-center justify-center flex-shrink-0 w-full p-2 bg-gray-100 rounded-full"
+                className="flex flex-row items-center justify-center flex-1 flex-shrink-0 w-full p-1 bg-gray-100 rounded-full"
               >
                 <Tab
                   fontSize={{ base: 12, md: 14 }}
