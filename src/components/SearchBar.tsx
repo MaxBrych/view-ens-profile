@@ -52,14 +52,14 @@ const Searchbar = () => {
   return (
     <FormControl
       as="form"
-      className="flex flex-col items-center justify-center min-h-screen"
+      className="flex flex-col items-center justify-center"
       onSubmit={handleSearch}
     >
       <Box
         borderRadius={"full"}
         border={"1px solid"}
         borderColor={"gray.300"}
-        h={{ base: "14", md: "18" }}
+        h={{ base: "12", md: "16" }}
         fontWeight={"bold"}
         backgroundColor={"white"}
         display={"flex"}
