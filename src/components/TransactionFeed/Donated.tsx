@@ -33,7 +33,7 @@ export default function Donated({ transactions, isLoading }: DonatedProps) {
               ${ethers.utils.formatUnits(transaction.amount, DECIMALS)}
             </div>
           </div>
-          <div className="py-1 text-lg font-semibold text-left md:text-xl">
+          <div className="py-1 text-lg font-bold text-left md:text-xl">
             {transaction.message}
           </div>
           <div className="text-xs leading-3 text-left">

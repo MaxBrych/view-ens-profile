@@ -62,22 +62,26 @@ export default function Donate({ address, name }: DonateButtonProps) {
             mb={4}
             className="border border-gray-300 rounded-xl"
           >
-            <Tabs
-              variant="soft-rounded"
-              colorScheme="green"
-              className="w-full "
-            >
+            <Tabs variant="soft-rounded" colorScheme="white" className="w-full">
               <TabList
                 w={"full"}
                 flex={1}
                 flexDirection={"row"}
                 justifyContent={"center"}
-                className="flex flex-row items-center justify-center w-full py-2"
+                className="flex flex-row items-center justify-center w-full p-2 bg-gray-300 rounded-full"
               >
-                <Tab fontSize={14} height={8}>
+                <Tab
+                  fontSize={{ base: 12, md: 14 }}
+                  height={6}
+                  className="shadow-sm"
+                >
                   Public
                 </Tab>
-                <Tab fontSize={14} height={8}>
+                <Tab
+                  fontSize={{ base: 12, md: 14 }}
+                  height={6}
+                  className="shadow-sm"
+                >
                   Private
                 </Tab>
               </TabList>

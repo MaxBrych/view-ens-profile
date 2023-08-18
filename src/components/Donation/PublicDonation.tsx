@@ -2,20 +2,11 @@ import React, { useEffect, useState } from "react";
 import {
   Button,
   Flex,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
   useDisclosure,
   Icon,
   useToast,
-  VStack,
   Text,
-  IconButton,
 } from "@chakra-ui/react";
-import { BiCoffeeTogo } from "react-icons/bi"; // for coffee icon
 import { AiFillCheckCircle } from "react-icons/ai"; // for checkmark icon
 import {
   WalletInstance,
