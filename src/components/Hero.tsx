@@ -35,7 +35,7 @@ const Hero = () => {
         </h1>
 
         <Image
-          src="https://cdn.discordapp.com/attachments/911669935363752026/1142194109667348530/hero-illus.png"
+          src="https://cdn.discordapp.com/attachments/911669935363752026/1142198867291553915/Frame_172ad.png"
           alt="Hero"
           width={500}
           height={500}

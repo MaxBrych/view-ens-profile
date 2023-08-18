@@ -64,12 +64,14 @@ const Searchbar = () => {
         backgroundColor={"white"}
         display={"flex"}
         alignItems={"center"}
+        pl={{ base: "6", md: "6" }}
+        pr={{ base: 2, md: 3 }}
         justifyContent={"space-between"}
         textColor={"gray.500"}
         fontSize={{ base: "md", md: "lg" }}
         maxWidth={{ base: "full", md: "xl" }}
       >
-        <Text pl={4}>flippr.xyz/</Text>
+        <Text>flippr.xyz/</Text>
         <Input
           ref={inputRef}
           value={searchInput}
@@ -93,6 +95,8 @@ const Searchbar = () => {
           rounded={"full"}
           color={"black"}
           size={{ base: "lg", md: "lg" }}
+          h={{ base: "16", md: "16" }}
+          inset={0}
           fontSize={{ base: "3xl", md: "3xl" }}
           onClick={handleSearch}
         >
