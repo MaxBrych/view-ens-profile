@@ -6,6 +6,7 @@ import {
   IconButton,
   Box,
   FormControl,
+  Text,
 } from "@chakra-ui/react";
 import { FiSearch } from "react-icons/fi";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
@@ -60,13 +61,11 @@ const Searchbar = () => {
         display={"flex"}
         alignItems={"center"}
         justifyContent={"space-between"}
-        px={4}
-        pl={6}
         textColor={"gray.500"}
-        fontSize={{ base: "lg", md: "xl" }}
+        fontSize={{ base: "md", md: "lg" }}
         maxWidth={{ base: "full", md: "2xl" }}
       >
-        flippr.xyz/
+        <Text pl={6}>flippr.xyz/</Text>
         <Input
           ref={inputRef}
           value={searchInput}
@@ -80,16 +79,16 @@ const Searchbar = () => {
           p={0}
           focusBorderColor="transparent"
           variant="unstyled"
-          fontSize={{ base: "lg", md: "xl" }}
+          fontSize={{ base: "md", md: "lg" }}
         />
         <IconButton
           icon={<FiSearch />}
           colorScheme="grey"
-          className="rounded-full px-2 bg-[#05C756] text-white"
+          className="px-2 text-white rounded-full bg-primary-500"
           aria-label={""}
           rounded={"full"}
-          size={{ base: "md", md: "lg" }}
-          fontSize={{ base: "xl", md: "2xl" }}
+          size={{ base: "lg", md: "xl" }}
+          fontSize={{ base: "2xl", md: "3xl" }}
           onClick={handleSearch}
         >
           Search
