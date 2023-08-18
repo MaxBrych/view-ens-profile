@@ -50,12 +50,16 @@ const Searchbar = () => {
   };
 
   return (
-    <FormControl as="form" onSubmit={handleSearch}>
+    <FormControl
+      as="form"
+      className="flex flex-col items-center justify-center min-h-screen"
+      onSubmit={handleSearch}
+    >
       <Box
         borderRadius={"full"}
         border={"1px solid"}
         borderColor={"gray.300"}
-        h={{ base: "16", md: "20" }}
+        h={{ base: "14", md: "18" }}
         fontWeight={"bold"}
         backgroundColor={"white"}
         display={"flex"}
@@ -63,7 +67,7 @@ const Searchbar = () => {
         justifyContent={"space-between"}
         textColor={"gray.500"}
         fontSize={{ base: "md", md: "lg" }}
-        maxWidth={{ base: "full", md: "2xl" }}
+        maxWidth={{ base: "full", md: "xl" }}
       >
         <Text pl={6}>flippr.xyz/</Text>
         <Input
@@ -87,7 +91,7 @@ const Searchbar = () => {
           className="px-2 text-white rounded-full bg-primary-500"
           aria-label={""}
           rounded={"full"}
-          size={{ base: "lg", md: "xl" }}
+          size={{ base: "md", md: "lg" }}
           fontSize={{ base: "2xl", md: "3xl" }}
           onClick={handleSearch}
         >
