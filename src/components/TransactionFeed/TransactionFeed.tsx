@@ -15,7 +15,7 @@ import Donated from "./Donated";
 
 const USDC_CONTRACT_ADDRESS = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"; // Polygon USDC contract address
 const DECIMALS = 6; // USDC has 6 decimals
-const CONTRACT_ADDRESS = "0xa76b00B8f6F17f15f37EBfb43033B9e2a48e353C";
+const CONTRACT_ADDRESS = "0x0a3e8462f98fe964939C3C8AA62667f763bB0D96";
 
 interface ProfileProps {
   receiverAddress: any;
