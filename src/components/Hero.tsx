@@ -1,28 +1,26 @@
-import { useState, useRef, FormEvent, useEffect } from "react";
-import { useRouter } from "next/router";
-import {
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Button,
-  useToast,
-  Text,
-  IconButton,
-  Heading,
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import Link from "next/link";
 import { FiSearch } from "react-icons/fi";
 import SearchBar from "./SearchBar";
 import Image from "next/image";
+import { useContract, useContractRead } from "@thirdweb-dev/react";
 
-const ethersDynamic: Promise<any> = import("ethers");
+const CONTRACT_ADDRESS = "0x3AaD0C509de23bE3A7831201138289AB9461F01C";
 
-const Hero = () => {
+export default function Hero() {
+  const { contract } = useContract(CONTRACT_ADDRESS);
+
+  // No arguments are required for the getTransactionCount function, so you can leave the args array empty
+  const { data: transactionCount, isLoading } = useContractRead(
+    contract,
+    "getTransactionCount",
+    []
+  );
+
   return (
     <Box
       w={"full"}
-      className="flex flex-col items-center justify-center min-h-screen"
+      className="flex flex-col items-center justify-center min-h-[75vh]"
     >
       <Box
         mx="auto"
@@ -51,9 +49,9 @@ const Hero = () => {
             Get a ENS name here!
           </Link>
         </div>
+        {/* Displaying the transactionCount */}
+        <h1>{!isLoading && transactionCount}</h1>
       </Box>
     </Box>
   );
-};
-
-export default Hero;
+}

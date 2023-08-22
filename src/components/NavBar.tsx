@@ -137,7 +137,7 @@ export default function Navbar() {
   }, [walletAddress]);
 
   return (
-    <Container maxW={"100%"} className="fixed w-full rounded-xl top-4" py={2}>
+    <Container maxW={"100%"} className="sticky w-full rounded-xl top-4" py={2}>
       <Flex justifyContent={"space-between"} alignItems={"center"}>
         <Link href="/">
           <Image
