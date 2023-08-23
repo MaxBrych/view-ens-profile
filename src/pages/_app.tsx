@@ -6,12 +6,7 @@ import {
   metamaskWallet,
   localWallet,
 } from "@thirdweb-dev/react";
-import { WagmiConfig, createConfig } from "wagmi";
-import {
-  ConnectKitProvider,
-  ConnectKitButton,
-  getDefaultConfig,
-} from "connectkit";
+
 import localFont from "next/font/local";
 
 const client = process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID;
@@ -69,6 +64,7 @@ export default function App({
       initialSession={pageProps.initialSession}
     >
       <ThirdwebProvider
+        clientId={client}
         activeChain={activeChain}
         supportedWallets={[coinbaseWallet(), metamaskWallet(), localWallet()]}
       >
