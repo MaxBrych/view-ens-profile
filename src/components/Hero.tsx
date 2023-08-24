@@ -29,15 +29,6 @@ export default function Hero() {
           className="mb-0"
         />
         <SearchBar />
-        <div className="flex flex-col justify-between w-full py-6">
-          <Link
-            className="w-full mt-4 text-xs font-semibold text-center text-gray-500 underline md:text-sm hover:text-gray-700 focus:text-gray-700"
-            href="https://app.ens.domains/"
-            target="_blank"
-          >
-            Get a ENS name here!
-          </Link>
-        </div>
 
         <TotalDonated />
       </Box>
