@@ -8,6 +8,8 @@ import { useContract, useContractRead } from "@thirdweb-dev/react";
 const CONTRACT_ADDRESS = "0x3AaD0C509de23bE3A7831201138289AB9461F01C";
 
 export default function Hero() {
+  {
+    /*
   const { contract } = useContract(CONTRACT_ADDRESS);
 
   // No arguments are required for the getTransactionCount function, so you can leave the args array empty
@@ -16,6 +18,8 @@ export default function Hero() {
     "getTransactionCount",
     []
   );
+ */
+  }
 
   return (
     <Box
@@ -50,7 +54,7 @@ export default function Hero() {
           </Link>
         </div>
         {/* Displaying the transactionCount */}
-        <h1>{!isLoading && transactionCount}</h1>
+        {/*  <h1>{!isLoading && transactionCount}</h1> */}
       </Box>
     </Box>
   );
