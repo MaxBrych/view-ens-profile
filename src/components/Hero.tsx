@@ -3,24 +3,9 @@ import Link from "next/link";
 import { FiSearch } from "react-icons/fi";
 import SearchBar from "./SearchBar";
 import Image from "next/image";
-import { useContract, useContractRead } from "@thirdweb-dev/react";
-
-const CONTRACT_ADDRESS = "0x2eDb7B942926fB8AfBAfE513d3325E61E0536b90";
+import TotalDonated from "./Getter/TotalDonated";
 
 export default function Hero() {
-  {
-    /*
-  const { contract } = useContract(CONTRACT_ADDRESS);
-
-  // No arguments are required for the getTransactionCount function, so you can leave the args array empty
-  const { data: transactionCount, isLoading } = useContractRead(
-    contract,
-    "getTransactionCount",
-    []
-  );
- */
-  }
-
   return (
     <Box
       w={"full"}
@@ -53,8 +38,8 @@ export default function Hero() {
             Get a ENS name here!
           </Link>
         </div>
-        {/* Displaying the transactionCount */}
-        {/*  <h1>{!isLoading && transactionCount}</h1> */}
+
+        <TotalDonated />
       </Box>
     </Box>
   );
