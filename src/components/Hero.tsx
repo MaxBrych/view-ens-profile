@@ -5,7 +5,7 @@ import SearchBar from "./SearchBar";
 import Image from "next/image";
 import { useContract, useContractRead } from "@thirdweb-dev/react";
 
-const CONTRACT_ADDRESS = "0x3AaD0C509de23bE3A7831201138289AB9461F01C";
+const CONTRACT_ADDRESS = "0x2eDb7B942926fB8AfBAfE513d3325E61E0536b90";
 
 export default function Hero() {
   {

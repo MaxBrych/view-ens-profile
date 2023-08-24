@@ -13,7 +13,7 @@ import {
 import Received from "./Received";
 import Donated from "./Donated";
 
-const CONTRACT_ADDRESS = "0x3AaD0C509de23bE3A7831201138289AB9461F01C";
+const CONTRACT_ADDRESS = "0x2eDb7B942926fB8AfBAfE513d3325E61E0536b90";
 
 interface ProfileProps {
   receiverAddress: any;
