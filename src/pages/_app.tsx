@@ -64,7 +64,6 @@ export default function App({
       initialSession={pageProps.initialSession}
     >
       <ThirdwebProvider
-        clientId={client}
         activeChain={activeChain}
         supportedWallets={[coinbaseWallet(), metamaskWallet(), localWallet()]}
       >
