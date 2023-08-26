@@ -162,7 +162,7 @@ export default function Navbar() {
             <Box>
               <Flex
                 onClick={onOpen}
-                className="flex h-12 gap-2 pl-3 justify-center items-center bg-[#FFF] px-2 rounded-full py-1"
+                className="flex h-12 gap-2 pl-3 cursor-pointer justify-center items-center bg-[#FFF] px-2 rounded-full py-1"
               >
                 <HiMenuAlt4 className="w-5 h-5" />
                 <Image
