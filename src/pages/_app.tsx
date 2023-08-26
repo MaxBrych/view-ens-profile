@@ -69,7 +69,7 @@ export default function App({
         supportedWallets={[coinbaseWallet(), metamaskWallet(), localWallet()]}
       >
         <ChakraProvider theme={theme}>
-          <main className={`${Mona.className} font-mona`}>
+          <main className={`${Mona.className} font-mona bg-[#f7fafc]`}>
             <Component {...pageProps} />
           </main>
         </ChakraProvider>

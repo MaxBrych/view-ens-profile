@@ -14,7 +14,6 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
-import { Inter, Manrope, Share } from "next/font/google";
 import DonateButton from "@/components/Donation/Donate";
 import ChatButton from "@/components/ChatButton";
 import ShareButton from "@/components/ShareButton";

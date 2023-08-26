@@ -29,25 +29,27 @@ export default function FeedPlaceholder({ address }: DonateButtonProps) {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center gap-2 p-3 border w-full border-[#DDD] rounded-xl">
+      <div className="flex flex-col items-center justify-center w-full gap-2 p-3 border border-gray-300 rounded-xl">
         <img
           className="w-16 h-16"
           src="https://cdn.discordapp.com/attachments/911669935363752026/1137477405963997214/usdc.png"
           alt="placeholder"
         />
-        <h1 className="text-xl font-bold tracking-tight md:text-2xl ">
+        <h1 className="text-xl font-bold tracking-tight md:text-xl ">
           Be the first donator
         </h1>
-        <p className="mb-2 text-xs text-center font-medium text-[#888] md:text-sm">
+        <p className="mb-2 text-xs font-medium text-center text-gray-500 md:text-sm">
           The user has not received any donation yet.
         </p>
         <Button
           onClick={onOpen}
-          textColor={"white"}
+          textColor={"black"}
+          fontSize={16}
+          fontStyle={"bold"}
           px={16}
           rounded={"full"}
           colorScheme="grey"
-          className="h-12 text-white rounded-full bg-[#05C756]"
+          className="h-12 text-black rounded-full bg-[#05C756]"
         >
           Donate
         </Button>
@@ -56,13 +58,41 @@ export default function FeedPlaceholder({ address }: DonateButtonProps) {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Support</ModalHeader>
+          <ModalHeader fontStyle={"bold"}>Support</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            <Tabs variant="soft-rounded" className="w-full">
-              <TabList>
-                <Tab>Public</Tab>
-                <Tab>Private</Tab>
+          <ModalBody
+            mx={4}
+            mb={4}
+            className="border border-gray-300 rounded-xl"
+          >
+            <Tabs
+              variant="soft-rounded"
+              bg={"white"}
+              textColor={"black"}
+              colorScheme="white"
+              className="p-4"
+            >
+              <TabList
+                w={"full"}
+                flex={1}
+                flexDirection={"row"}
+                justifyContent={"center"}
+                className="flex flex-row items-center justify-center flex-initial flex-shrink-0 p-1 bg-gray-100 rounded-full"
+              >
+                <Tab
+                  fontSize={{ base: 12, md: 14 }}
+                  height={8}
+                  className="shadow-sm "
+                >
+                  Public
+                </Tab>
+                <Tab
+                  fontSize={{ base: 12, md: 14 }}
+                  height={8}
+                  className="shadow-sm"
+                >
+                  Private
+                </Tab>
               </TabList>
               <TabPanels>
                 <TabPanel>

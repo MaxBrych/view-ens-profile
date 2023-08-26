@@ -7,7 +7,7 @@ export default function TotalDonated() {
   const { data: donatedTransactions, isLoading: isLoadingDonatedTransactions } =
     useContractRead(contract, "getTotalDonated", []);
   return (
-    <div className="flex flex-col items-center justify-center gap-2 text-xs mt-4">
+    <div className="flex flex-col items-center justify-center gap-2 mt-8 text-xs">
       Total USDC donated
       <h1 className="text-2xl font-bold">
         {donatedTransactions

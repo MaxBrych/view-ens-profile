@@ -244,6 +244,7 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
             rounded={"full"}
             bg={"primary.500"}
             h={12}
+            textColor={"black"}
             _hover={{ bg: "primary.600" }}
             className="w-full h-20 rounded-full bg-primary-500 "
             onClick={() => {
@@ -251,6 +252,7 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
               onClose();
             }}
             isLoading={isLoadingTransaction}
+            fontStyle={"bold"}
           >
             Donate
           </Button>

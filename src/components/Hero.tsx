@@ -18,11 +18,12 @@ export default function Hero() {
         maxW={"4xl"}
       >
         <h1 className="mb-2 text-3xl font-black tracking-tight text-center text-black md:mb-4 md:text-6xl ">
-          EASIEST WAY TO DONATE CRYPTO
+          EASIEST WAY TO <br />
+          DONATE CRYPTO
         </h1>
 
         <Image
-          src="https://cdn.discordapp.com/attachments/911669935363752026/1142198867291553915/Frame_172ad.png"
+          src="https://cdn.discordapp.com/attachments/911669935363752026/1144967106476126398/heroIMG.png"
           alt="Hero"
           width={500}
           height={500}

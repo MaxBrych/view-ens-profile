@@ -32,7 +32,7 @@ export default function Donate({ address, name }: DonateButtonProps) {
     <>
       <VStack>
         <IconButton
-          colorScheme="green"
+          colorScheme="white"
           color="black"
           bg="#05C756"
           aria-label="Send Message"
@@ -55,7 +55,7 @@ export default function Donate({ address, name }: DonateButtonProps) {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Support</ModalHeader>
+          <ModalHeader fontStyle={"bold"}>Support</ModalHeader>
           <ModalCloseButton />
           <ModalBody
             mx={4}
@@ -66,19 +66,20 @@ export default function Donate({ address, name }: DonateButtonProps) {
               variant="soft-rounded"
               bg={"white"}
               textColor={"black"}
-              className="w-full"
+              colorScheme="white"
+              className="p-4"
             >
               <TabList
                 w={"full"}
                 flex={1}
                 flexDirection={"row"}
                 justifyContent={"center"}
-                className="flex flex-row items-center justify-center flex-1 flex-shrink-0 w-full p-1 bg-gray-100 rounded-full"
+                className="flex flex-row items-center justify-center flex-initial flex-shrink-0 p-1 bg-gray-100 rounded-full"
               >
                 <Tab
                   fontSize={{ base: 12, md: 14 }}
                   height={8}
-                  className="shadow-sm"
+                  className="shadow-sm "
                 >
                   Public
                 </Tab>

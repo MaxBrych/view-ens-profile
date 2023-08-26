@@ -60,7 +60,7 @@ const Searchbar = () => {
         border={"1px solid"}
         borderColor={"gray.300"}
         h={{ base: "16", md: "20" }}
-        fontWeight={"bold"}
+        fontWeight={"semibold"}
         backgroundColor={"white"}
         display={"flex"}
         alignItems={"center"}
@@ -69,7 +69,7 @@ const Searchbar = () => {
         justifyContent={"space-between"}
         textColor={"gray.500"}
         fontSize={{ base: "md", md: "lg" }}
-        maxWidth={{ base: "full", md: "xl" }}
+        width={{ base: "full", md: "lg" }}
       >
         <Text>flippr.xyz/</Text>
         <Input

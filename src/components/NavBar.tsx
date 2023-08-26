@@ -137,7 +137,7 @@ export default function Navbar() {
   }, [walletAddress]);
 
   return (
-    <Container maxW={"100%"} className="sticky w-full rounded-xl top-4" py={2}>
+    <Container maxW={"100%"} className="w-full  rounded-xl" py={2}>
       <Flex justifyContent={"space-between"} alignItems={"center"}>
         <Link href="/">
           <Image
@@ -153,7 +153,7 @@ export default function Navbar() {
             <ConnectWallet btnTitle="Sign In" theme="light" />
           ) : isMismatched ? (
             <button
-              className="px-4 text-sm font-semibold bg-gray-300 rounded-full h-9"
+              className="px-4 text-sm font-semibold bg-white rounded-full h-9"
               onClick={() => switchChain(Polygon.chainId)}
             >
               Switch Network
@@ -162,7 +162,7 @@ export default function Navbar() {
             <Box>
               <Flex
                 onClick={onOpen}
-                className="flex h-12 gap-2 pl-3 cursor-pointer justify-center items-center bg-[#FFF] px-2 rounded-full py-1"
+                className="flex items-center justify-center h-12 gap-2 px-2 py-1 pl-3 bg-white border-gray-300 rounded-full cursor-pointer"
               >
                 <HiMenuAlt4 className="w-5 h-5" />
                 <Image

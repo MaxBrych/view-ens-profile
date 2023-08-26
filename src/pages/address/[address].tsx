@@ -13,11 +13,12 @@ import {
 } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import DonateButton from "@/components/Donation/Donate";
+import NavBar from "@/components/NavBar";
 import ChatButton from "@/components/ChatButton";
 import ShareButton from "@/components/ShareButton";
+import DonateButton from "@/components/Donation/Donate";
+
 import TransactionFeed from "@/components/TransactionFeed/TransactionFeed";
-import NavBar from "@/components/NavBar";
 
 function ProfileSkeleton({
   children,

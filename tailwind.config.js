@@ -14,9 +14,9 @@ module.exports = {
         "profil-pfp":
           "url('https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png')",
         "hero-bg-desktop":
-          "url('https://cdn.discordapp.com/attachments/911669935363752026/1142189764087382036/hero-illustration.png')",
+          "url('https://cdn.discordapp.com/attachments/911669935363752026/1144967106476126398/heroIMG.png')",
         "hero-bg-mobile":
-          "url('https://cdn.discordapp.com/attachments/911669935363752026/1142189764087382036/hero-illustration.png')",
+          "url('https://cdn.discordapp.com/attachments/911669935363752026/1144967106476126398/heroIMG.png')",
 
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
