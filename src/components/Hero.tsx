@@ -17,7 +17,7 @@ export default function Hero() {
         w="full"
         maxW={"4xl"}
       >
-        <h1 className="mb-2 text-3xl font-black tracking-tighter text-center text-black md:mb-4 md:text-7xl ">
+        <h1 className="mb-2 text-3xl font-black tracking-tight text-center text-black md:mb-4 md:text-6xl ">
           EASIEST WAY TO DONATE CRYPTO
         </h1>
 

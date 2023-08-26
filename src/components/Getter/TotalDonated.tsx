@@ -1,6 +1,6 @@
 import { useContract, useContractRead } from "@thirdweb-dev/react";
 import React from "react";
-const CONTRACT_ADDRESS = "0x2eDb7B942926fB8AfBAfE513d3325E61E0536b90";
+const CONTRACT_ADDRESS = "0x87939E801071102693678395EB3A311a7F39A4A0";
 
 export default function TotalDonated() {
   const { contract } = useContract(CONTRACT_ADDRESS);
