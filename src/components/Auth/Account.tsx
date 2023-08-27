@@ -82,7 +82,7 @@ export default function Account({ session, walletAddress }: any) {
         Back
       </Link>
       <Avatar
-        walletAddress={formatAddress(walletAddress)}
+        walletAddress={walletAddress}
         url={avatar_url}
         size={150}
         onUpload={(url: any) => {

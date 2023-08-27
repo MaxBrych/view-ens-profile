@@ -183,7 +183,7 @@ const ProfilePage = () => {
         p={4}
       >
         <Box
-          className="w-full p-4 mt-16"
+          className="w-full p-4 mt-8"
           bg={"white"}
           maxW={96}
           rounded={"2xl"}
