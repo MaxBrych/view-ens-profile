@@ -1,19 +1,13 @@
 import {
-  Avatar,
   Container,
   Flex,
   Menu,
-  MenuButton,
   MenuItem,
   MenuList,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
   useDisclosure,
   Box,
   Button,
+  MenuButton,
 } from "@chakra-ui/react";
 
 import {
@@ -137,7 +131,7 @@ export default function Navbar() {
   }, [walletAddress]);
 
   return (
-    <Container maxW={"100%"} className="w-full  rounded-xl" py={2}>
+    <Container maxW={"100%"} className="w-full rounded-xl" py={2}>
       <Flex justifyContent={"space-between"} alignItems={"center"}>
         <Link href="/">
           <Image
@@ -159,12 +153,17 @@ export default function Navbar() {
               Switch Network
             </button>
           ) : (
-            <Box>
-              <Flex
-                onClick={onOpen}
-                className="flex items-center justify-center h-12 gap-2 px-2 py-1 pl-3 bg-white border-gray-300 rounded-full cursor-pointer"
+            <Menu>
+              <MenuButton
+                rounded={"full"}
+                bg={"white"}
+                pr={2}
+                py={2}
+                pl={2}
+                className="flex bg-white border border-gray-200 rounded-full "
+                as={Button}
+                leftIcon={<HiMenuAlt4 className="w-5 h-5 text-black" />}
               >
-                <HiMenuAlt4 className="w-5 h-5" />
                 <Image
                   src={
                     ensRecords.avatar ||
@@ -176,21 +175,20 @@ export default function Navbar() {
                   width={36}
                   className="border border-gray-300 rounded-full"
                 />
-              </Flex>
+              </MenuButton>
 
-              <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent>
-                  <ModalHeader>Account</ModalHeader>
-                  <ModalBody>
-                    <Account walletAddress={walletAddress} />
-                    <Button colorScheme="grey" onClick={disconnect}>
-                      Sign Out
-                    </Button>
-                  </ModalBody>
-                </ModalContent>
-              </Modal>
-            </Box>
+              <MenuList>
+                <MenuItem>
+                  <Link href={`/account/{walletaddress}`}>Profile </Link>
+                </MenuItem>
+
+                <MenuItem>
+                  <Button colorScheme="grey" onClick={disconnect}>
+                    Sign Out
+                  </Button>
+                </MenuItem>
+              </MenuList>
+            </Menu>
           )}
         </Flex>
       </Flex>
