@@ -25,14 +25,12 @@ import React, { useEffect, useState } from "react";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { ethers } from "ethers";
-import Account from "./Auth/Account";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import router from "next/router";
 
 export default function Navbar() {
   const supabase = useSupabaseClient();
 
-  const { isOpen, onOpen, onClose } = useDisclosure(); // for controlling the modal
   const walletAddress = useAddress();
   const disconnect = useDisconnect();
   const isMismatched = useNetworkMismatch();
@@ -41,7 +39,6 @@ export default function Navbar() {
   const [ensName, setEnsName] = useState<string | null>(null);
   const [ensRecords, setEnsRecords] = useState<Record<string, string>>({});
   const [isLoading, setLoading] = useState(true);
-  const session = useSession();
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
   useEffect(() => {
