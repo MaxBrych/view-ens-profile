@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <Box
       w={"full"}
-      className="flex flex-col items-center justify-center min-h-[75vh]"
+      className="flex flex-col items-center justify-center min-h-[90vh]"
     >
       <Box
         mx="auto"

@@ -165,7 +165,6 @@ const ProfilePage = () => {
     const formattedAddress = formatAddress(address || "");
   }, [ensName, provider]);
   const bg = "gray.50";
-  const color = "gray.700";
 
   return (
     <>
@@ -177,7 +176,6 @@ const ProfilePage = () => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        color={color}
         backgroundColor={bg}
         className=" font-mona"
         p={4}
@@ -217,7 +215,6 @@ const ProfilePage = () => {
                 fontSize={{ base: "xs", md: "sm" }}
                 lineHeight={"normal"}
                 mb={4}
-                color={color}
                 className=" font-mona"
               >
                 {ensRecords.description}
@@ -248,18 +245,16 @@ const ProfilePage = () => {
                   justifyContent={"center"}
                   alignItems={"center"}
                   gap={2}
-                  color={color}
                   href={ensRecords["com.github"]}
                   h={"full"}
                   w={"full"}
                   isExternal
                 >
-                  <Icon as={FaGithub} boxSize={6} mr={2} color={color} />
+                  <Icon as={FaGithub} boxSize={6} mr={2} />
                   <Text
                     textDecorationLine={"none"}
                     fontSize={"sm"}
                     fontWeight={"semibold"}
-                    textColor={color}
                     className="underline-none"
                   >
                     {ensRecords["com.github"]}

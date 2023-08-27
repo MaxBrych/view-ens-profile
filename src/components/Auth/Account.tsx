@@ -68,12 +68,13 @@ export default function Account({ session, walletAddress }: any) {
       setLoading(false);
     }
   }
-  function formatAddress(address: string): string {
+  function formatAddress(address?: string): string {
+    if (!address) return "N/A";
     return address.slice(0, 6) + "..." + address.slice(-4);
   }
 
   return (
-    <div className="pt-4 font-medium font-mona-sans">
+    <div className="w-full pt-4 font-medium font-mona-sans">
       <Link
         href="/"
         className="flex items-center justify-start gap-2 font-semibold text-md "
@@ -91,9 +92,11 @@ export default function Account({ session, walletAddress }: any) {
         }}
       />
 
-      <div className="flex flex-col my-2">
-        <h5 className="text-sm">{address}</h5>
-        <label htmlFor="username">Username</label>
+      <div className="flex flex-col gap-2 my-2">
+        <h5 className="text-sm">{formatAddress(address)}</h5>
+        <label htmlFor="username" className="mt-2 text-sm">
+          Username
+        </label>
         <input
           className="p-2 bg-gray-100 border border-gray-300 rounded-md"
           id="username"
@@ -102,7 +105,9 @@ export default function Account({ session, walletAddress }: any) {
           onChange={(e) => setUsername(e.target.value)}
         />
 
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description" className="mt-2 text-sm">
+          Description
+        </label>
         <input
           className="p-2 bg-gray-100 border border-gray-300 rounded-md"
           id="description"
@@ -114,22 +119,19 @@ export default function Account({ session, walletAddress }: any) {
 
       <div className="flex w-full gap-4">
         <button
-          className="block h-10 px-6 mt-2 font-semibold text-center rounded-md cursor-pointer bg-primary-500"
+          className="block w-full h-10 px-6 mt-2 font-bold text-center rounded-full cursor-pointer text-bold bg-primary-500"
           onClick={() => updateProfile({ username, description, avatar_url })}
           disabled={loading}
         >
           {loading ? "Loading ..." : "Update"}
         </button>
       </div>
-
-      <div>
-        <button
-          className="block h-10 px-6 mt-2 text-center bg-gray-300 rounded-md cursor-pointer"
-          onClick={() => supabase.auth.signOut()}
-        >
-          Sign Out
-        </button>
-      </div>
+      <button
+        className="block w-full h-10 px-6 mt-2 font-bold text-center bg-gray-300 rounded-full cursor-pointer"
+        onClick={() => supabase.auth.signOut()}
+      >
+        Sign Out
+      </button>
     </div>
   );
 }
