@@ -27,6 +27,7 @@ import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { ethers } from "ethers";
 import Account from "./Auth/Account";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import router from "next/router";
 
 export default function Navbar() {
   const supabase = useSupabaseClient();
@@ -130,6 +131,14 @@ export default function Navbar() {
     fetchEnsDetails();
   }, [walletAddress]);
 
+  const handleProfileRedirect = () => {
+    if (ensName) {
+      router.push(`/account/${ensName}`);
+    } else {
+      router.push(`/account/${walletAddress}`);
+    }
+  };
+
   return (
     <Container maxW={"100%"} className="w-full rounded-xl" py={2}>
       <Flex justifyContent={"space-between"} alignItems={"center"}>
@@ -178,12 +187,14 @@ export default function Navbar() {
               </MenuButton>
 
               <MenuList>
-                <MenuItem>
-                  <Link href={`/account/{walletaddress}`}>Profile </Link>
-                </MenuItem>
+                <MenuItem onClick={handleProfileRedirect}>Profile</MenuItem>
 
                 <MenuItem>
-                  <Button colorScheme="grey" onClick={disconnect}>
+                  <Button
+                    colorScheme="grey"
+                    textColor={"black"}
+                    onClick={disconnect}
+                  >
                     Sign Out
                   </Button>
                 </MenuItem>

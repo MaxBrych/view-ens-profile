@@ -79,6 +79,7 @@ export default function Donate({ address, name }: DonateButtonProps) {
                   fontSize={{ base: 12, md: 14 }}
                   height={8}
                   className="shadow-sm "
+                  textColor={"black"}
                 >
                   Public
                 </Tab>
@@ -86,6 +87,7 @@ export default function Donate({ address, name }: DonateButtonProps) {
                   fontSize={{ base: 12, md: 14 }}
                   height={8}
                   className="shadow-sm"
+                  textColor={"black"}
                 >
                   Private
                 </Tab>
