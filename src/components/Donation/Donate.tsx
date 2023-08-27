@@ -67,14 +67,13 @@ export default function Donate({ address, name }: DonateButtonProps) {
               bg={"white"}
               textColor={"black"}
               colorScheme="whiteAlpha"
-              className="p-4"
             >
               <TabList
                 w={"full"}
                 flex={1}
                 flexDirection={"row"}
                 justifyContent={"center"}
-                className="flex flex-row items-center justify-center flex-initial flex-shrink-0 p-1 bg-gray-100 rounded-full"
+                className="flex flex-row items-center justify-center flex-initial flex-shrink-0 p-1 my-4 bg-gray-100 rounded-full"
               >
                 <Tab
                   fontSize={{ base: 12, md: 14 }}
@@ -91,8 +90,8 @@ export default function Donate({ address, name }: DonateButtonProps) {
                   Private
                 </Tab>
               </TabList>
-              <TabPanels w={"full"}>
-                <TabPanel>
+              <TabPanels className="w-full">
+                <TabPanel className="w-full">
                   <PublicDonation receiverAddress={address} />
                 </TabPanel>
                 <TabPanel>

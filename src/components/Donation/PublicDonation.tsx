@@ -246,7 +246,7 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
             h={12}
             textColor={"black"}
             _hover={{ bg: "primary.600" }}
-            className="w-full h-20 rounded-full bg-primary-500 "
+            className="w-full h-20 font-bold rounded-full bg-primary-500"
             onClick={() => {
               handleApproveAndDonate(amount, message);
               onClose();
