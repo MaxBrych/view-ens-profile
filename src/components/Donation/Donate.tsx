@@ -66,7 +66,7 @@ export default function Donate({ address, name }: DonateButtonProps) {
               variant="soft-rounded"
               bg={"white"}
               textColor={"black"}
-              colorScheme="white"
+              colorScheme="whiteAlpha"
               className="p-4"
             >
               <TabList
@@ -91,7 +91,7 @@ export default function Donate({ address, name }: DonateButtonProps) {
                   Private
                 </Tab>
               </TabList>
-              <TabPanels>
+              <TabPanels w={"full"}>
                 <TabPanel>
                   <PublicDonation receiverAddress={address} />
                 </TabPanel>

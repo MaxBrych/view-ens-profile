@@ -69,8 +69,8 @@ export default function FeedPlaceholder({ address }: DonateButtonProps) {
               variant="soft-rounded"
               bg={"white"}
               textColor={"black"}
-              colorScheme="white"
-              className="p-4"
+              colorScheme="whiteAlpha"
+              className="py-4"
             >
               <TabList
                 w={"full"}
@@ -94,7 +94,7 @@ export default function FeedPlaceholder({ address }: DonateButtonProps) {
                   Private
                 </Tab>
               </TabList>
-              <TabPanels>
+              <TabPanels w={"full"}>
                 <TabPanel>
                   <PublicDonation receiverAddress={address} />
                 </TabPanel>
