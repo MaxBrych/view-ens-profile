@@ -5,6 +5,8 @@ import {
   coinbaseWallet,
   metamaskWallet,
   localWallet,
+  smartWallet,
+  paperWallet,
 } from "@thirdweb-dev/react";
 
 import localFont from "next/font/local";
@@ -66,7 +68,20 @@ export default function App({
       <ThirdwebProvider
         clientId={client}
         activeChain={activeChain}
-        supportedWallets={[coinbaseWallet(), metamaskWallet(), localWallet()]}
+        supportedWallets={[
+          coinbaseWallet(),
+          metamaskWallet(),
+          localWallet(),
+          smartWallet({
+            factoryAddress: "0x0E21cF855226787060D6aE1b3C066398EFf48cA5",
+            gasless: true,
+            personalWallets: [
+              paperWallet({
+                paperClientId: "affcd036-8c4e-463c-baa3-fa47debb7fc3",
+              }),
+            ],
+          }),
+        ]}
       >
         <ChakraProvider theme={theme}>
           <main className={`${Mona.className} font-mona bg-[#f7fafc]`}>
