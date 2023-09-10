@@ -5,7 +5,6 @@ export default function Page() {
   return (
     <div className="flex flex-col items-start justify-start w-full min-h-screen p-4">
       <Hero />
-      <div>Hello world</div>
     </div>
   );
 }
