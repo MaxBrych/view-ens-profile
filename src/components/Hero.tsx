@@ -1,7 +1,8 @@
+"use client";
 import { Box } from "@chakra-ui/react";
 import Link from "next/link";
 import { FiSearch } from "react-icons/fi";
-import SearchBar from "./SearchBar";
+import SearchBar from "./SearchBar2";
 import Image from "next/image";
 import TotalDonated from "./Getter/TotalDonated";
 

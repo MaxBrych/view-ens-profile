@@ -99,6 +99,7 @@ function AddressProfile() {
   return (
     <>
       <NavBar />
+
       <Box
         minHeight="100vh"
         w="full"

@@ -12,7 +12,6 @@ export default function AccountPage() {
   const address = useAddress();
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen p-4">
-      <Navbar />
       <div className="flex flex-col items-center justify-center w-full min-h-screen grid-cols-4 gap-2 p-4 md:grid max-w-7xl bg-gray-50">
         <div className="flex flex-col items-start justify-start w-full h-full col-span-1 p-2 bg-white border border-gray-200 md:p-4 rounded-xl">
           {address && <Account walletAddress={address} />}
