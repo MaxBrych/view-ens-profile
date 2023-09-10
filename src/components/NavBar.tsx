@@ -26,7 +26,7 @@ import { HiMenuAlt4 } from "react-icons/hi";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 import { ethers } from "ethers";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const supabase = useSupabaseClient();
@@ -40,6 +40,7 @@ export default function Navbar() {
   const [ensRecords, setEnsRecords] = useState<Record<string, string>>({});
   const [isLoading, setLoading] = useState(true);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const provider = new ethers.providers.JsonRpcProvider(
