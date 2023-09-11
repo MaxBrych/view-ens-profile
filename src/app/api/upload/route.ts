@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   const bundlr = new Bundlr(
     "http://node1.bundlr.network",
     "matic",
-    process.env.NEXT_PUBLIC_BNDLR_KEY
+    process.env.NEXT_PUBLIC_BUNDLR_KEY
   );
   await bundlr.ready();
   let balance = await bundlr.getLoadedBalance();

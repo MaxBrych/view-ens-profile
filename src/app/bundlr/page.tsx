@@ -9,7 +9,7 @@ export default function Bundlr() {
     if (!data) return;
     try {
       setData("");
-      const response = await fetch("../api/upload", {
+      const response = await fetch("/api/upload", {
         method: "POST",
         body: JSON.stringify(data),
       });
