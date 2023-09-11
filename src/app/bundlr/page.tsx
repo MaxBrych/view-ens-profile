@@ -46,6 +46,7 @@ export default function Bundlr() {
 
   return (
     <main className="flex flex-col items-center justify-between">
+      <h1>Funktionier jetzt fuck!"""""</h1>
       <input
         placeholder="Create a post"
         onChange={(e) => setData(e.target.value)}
