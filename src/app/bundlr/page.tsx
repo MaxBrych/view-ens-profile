@@ -1,69 +1,113 @@
 "use client";
-import { useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import {
+  Box,
+  Input,
+  Button,
+  FormControl,
+  FormLabel,
+  Textarea,
+} from "@chakra-ui/react";
+import { useAddress, useContract } from "@thirdweb-dev/react";
+import { ethers } from "ethers";
 
-export default function Bundlr() {
-  const [data, setData] = useState("");
+interface MySmartContract extends ethers.Contract {
+  getAll: () => Promise<any>;
+  setMessage: (transactionId: string) => Promise<void>;
+}
+
+const USDC_CONTRACT_ADDRESS = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"; // Polygon USDC contract address
+const DECIMALS = 6; // USDC has 6 decimals
+const CONTRACT_ADDRESS = "0x87939E801071102693678395EB3A311a7F39A4A0";
+const DONATION_AMOUNTS = [5, 10, 25];
+
+// Prepare USDC contract instance
+const contractABI = [
+  "function approve(address spender, uint256 amount) public returns (bool)",
+  "function transfer(address recipient, uint256 amount) public returns (bool)",
+];
+
+interface DonateButtonProps {
+  receiverAddress: any;
+}
+
+export default function CreateProposalArticle() {
+  const address = useAddress();
+  const [message, setMessage] = useState("");
   const [file, setFile] = useState<any>();
   const [transaction, setTransaction] = useState("");
-  async function upload() {
-    if (!data) return;
+
+  const { contract: donate, isLoading: isVoteLoading } =
+    useContract<any>(CONTRACT_ADDRESS);
+
+  const vote = donate as unknown as MySmartContract;
+
+  const uploadBoth = async () => {
+    if (!file || !message) return;
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("message", message);
     try {
-      setData("");
-      const response = await fetch("/api/upload", {
+      const response = await fetch("/api/uploadBoth", {
         method: "POST",
-        body: JSON.stringify(data),
+        body: formData,
       });
       const json = await response.json();
       console.log("json:", json);
       setTransaction(json.txId);
+      if (vote) {
+        await vote.setMessage(json.txId);
+        window.location.reload();
+      }
     } catch (err) {
       console.log({ err });
     }
-  }
+  };
 
-  async function uploadFile() {
-    if (!file) return;
-    setData("");
-    const buffer = await file.arrayBuffer();
-    try {
-      const response = await fetch("/api/uploadFile", {
-        method: "POST",
-        body: buffer,
-      });
-      const json = await response.json();
-      console.log("json:", json);
-      setTransaction(json.txId);
-    } catch (err) {
-      console.log({ err });
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (event.target.files) {
+      setFile(event.target.files[0]);
     }
-  }
-
-  function handleFileChange(e: any) {
-    if (e.target.files) {
-      setFile(e.target.files[0]);
-    }
-  }
+  };
 
   return (
-    <main className="flex flex-col items-center justify-between">
-      <h1>Funktionier bitte </h1>
-      <input
-        placeholder="Create a post"
-        onChange={(e) => setData(e.target.value)}
-        className="px-2 py-1 text-black"
-      />
-      <button onClick={upload} className="px-12 mt-2 text-black bg-white">
-        Upload text
-      </button>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={uploadFile} className="px-12 mt-2 text-black bg-white">
-        Upload file
-      </button>
-      {transaction && (
-        <a target="_blank" rel="no-opener" href={transaction}>
-          View Arweave Data
-        </a>
+    <Box borderWidth="1px" borderRadius="lg" padding="6" marginTop="4">
+      {address && (
+        <>
+          <FormControl marginTop="4">
+            <FormLabel>Message</FormLabel>
+            <Input
+              placeholder="Enter message"
+              onChange={(e) => setMessage(e.target.value)}
+              bg="gray.700"
+              textColor="white"
+              borderRadius="xl"
+            />
+          </FormControl>
+          <FormControl marginTop="4">
+            <FormLabel>Arweave File</FormLabel>
+            <Input
+              type="file"
+              placeholder="Upload a file"
+              onChange={handleFileChange}
+              cursor="pointer"
+              border="2px dashed"
+              height={24}
+              borderColor="gray.700"
+              borderRadius="xl"
+            />
+          </FormControl>
+          <Button
+            colorScheme="blue"
+            marginTop="4"
+            disabled={isVoteLoading}
+            isLoading={isVoteLoading}
+            onClick={uploadBoth}
+          >
+            Upload
+          </Button>
+        </>
       )}
-    </main>
+    </Box>
   );
 }
