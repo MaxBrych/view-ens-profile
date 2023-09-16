@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
+
+const withPWA = require("next-pwa");
+
 const nextConfig = {
+  ...withPWA({
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+    disable: process.env.NODE_ENV === "development",
+  }),
   images: {
     remotePatterns: [
       {
@@ -11,15 +20,4 @@ const nextConfig = {
   },
 };
 
-const withPWA = require("next-pwa")({
-  dest: "public",
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === "production",
-});
-
-module.exports = withPWA({
-  basePath: "",
-  reactStrictMode: true,
-  images: { unoptimized: true },
-});
+module.exports = nextConfig;

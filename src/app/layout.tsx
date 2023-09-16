@@ -2,16 +2,18 @@
 import React from "react";
 import "../styles/globals.css";
 import NavBar from "@/components/NavBar";
+import type { Metadata } from "next";
 
-{
-  /**
-export const metadata = {
+export const metadata: Metadata = {
   title: "Flippr",
   description:
-  "Flippr is a dApp that makes sending money as easy as flipping a coin. ",
+    "Flippr is a dApp that makes sending money as easy as flipping a coin. ",
+  manifest: "/manifest.json",
+  icons: {
+    apple: "/icon.png",
+  },
+  themeColor: "#1fd25a",
 };
- */
-}
 
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import {
