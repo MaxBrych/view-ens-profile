@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import FeedPlaceholder from "../FeedPlaceholder";
+import Image from "next/image";
 
 interface ReceivedProps {
   transactions: any[];
@@ -103,7 +104,14 @@ export default function Received({
             <div className="py-1 text-lg font-bold text-left md:text-xl">
               {messageTag || transaction.message}
             </div>
-            {imageUrlTag && <img src={imageUrlTag} alt="Uploaded content" />}
+            {imageUrlTag && (
+              <Image
+                src={imageUrlTag}
+                alt="Uploaded content"
+                width={320}
+                height={320}
+              />
+            )}
             <div className="text-xs leading-3 text-left">
               {new Date(transaction.timestamp * 1000).toLocaleString()}
             </div>
