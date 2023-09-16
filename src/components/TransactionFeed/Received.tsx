@@ -16,61 +16,53 @@ export default function Received({
   isLoading,
   address,
 }: ReceivedProps) {
+  const [arweaveData, setArweaveData] = useState<any[]>([]);
+
+  async function fetchArweaveData(url: string) {
+    if (!url.startsWith("https://arweave.net/")) return null;
+
+    const transactionId = url.split("/").pop();
+    const query = `
+      query getByIds {
+        transactions(ids:["${transactionId}"]) {
+          edges {
+            node {
+              id
+              tags {
+                name
+                value
+              }
+            }
+          }
+        }
+      }`;
+
+    const response = await fetch("https://arweave.net/graphql", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query }),
+    });
+
+    const result = await response.json();
+    return result.data.transactions.edges[0]?.node.tags;
+  }
+
+  useEffect(() => {
+    const fetchAllArweaveData = async () => {
+      const allData = await Promise.all(
+        transactions.map((transaction: any) =>
+          fetchArweaveData(transaction.message)
+        )
+      );
+      setArweaveData(allData);
+    };
+
+    fetchAllArweaveData();
+  }, [transactions]);
+
   function formatAddress(address: string): string {
     return address.slice(0, 6) + "..." + address.slice(-4);
   }
-
-  const useArweaveContent = (url: string) => {
-    const [content, setContent] = useState<any>(null);
-
-    useEffect(() => {
-      const fetchArweaveData = async () => {
-        if (url.startsWith("https://arweave.net/")) {
-          const transactionId = url.split("/").pop();
-
-          // GraphQL query
-          const query = `
-          query getByIds {
-            transactions(ids:["${transactionId}"]) {
-              edges {
-                node {
-                  id
-                  tags {
-                    name
-                    value
-                  }
-                }
-              }
-            }
-          }`;
-
-          // POST request to the GraphQL endpoint
-          const response = await fetch("https://arweave.net/graphql", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              query: query,
-            }),
-          });
-
-          const result = await response.json();
-          if (result.data.transactions.edges[0]) {
-            setContent(result.data.transactions.edges[0].node.tags);
-          }
-          console.log(
-            "Fetched tags:",
-            result.data.transactions.edges[0].node.tags
-          );
-        }
-      };
-
-      fetchArweaveData();
-    }, [url]);
-
-    return content;
-  };
 
   if (isLoading) {
     return <div>Loading received transactions...</div>;
@@ -83,7 +75,7 @@ export default function Received({
   return (
     <>
       {transactions.map((transaction: any, index: any) => {
-        const arweaveContent = useArweaveContent(transaction.message);
+        const arweaveContent = arweaveData[index];
 
         const isArweaveURL = transaction.message.startsWith(
           "https://arweave.net/"
