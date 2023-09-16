@@ -278,7 +278,7 @@ const ProfilePage = () => {
 
           <TransactionFeed receiverAddress={address} />
         </Box>
-        <Box className="hidden md:flex md:flex-col md:items-star md:h-full md:gap-8">
+        <Box className="hidden md:flex md:flex-col md:items-star md:h-full md:gap-8 md:max-w-sm">
           <Box
             mx={4}
             mb={4}
@@ -324,9 +324,9 @@ const ProfilePage = () => {
               </TabPanels>
             </Tabs>
           </Box>
-          <div className="h-[10vh]">
+          {/* <div className="h-[10vh]">
             <Home receiverAddress={address} />
-          </div>
+          </div>*/}
         </Box>
       </Box>
     </>
