@@ -15,6 +15,11 @@ import {
   Skeleton,
   useColorModeValue,
   HStack,
+  Tabs,
+  TabPanels,
+  TabPanel,
+  Tab,
+  TabList,
 } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
 import DonateButton from "@/components/Donation/Donate";
@@ -24,6 +29,11 @@ import TransactionFeed from "@/components/TransactionFeed/TransactionFeed";
 import NavBar from "@/components/NavBar";
 import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useAddress } from "@thirdweb-dev/react";
+import BundlrUpload from "@/components/BundlrUpload";
+import MessageUpload from "@/components/Donation/MessageUpload";
+import Home from "@/components/Chat/Home";
+import PublicDonation from "@/components/Donation/PublicDonation";
+import PrivateDonation from "@/components/Donation/PrivateDontation";
 
 const ethersDynamic: Promise<any> = import("ethers");
 
@@ -175,8 +185,8 @@ const ProfilePage = () => {
         minHeight="100vh"
         w="full"
         display="flex"
-        flexDirection="column"
         alignItems="center"
+        gap={8}
         justifyContent="center"
         backgroundColor={bg}
         className=" font-mona"
@@ -223,11 +233,11 @@ const ProfilePage = () => {
               </Text>
             )}
 
-            <HStack mt={2} spacing={8} mb={4} rowGap={8}>
+            <div className="flex gap-8 mt-2 mb-4 md:hidden">
               <ChatButton receiverAddress={address} />
               <ShareButton />
               <DonateButton address={address} name="Donate" />
-            </HStack>
+            </div>
 
             {ensRecords["com.github"] && (
               <Flex
@@ -267,6 +277,56 @@ const ProfilePage = () => {
           </Flex>
 
           <TransactionFeed receiverAddress={address} />
+        </Box>
+        <Box className="hidden md:flex md:flex-col md:items-star md:h-full md:gap-8">
+          <Box
+            mx={4}
+            mb={4}
+            className="bg-white border border-gray-300 rounded-xl"
+          >
+            <Tabs
+              variant="soft-rounded"
+              bg={"white"}
+              textColor={"black"}
+              colorScheme="whiteAlpha"
+            >
+              <TabList
+                w={"full"}
+                flex={1}
+                flexDirection={"row"}
+                justifyContent={"center"}
+                className="flex flex-row items-center justify-center flex-initial flex-shrink-0 p-1 my-4 bg-gray-100 rounded-full"
+              >
+                <Tab
+                  fontSize={{ base: 12, md: 14 }}
+                  height={8}
+                  className="shadow-sm "
+                  textColor={"black"}
+                >
+                  Public
+                </Tab>
+                <Tab
+                  fontSize={{ base: 12, md: 14 }}
+                  height={8}
+                  className="shadow-sm"
+                  textColor={"black"}
+                >
+                  Private
+                </Tab>
+              </TabList>
+              <TabPanels className="w-full">
+                <TabPanel className="w-full">
+                  <PublicDonation receiverAddress={address} />
+                </TabPanel>
+                <TabPanel>
+                  <PrivateDonation receiverAddress={address} />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Box>
+          <div className="h-[10vh]">
+            <Home receiverAddress={address} />
+          </div>
         </Box>
       </Box>
     </>

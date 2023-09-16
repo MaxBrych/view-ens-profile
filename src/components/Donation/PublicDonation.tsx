@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import {
   Button,
   Flex,
@@ -6,6 +6,9 @@ import {
   Icon,
   useToast,
   Text,
+  FormControl,
+  FormLabel,
+  Input,
 } from "@chakra-ui/react";
 import { AiFillCheckCircle } from "react-icons/ai"; // for checkmark icon
 import {
@@ -54,8 +57,33 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
   const [transactionHash, setTransactionHash] = useState("");
   const [amount, setAmount] = useState(0);
   const [message, setMessage] = useState("");
+  const [file, setFile] = useState<any>();
 
   const [ethersDynamic, setEthersDynamic] = useState<any>(null);
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (event.target.files) {
+      setFile(event.target.files[0]);
+    }
+  };
+  const uploadBoth = async (message: any) => {
+    if (!file || !message) return;
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("message", message);
+    try {
+      const response = await fetch("/api/uploadBoth", {
+        method: "POST",
+        body: formData,
+      });
+      const json = await response.json();
+      console.log("json:", json);
+      return json.txId;
+    } catch (err) {
+      console.log({ err });
+      return null;
+    }
+  };
 
   useEffect(() => {
     const loadProviderAndSigner = async () => {
@@ -85,7 +113,7 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
     loadProviderAndSigner();
   }, [wallet]);
 
-  const CREATOR_FEE = 1001; //  0.1% fee
+  const CREATOR_FEE = 1001; //  0.01% fee
 
   useEffect(() => {
     const resolveNames = async () => {
@@ -107,7 +135,12 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
     "transferAndRecord"
   );
 
-  async function handleApproveAndDonate(amount: number, message: string) {
+  async function handleApproveAndDonate(amount: number) {
+    const arweaveTxId = await uploadBoth(message);
+    if (!arweaveTxId) {
+      console.error("Failed to upload file to Arweave.");
+      return;
+    }
     if (!usdcContract || !account) {
       console.log("No USDC contract or account.");
       return;
@@ -141,18 +174,6 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
       return;
     }
 
-    if (message.length > 200) {
-      toast({
-        title: "Message too long.",
-        description: "Please keep your message under 200 characters.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      console.log("Message too long:", message); // Added log
-      return;
-    }
-
     try {
       setIsLoadingTransaction(true);
 
@@ -182,7 +203,7 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
       // Once the approval transaction is confirmed, make the donation
       setLoadingMessage("Sign to transfer USDC");
       const tx: any = await transferAndRecord({
-        args: [receiverAddress, totalValue, message],
+        args: [receiverAddress, totalValue, arweaveTxId],
       });
 
       console.log("Transaction sent:", tx);
@@ -239,6 +260,20 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
             placeholder="Message"
             className="w-full h-12 p-3 border-2 border-gray-200 rounded-lg focus:outline-none"
           />
+
+          <FormControl marginTop="4">
+            <FormLabel>Arweave File</FormLabel>
+            <Input
+              type="file"
+              placeholder="Upload a file"
+              onChange={handleFileChange}
+              cursor="pointer"
+              border="2px dashed"
+              height={24}
+              borderColor="gray.700"
+              borderRadius="xl"
+            />
+          </FormControl>
           {isLoadingTransaction && <p>{loadingMessage}</p>}
           <Button
             rounded={"full"}
@@ -248,7 +283,7 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
             _hover={{ bg: "primary.600" }}
             className="w-full h-20 font-bold rounded-full bg-primary-500"
             onClick={() => {
-              handleApproveAndDonate(amount, message);
+              handleApproveAndDonate(amount);
               onClose();
             }}
             isLoading={isLoadingTransaction}
