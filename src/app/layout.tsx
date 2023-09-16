@@ -3,8 +3,9 @@ import React from "react";
 import "../styles/globals.css";
 import NavBar from "@/components/NavBar";
 import type { Metadata } from "next";
+import NextProgress from "nextjs-progressbar";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Flippr",
   description:
     "Flippr is a dApp that makes sending money as easy as flipping a coin. ",
@@ -104,6 +105,7 @@ export default function RootLayout({
           <ChakraProvider theme={theme}>
             <body>
               <main className={`${Mona.className} font-mona bg-[#f7fafc]`}>
+                <NextProgress color="#1fd25a" />
                 <NavBar />
 
                 {children}
