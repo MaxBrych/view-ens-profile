@@ -36,6 +36,7 @@ import { useState } from "react";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 import { useParams } from "next/navigation";
+import Head from "next/head";
 const activeChain = "polygon";
 const theme = extendTheme({
   styles: {
@@ -80,6 +81,14 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <Head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon.png" />
+        <meta
+          name="apple-mobile-web-app-statur-bar-style"
+          content="black-translucent"
+        />
+      </Head>
       <SessionContextProvider
         supabaseClient={supabaseClient}
         //initialSession={pageProps.initialSession}
