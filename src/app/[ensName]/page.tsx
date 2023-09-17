@@ -185,9 +185,9 @@ const ProfilePage = () => {
         minHeight="100vh"
         w="full"
         display="flex"
-        alignItems="start"
+        alignItems="center"
         gap={8}
-        justifyContent="center"
+        justifyContent="start"
         backgroundColor={bg}
         className=" font-mona"
         p={4}

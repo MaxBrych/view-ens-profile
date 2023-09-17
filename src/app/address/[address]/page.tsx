@@ -105,8 +105,8 @@ function AddressProfile() {
         w="full"
         display="flex"
         flexDirection="column"
-        alignItems="start"
-        justifyContent="center"
+        alignItems="center"
+        justifyContent="start"
         color={color}
         backgroundColor={bg}
         p={4}
