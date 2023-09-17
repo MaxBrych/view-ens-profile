@@ -185,7 +185,7 @@ const ProfilePage = () => {
         minHeight="100vh"
         w="full"
         display="flex"
-        alignItems="center"
+        alignItems="start"
         gap={8}
         justifyContent="center"
         backgroundColor={bg}
@@ -202,7 +202,7 @@ const ProfilePage = () => {
           border={"1px solid #E2E8F0"}
           p={4}
         >
-          <Flex direction="column" p={4} w="full" align="center">
+          <Flex direction="column" p={4} w="full" align="start">
             <ENSRecordSkeleton isLoaded={!isLoading}>
               <Image
                 src={

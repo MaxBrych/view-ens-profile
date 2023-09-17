@@ -100,14 +100,12 @@ function AddressProfile() {
 
   return (
     <>
-      <NavBar />
-
       <Box
         minHeight="100vh"
         w="full"
         display="flex"
         flexDirection="column"
-        alignItems="center"
+        alignItems="start"
         justifyContent="center"
         color={color}
         backgroundColor={bg}
@@ -123,7 +121,7 @@ function AddressProfile() {
           border={"1px solid #E2E8F0"}
           p={4}
         >
-          <Flex direction="column" p={4} w="full" align="center">
+          <Flex direction="column" p={4} w="full" align="start">
             <ProfileSkeleton isLoaded={!isLoading}>
               <Image
                 src={
