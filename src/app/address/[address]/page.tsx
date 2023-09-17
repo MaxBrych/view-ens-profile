@@ -106,7 +106,7 @@ function AddressProfile() {
         display="flex"
         flexDirection="column"
         alignItems="center"
-        justifyContent="start"
+        justifyContent="center"
         color={color}
         backgroundColor={bg}
         p={4}
@@ -121,7 +121,7 @@ function AddressProfile() {
           border={"1px solid #E2E8F0"}
           p={4}
         >
-          <Flex direction="column" p={4} w="full" align="start">
+          <Flex direction="column" p={4} w="full" align="center">
             <ProfileSkeleton isLoaded={!isLoading}>
               <Image
                 src={
