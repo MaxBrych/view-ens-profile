@@ -10,6 +10,7 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
+import TipTap from "../Editor/TipTap";
 import { AiFillCheckCircle } from "react-icons/ai"; // for checkmark icon
 import {
   WalletInstance,
@@ -38,6 +39,8 @@ interface DonateButtonProps {
 }
 
 export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
+  const [editorContent, setEditorContent] = useState("");
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const wallet: WalletInstance | undefined = useWallet();
   const [usdcContract, setUsdcContract] = useState<ethers.Contract | null>(
@@ -252,7 +255,9 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
             ))}
           </Flex>
           <hr />
-
+          {/*<TipTap
+            onContentChange={(content: any) => setEditorContent(content)}
+          />*/}
           <input
             type="text"
             value={message}
