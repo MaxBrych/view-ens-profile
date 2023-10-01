@@ -1,10 +1,13 @@
 "use client";
 import { useState } from "react";
+import NSFWFilter from "nsfw-filter";
 
 export default function BundlrUpload() {
   const [data, setData] = useState("");
   const [file, setFile] = useState<any>();
   const [transaction, setTransaction] = useState("");
+  const [isImageSafe, setIsImageSafe] = useState(true); // New state to manage whether the image is safe or not
+
   async function upload() {
     if (!data) return;
     try {
@@ -38,11 +41,22 @@ export default function BundlrUpload() {
     }
   }
 
-  function handleFileChange(e: any) {
+  const handleFileChange = async (e: any) => {
     if (e.target.files) {
-      setFile(e.target.files[0]);
+      const file = e.target.files[0];
+      // Check if the image is safe
+      const isSafe = await NSFWFilter.isSafe(file);
+      setIsImageSafe(isSafe); // Update the isImageSafe state
+
+      if (isSafe) {
+        // Only set the file if it is safe
+        setFile(file);
+      } else {
+        console.warn("Uploaded image is not safe");
+        // Optionally, you can clear the file input here or show a warning message to the user.
+      }
     }
-  }
+  };
 
   return (
     <main className="flex flex-col items-center justify-between">
@@ -55,7 +69,14 @@ export default function BundlrUpload() {
         Upload text
       </button>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={uploadFile} className="px-12 mt-2 text-black bg-white">
+      {!isImageSafe && (
+        <span style={{ color: "red" }}>Uploaded image is not appropriate</span>
+      )}
+      <button
+        onClick={uploadFile}
+        className="px-12 mt-2 text-black bg-white"
+        disabled={!isImageSafe}
+      >
         Upload file
       </button>
       {transaction && (

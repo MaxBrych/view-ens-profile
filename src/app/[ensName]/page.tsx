@@ -300,7 +300,7 @@ const ProfilePage = () => {
                 <Tab
                   fontSize={{ base: 12, md: 14 }}
                   height={8}
-                  className="shadow-sm "
+                  className="text-black shadow-sm "
                   textColor={"black"}
                 >
                   Public
@@ -308,7 +308,7 @@ const ProfilePage = () => {
                 <Tab
                   fontSize={{ base: 12, md: 14 }}
                   height={8}
-                  className="shadow-sm"
+                  className="text-black shadow-sm"
                   textColor={"black"}
                 >
                   Private

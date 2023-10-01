@@ -5,6 +5,7 @@ import { useAddress } from "@thirdweb-dev/react";
 import { Box, Grid } from "@chakra-ui/react";
 import UserReceived from "@/components/Getter/UserReceived";
 import UserDonated from "@/components/Getter/UserDonated";
+import GiftLink from "@/components/PeanutLink/GiftLink";
 const bg = "gray.50";
 const color = "gray.700";
 
@@ -16,6 +17,7 @@ export default function AccountPage() {
         <div className="flex flex-col items-start justify-start w-full h-full col-span-1 p-2 bg-white border border-gray-200 md:p-4 rounded-xl">
           {address && <Account walletAddress={address} />}
         </div>
+        {/* <GiftLink />*/}
         <div className="flex flex-col items-start w-full h-full grid-cols-3 col-span-3 p-2 bg-white border border-gray-200 md:grid md:p-4 rounded-xl">
           <UserReceived address={address} />
           <UserDonated />
