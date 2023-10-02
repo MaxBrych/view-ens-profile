@@ -46,7 +46,8 @@ const ChatButton: React.FC<ChatButtonProps> = ({ receiverAddress }) => {
       }
     }
   `;
-
+  {
+    /* 
   // Use the useQuery hook to execute the GraphQL query
   const { data, loading, error } = useQuery(xmtpQuery);
 
@@ -54,40 +55,41 @@ const ChatButton: React.FC<ChatButtonProps> = ({ receiverAddress }) => {
   if (loading) return null; // Optionally show a loading spinner
   if (error) return null; // Optionally show an error message
   if (data && data.XMTPs.XMTP && data.XMTPs.XMTP.isXMTPEnabled)
-    // XMTP Protocol is enabled, show the ChatButton
-    return (
-      <>
-        <VStack>
-          <IconButton
-            colorScheme="green"
-            color="black"
-            bg="#05C756"
-            aria-label="Send Message"
-            icon={<BsFillChatFill />}
-            onClick={onOpen}
-            rounded={"full"}
-            size={"lg"}
-          />
-          <Text
-            fontSize="xs"
-            className="font-semibold"
-            textColor={"blackAlpha.600"}
-          >
-            Chat
-          </Text>
-        </VStack>
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Chat</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Home receiverAddress={receiverAddress} />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      </>
-    );
+    // XMTP Protocol is enabled, show the ChatButton*/
+  }
+  return (
+    <>
+      <VStack>
+        <IconButton
+          colorScheme="green"
+          color="black"
+          bg="#05C756"
+          aria-label="Send Message"
+          icon={<BsFillChatFill />}
+          onClick={onOpen}
+          rounded={"full"}
+          size={"lg"}
+        />
+        <Text
+          fontSize="xs"
+          className="font-semibold"
+          textColor={"blackAlpha.600"}
+        >
+          Chat
+        </Text>
+      </VStack>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Chat</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Home receiverAddress={receiverAddress} />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </>
+  );
 };
 
 export default ChatButton;
