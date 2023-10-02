@@ -24,6 +24,10 @@ import {
   localWallet,
   smartWallet,
   paperWallet,
+  ConnectWallet,
+  walletConnect,
+  zerionWallet,
+  rainbowWallet,
 } from "@thirdweb-dev/react";
 
 import localFont from "next/font/local";
@@ -48,6 +52,12 @@ const theme = extendTheme({
     },
   },
 });
+
+const smartWalletOptions = {
+  factoryAddress: "0x0E21cF855226787060D6aE1b3C066398EFf48cA5",
+  gasless: true,
+};
+
 const Mona = localFont({
   src: [
     {
@@ -97,9 +107,14 @@ export default function RootLayout({
           clientId={client}
           activeChain={activeChain}
           supportedWallets={[
-            coinbaseWallet(),
             metamaskWallet(),
+
+            coinbaseWallet(),
+            walletConnect(),
             localWallet(),
+            zerionWallet(),
+            rainbowWallet(),
+
             smartWallet({
               factoryAddress: "0x0E21cF855226787060D6aE1b3C066398EFf48cA5",
               gasless: true,

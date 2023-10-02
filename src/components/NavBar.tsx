@@ -151,7 +151,12 @@ export default function Navbar() {
         </Link>
         <Flex alignItems={"center"}>
           {!walletAddress ? (
-            <ConnectWallet btnTitle="Sign In" theme="light" />
+            <ConnectWallet
+              theme={"light"}
+              btnTitle={"Sign in"}
+              modalTitle={"Choose Wallet"}
+              auth={{ loginOptional: false }}
+            />
           ) : isMismatched ? (
             <button
               className="px-4 text-sm font-semibold bg-white rounded-full h-9"
