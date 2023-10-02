@@ -53,7 +53,7 @@ const ChatButton: React.FC<ChatButtonProps> = ({ receiverAddress }) => {
   // Handle the data, loading, and error states
   if (loading) return null; // Optionally show a loading spinner
   if (error) return null; // Optionally show an error message
-  if (data && data.XMTPs.XMTP && data.XMTPs.XMTP.isXMTPEnabled) {
+  if (data && data.XMTPs.XMTP && data.XMTPs.XMTP.isXMTPEnabled)
     // XMTP Protocol is enabled, show the ChatButton
     return (
       <>
@@ -88,10 +88,6 @@ const ChatButton: React.FC<ChatButtonProps> = ({ receiverAddress }) => {
         </Modal>
       </>
     );
-  }
-
-  // XMTP Protocol is not enabled, hide the ChatButton
-  return null;
 };
 
 export default ChatButton;
