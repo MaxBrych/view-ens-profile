@@ -156,6 +156,8 @@ export default function Navbar() {
               btnTitle={"Sign in"}
               modalTitle={"Choose Wallet"}
               auth={{ loginOptional: false }}
+              switchToActiveChain={true}
+              modalSize={"compact"}
             />
           ) : isMismatched ? (
             <button

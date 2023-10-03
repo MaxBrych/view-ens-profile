@@ -11,10 +11,11 @@ import {
   localWallet,
   smartWallet,
   paperWallet,
-  ConnectWallet,
   walletConnect,
   zerionWallet,
   rainbowWallet,
+  embeddedWallet,
+  magicLink,
 } from "@thirdweb-dev/react";
 
 import localFont from "next/font/local";
@@ -48,8 +49,6 @@ const smartWalletOptions = {
 export default function Providers({ children }: { children: React.ReactNode }) {
   let params = useParams();
   console.log(params);
-
-  // Create a new supabase browser client on every first render.
   const [supabaseClient] = useState(() => createPagesBrowserClient());
   return (
     <>
@@ -61,23 +60,22 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           clientId={client}
           activeChain={activeChain}
           supportedWallets={[
-            metamaskWallet(),
-
-            coinbaseWallet(),
-            walletConnect(),
-            localWallet(),
-            zerionWallet(),
-            rainbowWallet(),
-
-            smartWallet({
-              factoryAddress: "0x0E21cF855226787060D6aE1b3C066398EFf48cA5",
-              gasless: true,
-              personalWallets: [
-                paperWallet({
-                  paperClientId: "affcd036-8c4e-463c-baa3-fa47debb7fc3",
-                }),
-              ],
-            }),
+            smartWallet(
+              metamaskWallet({ recommended: true }),
+              smartWalletOptions
+            ),
+            smartWallet(coinbaseWallet(), smartWalletOptions),
+            smartWallet(walletConnect(), smartWalletOptions),
+            smartWallet(localWallet(), smartWalletOptions),
+            smartWallet(
+              magicLink({
+                apiKey: "pk_live_8A6DB8E910093476",
+                oauthOptions: {
+                  providers: ["google", "facebook", "twitter", "apple"],
+                },
+              }),
+              smartWalletOptions
+            ),
           ]}
         >
           <ChakraProvider theme={theme}>{children}</ChakraProvider>
