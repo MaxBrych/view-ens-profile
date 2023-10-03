@@ -64,7 +64,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
               metamaskWallet({ recommended: true }),
               smartWalletOptions
             ),
-            smartWallet(coinbaseWallet(), smartWalletOptions),
+            coinbaseWallet(),
             smartWallet(walletConnect(), smartWalletOptions),
             smartWallet(localWallet(), smartWalletOptions),
             smartWallet(
