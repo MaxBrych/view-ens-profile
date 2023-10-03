@@ -65,11 +65,12 @@ export default function Providers({ children }: { children: React.ReactNode }) {
               smartWalletOptions
             ),
             coinbaseWallet(),
+            smartWallet(coinbaseWallet(), smartWalletOptions),
             smartWallet(walletConnect(), smartWalletOptions),
             smartWallet(localWallet(), smartWalletOptions),
             smartWallet(
               magicLink({
-                apiKey: "pk_live_8DAC35E6A0E8E9D4",
+                apiKey: "pk_live_04D54076FEC51D7B",
                 oauthOptions: {
                   providers: ["google", "facebook", "twitter", "apple"],
                 },
