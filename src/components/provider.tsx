@@ -69,7 +69,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
             smartWallet(localWallet(), smartWalletOptions),
             smartWallet(
               magicLink({
-                apiKey: "pk_live_8A6DB8E910093476",
+                apiKey: process.env.NEXT_PUBLIC_MAGIC_KEY!,
                 oauthOptions: {
                   providers: ["google", "facebook", "twitter", "apple"],
                 },
