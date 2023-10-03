@@ -185,7 +185,7 @@ const ProfilePage = () => {
         minHeight="100vh"
         w="full"
         display="flex"
-        alignItems="center"
+        alignItems="start"
         gap={8}
         justifyContent="center"
         backgroundColor={bg}
@@ -193,7 +193,7 @@ const ProfilePage = () => {
         p={4}
       >
         <Box
-          className="w-full p-4 mt-8"
+          className="w-full p-4"
           bg={"white"}
           maxW={96}
           rounded={"2xl"}
@@ -202,7 +202,7 @@ const ProfilePage = () => {
           border={"1px solid #E2E8F0"}
           p={4}
         >
-          <Flex direction="column" p={4} w="full" align="center">
+          <Flex direction="column" p={4} className="w-full" align="center">
             <ENSRecordSkeleton isLoaded={!isLoading}>
               <Image
                 src={
@@ -227,7 +227,7 @@ const ProfilePage = () => {
                 fontSize={{ base: "xs", md: "sm" }}
                 lineHeight={"normal"}
                 mb={4}
-                className=" font-mona"
+                className="mt-1 font-mona"
               >
                 {ensRecords.description}
               </Text>
@@ -278,38 +278,36 @@ const ProfilePage = () => {
 
           <TransactionFeed receiverAddress={address} />
         </Box>
-        <Box className="hidden md:flex md:flex-col md:items-start md:justify-start md:h-full md:gap-8 md:max-w-sm">
-          <Box
-            mx={4}
-            mb={4}
-            className="bg-white border border-gray-300 rounded-xl"
-          >
+        <Box className="hidden bg-white border border-gray-200 md:flex md:flex-col md:items-start md:justify-start md:h-full md:gap-8 md:max-w-sm rounded-xl">
+          <Box mx={4} mb={4} className="">
             <Tabs
               variant="soft-rounded"
-              bg={"white"}
               textColor={"black"}
-              colorScheme="whiteAlpha"
+              className="flex-initial flex-shrink-0"
             >
               <TabList
-                w={"full"}
                 flex={1}
                 flexDirection={"row"}
                 justifyContent={"center"}
-                className="flex flex-row items-center justify-center flex-initial flex-shrink-0 p-1 my-4 bg-gray-100 rounded-full"
+                className="flex flex-row items-center justify-center flex-initial flex-shrink-0 gap-1 p-1 my-4 bg-gray-100 rounded-full"
               >
                 <Tab
+                  _selected={{ color: "black", bg: "whiteAlpha.900" }}
                   fontSize={{ base: 12, md: 14 }}
                   height={8}
                   className="text-black shadow-sm "
                   textColor={"black"}
+                  w={"full"}
                 >
                   Public
                 </Tab>
                 <Tab
+                  _selected={{ color: "black", bg: "whiteAlpha.900" }}
                   fontSize={{ base: 12, md: 14 }}
                   height={8}
                   className="text-black shadow-sm"
                   textColor={"black"}
+                  w={"full"}
                 >
                   Private
                 </Tab>

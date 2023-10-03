@@ -112,7 +112,7 @@ function AddressProfile() {
         p={4}
       >
         <Box
-          className="w-full p-4 mt-16"
+          className="w-full p-4 mt-0"
           bg={"white"}
           maxW={96}
           rounded={"2xl"}

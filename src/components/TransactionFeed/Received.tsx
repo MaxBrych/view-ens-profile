@@ -98,6 +98,7 @@ export default function Received({
             </div>
             {imageUrlTag && (
               <Image
+                className="object-cover object-center rounded-xl max-h-80"
                 src={imageUrlTag}
                 alt="Uploaded content"
                 width={320}
