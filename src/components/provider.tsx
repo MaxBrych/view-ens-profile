@@ -60,23 +60,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           clientId={client}
           activeChain={activeChain}
           supportedWallets={[
-            smartWallet(
-              metamaskWallet({ recommended: true }),
-              smartWalletOptions
-            ),
-            coinbaseWallet(),
-            smartWallet(coinbaseWallet(), smartWalletOptions),
-            smartWallet(walletConnect(), smartWalletOptions),
-            smartWallet(localWallet(), smartWalletOptions),
-            smartWallet(
-              magicLink({
-                apiKey: "pk_live_04D54076FEC51D7B",
-                oauthOptions: {
-                  providers: ["google", "facebook", "twitter", "apple"],
-                },
-              }),
-              smartWalletOptions
-            ),
+            metamaskWallet({ recommended: true }),
+
+            coinbaseWallet({ recommended: true }),
+            walletConnect(),
+            localWallet(),
           ]}
         >
           <ChakraProvider theme={theme}>{children}</ChakraProvider>
