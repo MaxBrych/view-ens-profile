@@ -6,9 +6,12 @@ import {
   MenuList,
   useDisclosure,
   Box,
+  Link,
   Button,
   MenuButton,
 } from "@chakra-ui/react";
+
+import { FiUser } from "react-icons/fi";
 
 import {
   useAddress,
@@ -19,7 +22,6 @@ import {
   ConnectWallet,
 } from "@thirdweb-dev/react";
 import { Polygon } from "@thirdweb-dev/chains";
-import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { HiMenuAlt4 } from "react-icons/hi";
@@ -149,7 +151,7 @@ export default function Navbar() {
             className="w-auto h-8 cursor-pointer"
           />
         </Link>
-        <Flex alignItems={"center"}>
+        <Flex alignItems={"center"} gap={8}>
           {!walletAddress ? (
             <ConnectWallet
               theme={"light"}
@@ -167,44 +169,35 @@ export default function Navbar() {
               Switch Network
             </button>
           ) : (
-            <Menu>
-              <MenuButton
-                rounded={"full"}
-                bg={"white"}
-                pr={2}
-                py={2}
-                pl={2}
-                className="flex bg-white border border-gray-200 rounded-full "
-                as={Button}
-                leftIcon={<HiMenuAlt4 className="w-5 h-5 text-black" />}
-              >
-                <Image
-                  src={
-                    ensRecords.avatar ||
-                    avatarUrl ||
-                    "https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png"
-                  }
-                  alt="Avatar"
-                  height={36}
-                  width={36}
-                  className="border border-gray-300 rounded-full"
-                />
-              </MenuButton>
-
-              <MenuList>
-                <MenuItem onClick={handleProfileRedirect}>Profile</MenuItem>
-
-                <MenuItem>
-                  <Button
-                    colorScheme="grey"
-                    textColor={"black"}
-                    onClick={disconnect}
-                  >
-                    Sign Out
-                  </Button>
-                </MenuItem>
-              </MenuList>
-            </Menu>
+            <Flex gap={4} alignItems={"center"}>
+              <ConnectWallet
+                theme={"light"}
+                btnTitle={"Sign in"}
+                modalTitle={"Choose Wallet"}
+                auth={{ loginOptional: false }}
+                switchToActiveChain={true}
+                modalSize={"compact"}
+              />
+              <Flex alignItems={"center"} gap={2}>
+                <Link
+                  textDecoration={"none"}
+                  fontSize={"14"}
+                  onClick={handleProfileRedirect}
+                >
+                  <Image
+                    src={
+                      ensRecords.avatar ||
+                      avatarUrl ||
+                      "https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png"
+                    }
+                    alt="Avatar"
+                    height={48}
+                    width={48}
+                    className="border border-gray-300 rounded-full"
+                  />
+                </Link>
+              </Flex>
+            </Flex>
           )}
         </Flex>
       </Flex>

@@ -78,7 +78,7 @@ const Searchbar = () => {
           ref={inputRef}
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          placeholder="Your address"
+          placeholder="Your Username or ENS"
           className="px-0 border-none outline-none focus:outline-none "
           backgroundColor={"white"}
           border={"none"}
