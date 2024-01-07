@@ -11,6 +11,11 @@ import {
   Skeleton,
   HStack,
   Icon,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
 } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
@@ -20,6 +25,8 @@ import ShareButton from "@/components/ShareButton";
 import DonateButton from "@/components/Donation/Donate";
 
 import TransactionFeed from "@/components/TransactionFeed/TransactionFeed";
+import PublicDonation from "@/components/Donation/PublicDonation";
+import PrivateDonation from "@/components/Donation/PrivateDontation";
 
 function ProfileSkeleton({
   children,
@@ -104,15 +111,15 @@ function AddressProfile() {
         minHeight="100vh"
         w="full"
         display="flex"
-        flexDirection="column"
-        alignItems="center"
+        alignItems="start"
+        gap={8}
         justifyContent="center"
-        color={color}
         backgroundColor={bg}
+        className=" font-mona"
         p={4}
       >
         <Box
-          className="w-full p-4 mt-0"
+          className="w-full p-4"
           bg={"white"}
           maxW={96}
           rounded={"2xl"}
@@ -133,11 +140,10 @@ function AddressProfile() {
                 rounded="full"
                 border={"1px"}
                 borderColor={"gray.300"}
-                objectFit={"cover"}
               />
             </ProfileSkeleton>
 
-            <h1 className="h-3 mb-4 text-xl text-center">
+            <h1 className="h-3 mb-4 text-xl font-bold text-center">
               {profile.username || ""}
             </h1>
             <Text
@@ -145,20 +151,67 @@ function AddressProfile() {
               fontSize={{ base: "xs", md: "sm" }}
               lineHeight={"normal"}
               mb={4}
-              color={color}
               className=" font-mona"
             >
               {profile.description || ""}
             </Text>
 
-            <HStack mt={2} spacing={8} mb={4} rowGap={8}>
+            <div className="flex gap-8 mt-2 mb-4 md:hidden">
               <ChatButton receiverAddress={address} />
               <ShareButton />
               <DonateButton address={address} name="Donate" />
-            </HStack>
+            </div>
           </Flex>
 
           <TransactionFeed receiverAddress={address} />
+        </Box>
+        <Box className="hidden bg-white border border-gray-200 md:flex md:flex-col md:items-start md:justify-start md:h-full md:gap-8 md:max-w-sm rounded-xl">
+          <Box mx={4} mb={4} className="">
+            <Tabs
+              variant="soft-rounded"
+              textColor={"black"}
+              className="flex-initial flex-shrink-0"
+            >
+              <TabList
+                flex={1}
+                flexDirection={"row"}
+                justifyContent={"center"}
+                className="flex flex-row items-center justify-center flex-initial flex-shrink-0 gap-1 p-1 my-4 bg-gray-100 rounded-full"
+              >
+                <Tab
+                  _selected={{ color: "black", bg: "whiteAlpha.900" }}
+                  fontSize={{ base: 12, md: 14 }}
+                  height={8}
+                  className="text-black shadow-sm "
+                  textColor={"black"}
+                  w={"full"}
+                >
+                  Public
+                </Tab>
+                <Tab
+                  _selected={{ color: "black", bg: "whiteAlpha.900" }}
+                  fontSize={{ base: 12, md: 14 }}
+                  height={8}
+                  className="text-black shadow-sm"
+                  textColor={"black"}
+                  w={"full"}
+                >
+                  Private
+                </Tab>
+              </TabList>
+              <TabPanels className="w-full">
+                <TabPanel className="w-full">
+                  <PublicDonation receiverAddress={address} />
+                </TabPanel>
+                <TabPanel>
+                  <PrivateDonation receiverAddress={address} />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Box>
+          {/* <div className="h-[10vh]">
+            <Home receiverAddress={address} />
+          </div>*/}
         </Box>
       </Box>
     </>
