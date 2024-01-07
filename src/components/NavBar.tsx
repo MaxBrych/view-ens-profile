@@ -48,6 +48,7 @@ export default function Navbar() {
     const provider = new ethers.providers.JsonRpcProvider(
       process.env.NEXT_PUBLIC_PROVIDER_URL
     );
+
     const fetchAvatarFromDatabase = async () => {
       const { data, error } = await supabase
         .from("wallet_profiles")
@@ -57,11 +58,13 @@ export default function Navbar() {
 
       if (data && data.avatar_url) {
         setAvatarUrl(data.avatar_url);
+        setLoading(false); // Set loading to false after fetching
+      } else {
+        fetchEnsDetails(); // Fetch ENS details if no avatar URL is found
       }
     };
 
     const fetchEnsDetails = async () => {
-      setLoading(true);
       if (walletAddress) {
         const ensNameLookup = await provider.lookupAddress(walletAddress);
         if (ensNameLookup) {
@@ -127,8 +130,9 @@ export default function Navbar() {
         }
       }
     };
-
-    fetchEnsDetails();
+    if (walletAddress) {
+      fetchAvatarFromDatabase(); // Initially, try to fetch avatar from the database
+    }
   }, [walletAddress]);
 
   const handleProfileRedirect = () => {

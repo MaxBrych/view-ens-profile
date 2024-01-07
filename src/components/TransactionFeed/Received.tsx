@@ -105,7 +105,7 @@ export default function Received({
                 height={320}
               />
             )}
-            <div className="text-xs leading-3 text-left">
+            <div className="mt-1 text-xs leading-3 text-left">
               {new Date(transaction.timestamp * 1000).toLocaleString()}
             </div>
           </div>
