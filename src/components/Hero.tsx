@@ -24,7 +24,7 @@ export default function Hero() {
         </h1>
 
         <Image
-          src="https://cdn.discordapp.com/attachments/911669935363752026/1144967106476126398/heroIMG.png"
+          src="https://cdn.discordapp.com/attachments/911669935363752026/1210595356283510834/herooo.png?ex=65eb21c8&is=65d8acc8&hm=0190ee6cbb079a96bbd8232f5c27db95c3c9ad996ee2bcf7a94620105df7f211&"
           alt="Hero"
           width={500}
           height={500}
