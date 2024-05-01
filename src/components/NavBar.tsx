@@ -149,7 +149,7 @@ export default function Navbar() {
         <Link href="/">
           <Image
             alt="Logo"
-            src="https://cdn.discordapp.com/attachments/911669935363752026/1134946436908322846/Flippr_Wordmark.png"
+            src="https://cdn.discordapp.com/attachments/911669935363752026/1235130120101040168/Frame_49.png?ex=66334010&is=6631ee90&hm=5b594cbadffaaa235507e2b16952d8c83bd6fa2612e694ef52f0ff1751c7cec9&"
             height={48}
             width={200}
             className="w-auto h-8 cursor-pointer"
@@ -192,7 +192,7 @@ export default function Navbar() {
                     src={
                       ensRecords.avatar ||
                       avatarUrl ||
-                      "https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png"
+                      "https://cdn.discordapp.com/attachments/911669935363752026/1235130482258350080/Ellipse_3.png?ex=66334066&is=6631eee6&hm=53326069028bf630c903aea356fe319f841413db48782ecb39a9f53cc518c66b&"
                     }
                     alt="Avatar"
                     height={48}

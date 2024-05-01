@@ -152,7 +152,7 @@ const ProfilePage = () => {
           setEnsRecords({
             avatar:
               data.avatar_url ||
-              "https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png",
+              "https://cdn.discordapp.com/attachments/911669935363752026/1235130482258350080/Ellipse_3.png?ex=66334066&is=6631eee6&hm=53326069028bf630c903aea356fe319f841413db48782ecb39a9f53cc518c66b&",
             description: data.full_name,
             // Add other fields as needed
           });
@@ -207,7 +207,7 @@ const ProfilePage = () => {
               <Image
                 src={
                   ensRecords.avatar ||
-                  "https://cdn.discordapp.com/attachments/911669935363752026/1139256377118830662/ETH_Pand.png"
+                  "https://cdn.discordapp.com/attachments/911669935363752026/1235130482258350080/Ellipse_3.png?ex=66334066&is=6631eee6&hm=53326069028bf630c903aea356fe319f841413db48782ecb39a9f53cc518c66b&"
                 }
                 alt="Avatar"
                 boxSize={["96px", "128px", "160px"]}
