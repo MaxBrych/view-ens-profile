@@ -19,6 +19,7 @@
     "@ensdomains/address-encoder": "^0.2.21",
     "@ensdomains/ensjs": "^3.0.0-alpha.64",
     "@ethersproject/shims": "^5.7.0",
+    "@irys/sdk": "^0.1.4",
     "@openzeppelin/contracts": "^4.9.3",
     "@squirrel-labs/peanut-sdk": "^0.2.11",
     "@supabase/auth-helpers-nextjs": "^0.7.4",

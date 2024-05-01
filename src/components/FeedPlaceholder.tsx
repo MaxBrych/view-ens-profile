@@ -32,7 +32,11 @@ export default function FeedPlaceholder({ address }: DonateButtonProps) {
       <div className="flex flex-col items-center justify-center w-full gap-2 p-3 border border-gray-300 rounded-xl">
         <img
           className="w-16 h-16"
+<<<<<<< HEAD
           src="https://cdn.discordapp.com/attachments/911669935363752026/1235130712668110848/Frame_155.png?ex=6633409d&is=6631ef1d&hm=2e02450c11657d39b9738516a475573c6eea6258ef8830f2b8f863db1ae96705&"
+=======
+          src="https://cdn.discordapp.com/attachments/911669935363752026/1210597182823071806/placeholder.png?ex=65eb237c&is=65d8ae7c&hm=37796b372f6ca206ed4fedcd33f6381737146757bfa07f63052445a3730393ff&"
+>>>>>>> 41fbb65f18b4a9c4806df33535736afd4e71f3f2
           alt="placeholder"
         />
         <h1 className="text-xl font-bold tracking-tight md:text-xl ">

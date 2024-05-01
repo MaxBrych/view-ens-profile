@@ -152,7 +152,11 @@ const ProfilePage = () => {
           setEnsRecords({
             avatar:
               data.avatar_url ||
+<<<<<<< HEAD
               "https://cdn.discordapp.com/attachments/911669935363752026/1235130482258350080/Ellipse_3.png?ex=66334066&is=6631eee6&hm=53326069028bf630c903aea356fe319f841413db48782ecb39a9f53cc518c66b&",
+=======
+              "https://cdn.discordapp.com/attachments/911669935363752026/1210597554249531402/eth_panda.png?ex=65eb23d4&is=65d8aed4&hm=f41aac3c27bbf6160f435a812652a309e1282c987183ac5869013d17118afb37&",
+>>>>>>> 41fbb65f18b4a9c4806df33535736afd4e71f3f2
             description: data.full_name,
             // Add other fields as needed
           });
@@ -160,7 +164,8 @@ const ProfilePage = () => {
           // Handle error or use placeholders
 
           setEnsRecords({
-            avatar: "https://example.com/placeholder-avatar.png",
+            avatar:
+              "https://cdn.discordapp.com/attachments/911669935363752026/1210597554249531402/eth_panda.png?ex=65eb23d4&is=65d8aed4&hm=f41aac3c27bbf6160f435a812652a309e1282c987183ac5869013d17118afb37&",
             description: "User not found",
           });
         }

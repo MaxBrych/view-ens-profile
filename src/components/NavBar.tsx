@@ -149,7 +149,11 @@ export default function Navbar() {
         <Link href="/">
           <Image
             alt="Logo"
+<<<<<<< HEAD
             src="https://cdn.discordapp.com/attachments/911669935363752026/1235130120101040168/Frame_49.png?ex=66334010&is=6631ee90&hm=5b594cbadffaaa235507e2b16952d8c83bd6fa2612e694ef52f0ff1751c7cec9&"
+=======
+            src="https://cdn.discordapp.com/attachments/911669935363752026/1210595356572913695/logoooo.png?ex=65eb21c8&is=65d8acc8&hm=d16fab87ff1d20aa8dd463180218d2a00bd2b9bc58f2c89baa36484531928ec6&"
+>>>>>>> 41fbb65f18b4a9c4806df33535736afd4e71f3f2
             height={48}
             width={200}
             className="w-auto h-8 cursor-pointer"

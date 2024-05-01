@@ -174,11 +174,16 @@ export default function PublicDonation({ receiverAddress }: DonateButtonProps) {
   async function handleApproveAndDonate(amount: number) {
     let arweaveTxId;
     if (message && file) {
-      arweaveTxId = await uploadBoth(message);
+      // New Irys-based upload logic
+      const metadata = { message, file };
+      arweaveTxId = await uploadBoth(metadata);
     } else if (message) {
       arweaveTxId = await uploadTextOnly(message);
     } else if (file) {
       arweaveTxId = await uploadFileOnly();
+    } else {
+      console.error("Message or file is missing.");
+      return;
     }
 
     if (!arweaveTxId) {
